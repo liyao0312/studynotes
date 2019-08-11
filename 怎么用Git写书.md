@@ -1,4 +1,4 @@
-# 怎么用Git写书
+# 怎么用git写书
 
 ## 安装环境
 
@@ -75,7 +75,46 @@ git init
 
 别忘了在提交的时候忽略掉module文件夹，不然每次提交拉取的时候会很痛苦....
 
+### 图形化编辑管理工具
+
+用一个图形化编辑管理工具，方便我们实时编辑查看内容，这里推荐用VScode，又可以编辑Markdown，又可以用git，又可以分屏看效果。别忘了在提交的时候忽略掉module文件夹，不然每次提交拉取的时候会很痛苦....
+处理VScode中md文件的乱码问题，可以手动生成md文件。不用系统自动生成，这样可以避免乱码
+
 ### 小拓展
 你可以将电子书提交到 github，在托管电子书的仓库建一个 gh-pages 分支，将本地编译好的电子书文件（项目根目录下的 _book 目录里的文件 ）上传到这个分支，然后就可以使用这个网址访问 http://yourUserName.github.io/bookName。
 
 当然也可以发布到gitbook，然而这个网站访问有点慢-.-
+
+### gitbook目录折叠
+插件名称：toggle-chapters
+效果：默认只在目录导航中显示章的标题，而不会显示小节的标题，点击每一章或者每一节会显示当前章或节的子目录，如果有的话，但是同时会收起其它之前展开的章节。
+关于更多的gitbook插件，读者可以参考插件网站。
+在根目录(即与SUMMARY.md同级的目录)下的配置文件 book.json(如果没有则新建)中添加插件配置，如图
+![](https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190811141006691-1326724723.png)
+配置完成后，可按照一下步骤进行：
+
+$ cd gitbook根目录
+$ npm install gitbook-plugin-toggle-chapters (此时gitbook的根目录下的node_modules文件夹中已经有了该插件了)
+$ gitbook build
+$ gitbook serve
+访问 http://localhost:4000 看你的插件是否已经生效。
+
+### 图片使用
+可以用博客园的此编辑器，添加图片后发布出来，然后再编辑的时候，就可以看到图片的链接，直接复制到本地编辑器就可以
+
+### GitBook源文件发布到gh-pages
+复制_book文件下的所有文件，切换到 gh-pages分支，然后复制到这个目录下，然后推送、
+```
+git checkout --orphan gh-pages
+//清空一下分支
+rm -rf *
+//然后将master分支下的_book静态页面文件内容全部复制到gh-pages分支下
+git checkout master -- _book
+//将_book中的子文件全部移到外层，并删除_book
+mv _book/* ./
+rm -rf _book
+//这时候gh-pages分支下就是全部的静态页面文件了，接下来就是提交到远程gh-pages分支
+git add .
+git commit -m 'publish gh-pages'
+git push origin gh-pages
+```

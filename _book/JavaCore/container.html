@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Java高级特性 · GitBook</title>
+        <title>容器 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="容器.html" />
+    <link rel="next" href="concurrent.html" />
     
     
-    <link rel="prev" href="Java基础特性.html" />
+    <link rel="prev" href="advanced.html" />
     
 
     </head>
@@ -125,23 +125,23 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" >
+        <li class="chapter " data-level="1.2" data-path="basics.html">
             
-                <span>
+                <a href="basics.html">
             
                     
                     Java核心技术教程
             
-                </span>
+                </a>
             
 
             
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="Java基础特性.html">
+        <li class="chapter " data-level="1.2.1" data-path="basics.html">
             
-                <a href="Java基础特性.html">
+                <a href="basics.html">
             
                     
                     Java基础特性
@@ -152,9 +152,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.2" data-path="Java高级特性.html">
+        <li class="chapter " data-level="1.2.2" data-path="advanced.html">
             
-                <a href="Java高级特性.html">
+                <a href="advanced.html">
             
                     
                     Java高级特性
@@ -165,9 +165,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="容器.html">
+        <li class="chapter active" data-level="1.2.3" data-path="container.html">
             
-                <a href="容器.html">
+                <a href="container.html">
             
                     
                     容器
@@ -178,9 +178,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="并发.html">
+        <li class="chapter " data-level="1.2.4" data-path="concurrent.html">
             
-                <a href="并发.html">
+                <a href="concurrent.html">
             
                     
                     并发
@@ -191,9 +191,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="输入输出流IO.html">
+        <li class="chapter " data-level="1.2.5" data-path="io.html">
             
-                <a href="输入输出流IO.html">
+                <a href="io.html">
             
                     
                     输入输出流IO
@@ -204,9 +204,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="Java虚拟机.html">
+        <li class="chapter " data-level="1.2.6" data-path="jvm.html">
             
-                <a href="Java虚拟机.html">
+                <a href="jvm.html">
             
                     
                     Java虚拟机
@@ -252,7 +252,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Java高级特性</a>
+        <a href=".." >容器</a>
     </h1>
 </div>
 
@@ -267,9 +267,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="java&#x9AD8;&#x7EA7;&#x7279;&#x6027;">Java&#x9AD8;&#x7EA7;&#x7279;&#x6027;</h1>
-<h2 id="java&#x6B63;&#x5219;">Java&#x6B63;&#x5219;</h2>
-<h2 id="java-jdk8&#x7684;&#x65B0;&#x7279;&#x6027;">Java JDK8&#x7684;&#x65B0;&#x7279;&#x6027;</h2>
+                                <h1 id="&#x5BB9;&#x5668;">&#x5BB9;&#x5668;</h1>
+<h2 id="java&#x5BB9;&#x5668;&#x6982;&#x8FF0;">Java&#x5BB9;&#x5668;&#x6982;&#x8FF0;</h2>
+<h2 id="java&#x5BB9;&#x5668;&#x4E4B;list">Java&#x5BB9;&#x5668;&#x4E4B;List</h2>
+<h3 id="arraylist&#x3001;vector&#x548C;linkedlist&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;">ArrayList&#x3001;Vector&#x548C;LinkedList&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;</h3>
+<h2 id="java&#x5BB9;&#x5668;&#x4E4B;set">Java&#x5BB9;&#x5668;&#x4E4B;Set</h2>
+<h2 id="java&#x5BB9;&#x5668;&#x4E4B;queue">Java&#x5BB9;&#x5668;&#x4E4B;Queue</h2>
+<h2 id="java&#x5BB9;&#x5668;&#x4E4B;map">Java&#x5BB9;&#x5668;&#x4E4B;Map</h2>
+<h3 id="hashmap&#x3001;hashtable&#x3001;treemap&#x548C;weakhashmap&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;">HashMap&#x3001;Hashtable&#x3001;TreeMap&#x548C;WeakHashMap&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;</h3>
+<h3 id="&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;&#x4F5C;&#x4E3A;hashmap&#x6216;hashtable&#x7684;key&#x9700;&#x8981;&#x6CE8;&#x610F;&#x54EA;&#x4E9B;&#x95EE;&#x9898;">&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;&#x4F5C;&#x4E3A;HashMap&#x6216;Hashtable&#x7684;key&#x9700;&#x8981;&#x6CE8;&#x610F;&#x54EA;&#x4E9B;&#x95EE;&#x9898;</h3>
+<h3 id=""> </h3>
 
                                 
                                 </section>
@@ -297,12 +304,12 @@
 
             
                 
-                <a href="Java基础特性.html" class="navigation navigation-prev " aria-label="Previous page: Java基础特性">
+                <a href="advanced.html" class="navigation navigation-prev " aria-label="Previous page: Java高级特性">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="容器.html" class="navigation navigation-next " aria-label="Next page: 容器">
+                <a href="concurrent.html" class="navigation navigation-next " aria-label="Next page: 并发">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -313,7 +320,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java高级特性","level":"1.2.2","depth":2,"next":{"title":"容器","level":"1.2.3","depth":2,"path":"Java核心技术教程/容器.md","ref":"Java核心技术教程/容器.md","articles":[]},"previous":{"title":"Java基础特性","level":"1.2.1","depth":2,"path":"Java核心技术教程/Java基础特性.md","ref":"Java核心技术教程/Java基础特性.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","livereload"],"pluginsConfig":{"toggle-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Java核心技术教程/Java高级特性.md","mtime":"2019-08-11T13:19:38.612Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-11T13:45:39.899Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"容器","level":"1.2.3","depth":2,"next":{"title":"并发","level":"1.2.4","depth":2,"path":"JavaCore/concurrent.md","ref":"JavaCore/concurrent.md","articles":[]},"previous":{"title":"Java高级特性","level":"1.2.2","depth":2,"path":"JavaCore/advanced.md","ref":"JavaCore/advanced.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","livereload"],"pluginsConfig":{"toggle-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"JavaCore/container.md","mtime":"2019-08-11T13:25:54.254Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-11T14:10:57.510Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
