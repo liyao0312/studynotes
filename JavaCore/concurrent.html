@@ -1,0 +1,399 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>并发 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="io.html" />
+    
+    
+    <link rel="prev" href="container.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    编者序
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="../怎么用Git写书.html">
+            
+                <a href="../怎么用Git写书.html">
+            
+                    
+                    怎么用Git写书
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="basics.html">
+            
+                <a href="basics.html">
+            
+                    
+                    Java核心技术教程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="basics.html">
+            
+                <a href="basics.html">
+            
+                    
+                    Java基础特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="advanced.html">
+            
+                <a href="advanced.html">
+            
+                    
+                    Java高级特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="container.html">
+            
+                <a href="container.html">
+            
+                    
+                    容器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.4" data-path="concurrent.html">
+            
+                <a href="concurrent.html">
+            
+                    
+                    并发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="io.html">
+            
+                <a href="io.html">
+            
+                    
+                    输入输出流IO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="jvm.html">
+            
+                <a href="jvm.html">
+            
+                    
+                    Java虚拟机
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >并发</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x5E76;&#x53D1;">&#x5E76;&#x53D1;</h1>
+<h2 id="1&#x5E76;&#x53D1;&#x7B80;&#x4ECB;">1.&#x5E76;&#x53D1;&#x7B80;&#x4ECB;</h2>
+<h3 id="11-&#x4EC0;&#x4E48;&#x662F;&#x8FDB;&#x7A0B;&#xFF1F;&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#xFF1F;&#x8FDB;&#x7A0B;&#x548C;&#x7EBF;&#x7A0B;&#x7684;&#x533A;&#x522B;&#xFF1F;">1.1. &#x4EC0;&#x4E48;&#x662F;&#x8FDB;&#x7A0B;&#xFF1F;&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#xFF1F;&#x8FDB;&#x7A0B;&#x548C;&#x7EBF;&#x7A0B;&#x7684;&#x533A;&#x522B;&#xFF1F;</h3>
+<h3 id="12-&#x5E76;&#x53D1;&#xFF08;&#x591A;&#x7EBF;&#x7A0B;&#xFF09;&#x7F16;&#x7A0B;&#x7684;&#x597D;&#x5904;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">1.2. &#x5E76;&#x53D1;&#xFF08;&#x591A;&#x7EBF;&#x7A0B;&#xFF09;&#x7F16;&#x7A0B;&#x7684;&#x597D;&#x5904;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h3>
+<h3 id="13-&#x5E76;&#x53D1;&#x4E00;&#x5B9A;&#x6BD4;&#x4E32;&#x884C;&#x66F4;&#x5FEB;&#x5417;&#xFF1F;">1.3. &#x5E76;&#x53D1;&#x4E00;&#x5B9A;&#x6BD4;&#x4E32;&#x884C;&#x66F4;&#x5FEB;&#x5417;&#xFF1F;</h3>
+<h3 id="14-&#x5982;&#x4F55;&#x8BA9;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x7EBF;&#x7A0B;&#x6682;&#x505C;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#xFF1F;">1.4. &#x5982;&#x4F55;&#x8BA9;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x7EBF;&#x7A0B;&#x6682;&#x505C;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#xFF1F;</h3>
+<h3 id="15-&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#x8C03;&#x5EA6;&#x5668;thread-scheduler&#x548C;&#x65F6;&#x95F4;&#x5206;&#x7247;time-slicing&#xFF1F;">1.5. &#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#x8C03;&#x5EA6;&#x5668;(Thread Scheduler)&#x548C;&#x65F6;&#x95F4;&#x5206;&#x7247;(Time Slicing)&#xFF1F;</h3>
+<h3 id="16-&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x4E2D;&#xFF0C;&#x4EC0;&#x4E48;&#x662F;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;context-switching&#xFF1F;">1.6. &#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x4E2D;&#xFF0C;&#x4EC0;&#x4E48;&#x662F;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;(context-switching)&#xFF1F;</h3>
+<h3 id="17-&#x5982;&#x4F55;&#x786E;&#x4FDD;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1F;">1.7. &#x5982;&#x4F55;&#x786E;&#x4FDD;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1F;</h3>
+<h3 id="18-&#x4EC0;&#x4E48;&#x662F;&#x6B7B;&#x9501;deadlock&#xFF1F;&#x5982;&#x4F55;&#x5206;&#x6790;&#x548C;&#x907F;&#x514D;&#x6B7B;&#x9501;&#xFF1F;">1.8. &#x4EC0;&#x4E48;&#x662F;&#x6B7B;&#x9501;(Deadlock)&#xFF1F;&#x5982;&#x4F55;&#x5206;&#x6790;&#x548C;&#x907F;&#x514D;&#x6B7B;&#x9501;&#xFF1F;</h3>
+<h2 id="2&#x7EBF;&#x7A0B;&#x57FA;&#x7840;">2.&#x7EBF;&#x7A0B;&#x57FA;&#x7840;</h2>
+<h3 id="21-java-&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E2D;&#x6709;&#x54EA;&#x4E9B;&#x72B6;&#x6001;&#xFF1F;&#x5404;&#x72B6;&#x6001;&#x4E4B;&#x95F4;&#x5982;&#x4F55;&#x5207;&#x6362;&#xFF1F;">2.1. Java &#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E2D;&#x6709;&#x54EA;&#x4E9B;&#x72B6;&#x6001;&#xFF1F;&#x5404;&#x72B6;&#x6001;&#x4E4B;&#x95F4;&#x5982;&#x4F55;&#x5207;&#x6362;&#xFF1F;</h3>
+<h3 id="22-&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x6709;&#x54EA;&#x4E9B;&#x65B9;&#x5F0F;&#xFF1F;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x5404;&#x81EA;&#x5229;&#x5F0A;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">2.2. &#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x6709;&#x54EA;&#x4E9B;&#x65B9;&#x5F0F;&#xFF1F;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x5404;&#x81EA;&#x5229;&#x5F0A;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h3>
+<h3 id="23-&#x4EC0;&#x4E48;&#x662F;-callable-&#x548C;-future&#xFF1F;&#x4EC0;&#x4E48;&#x662F;-futuretask&#xFF1F;">2.3. &#x4EC0;&#x4E48;&#x662F; Callable &#x548C; Future&#xFF1F;&#x4EC0;&#x4E48;&#x662F; FutureTask&#xFF1F;</h3>
+<h3 id="24-start-&#x548C;-run-&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF1F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8C03;&#x7528;-thread-&#x7C7B;&#x7684;-run-&#x65B9;&#x6CD5;&#x4E48;&#xFF1F;">2.4. start() &#x548C; run() &#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF1F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8C03;&#x7528; Thread &#x7C7B;&#x7684; run() &#x65B9;&#x6CD5;&#x4E48;&#xFF1F;</h3>
+<h3 id="25-sleep&#x3001;yield&#x3001;join-&#x65B9;&#x6CD5;&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;-sleep-&#x548C;-yield-&#x65B9;&#x6CD5;&#x662F;&#x9759;&#x6001;&#xFF08;static&#xFF09;&#x7684;&#xFF1F;">2.5. sleep()&#x3001;yield()&#x3001;join() &#x65B9;&#x6CD5;&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48; sleep() &#x548C; yield() &#x65B9;&#x6CD5;&#x662F;&#x9759;&#x6001;&#xFF08;static&#xFF09;&#x7684;&#xFF1F;</h3>
+<h3 id="26-java-&#x7684;&#x7EBF;&#x7A0B;&#x4F18;&#x5148;&#x7EA7;&#x5982;&#x4F55;&#x63A7;&#x5236;&#xFF1F;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x7684;-java-&#x7EBF;&#x7A0B;&#x4E00;&#x5B9A;&#x5148;&#x6267;&#x884C;&#x5417;&#xFF1F;">2.6. Java &#x7684;&#x7EBF;&#x7A0B;&#x4F18;&#x5148;&#x7EA7;&#x5982;&#x4F55;&#x63A7;&#x5236;&#xFF1F;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x7684; Java &#x7EBF;&#x7A0B;&#x4E00;&#x5B9A;&#x5148;&#x6267;&#x884C;&#x5417;&#xFF1F;</h3>
+<h3 id="27-&#x4EC0;&#x4E48;&#x662F;&#x5B88;&#x62A4;&#x7EBF;&#x7A0B;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x7528;&#x5B88;&#x62A4;&#x7EBF;&#x7A0B;&#xFF1F;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5B88;&#x62A4;&#x7EBF;&#x7A0B;&#xFF1F;">2.7. &#x4EC0;&#x4E48;&#x662F;&#x5B88;&#x62A4;&#x7EBF;&#x7A0B;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x7528;&#x5B88;&#x62A4;&#x7EBF;&#x7A0B;&#xFF1F;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5B88;&#x62A4;&#x7EBF;&#x7A0B;&#xFF1F;</h3>
+<h3 id="28-&#x7EBF;&#x7A0B;&#x95F4;&#x662F;&#x5982;&#x4F55;&#x901A;&#x4FE1;&#x7684;&#xFF1F;">2.8. &#x7EBF;&#x7A0B;&#x95F4;&#x662F;&#x5982;&#x4F55;&#x901A;&#x4FE1;&#x7684;&#xFF1F;</h3>
+<h3 id="29-&#x4E3A;&#x4EC0;&#x4E48;&#x7EBF;&#x7A0B;&#x901A;&#x4FE1;&#x7684;&#x65B9;&#x6CD5;-wait-notify-&#x548C;-notifyall-&#x88AB;&#x5B9A;&#x4E49;&#x5728;-object-&#x7C7B;&#x91CC;&#xFF1F;">2.9. &#x4E3A;&#x4EC0;&#x4E48;&#x7EBF;&#x7A0B;&#x901A;&#x4FE1;&#x7684;&#x65B9;&#x6CD5; wait(), notify() &#x548C; notifyAll() &#x88AB;&#x5B9A;&#x4E49;&#x5728; Object &#x7C7B;&#x91CC;&#xFF1F;</h3>
+<h3 id="210-&#x4E3A;&#x4EC0;&#x4E48;-wait-notify-&#x548C;-notifyall-&#x5FC5;&#x987B;&#x5728;&#x540C;&#x6B65;&#x65B9;&#x6CD5;&#x6216;&#x8005;&#x540C;&#x6B65;&#x5757;&#x4E2D;&#x88AB;&#x8C03;&#x7528;&#xFF1F;">2.10. &#x4E3A;&#x4EC0;&#x4E48; wait(), notify() &#x548C; notifyAll() &#x5FC5;&#x987B;&#x5728;&#x540C;&#x6B65;&#x65B9;&#x6CD5;&#x6216;&#x8005;&#x540C;&#x6B65;&#x5757;&#x4E2D;&#x88AB;&#x8C03;&#x7528;&#xFF1F;</h3>
+<h2 id="3&#x5E76;&#x53D1;&#x673A;&#x5236;&#x7684;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;">3.&#x5E76;&#x53D1;&#x673A;&#x5236;&#x7684;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;</h2>
+<h3 id="31-volatile-&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">3.1. volatile &#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h3>
+<h3 id="32-synchronized-&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x540C;&#x6B65;&#x65B9;&#x6CD5;&#x548C;&#x540C;&#x6B65;&#x5757;&#xFF0C;&#x54EA;&#x4E2A;&#x66F4;&#x597D;&#xFF1F;">3.2. synchronized &#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x540C;&#x6B65;&#x65B9;&#x6CD5;&#x548C;&#x540C;&#x6B65;&#x5757;&#xFF0C;&#x54EA;&#x4E2A;&#x66F4;&#x597D;&#xFF1F;</h3>
+<h3 id="33-volatile-&#x548C;-synchronized-&#x7684;&#x533A;&#x522B;&#xFF1F;">3.3. volatile &#x548C; synchronized &#x7684;&#x533A;&#x522B;&#xFF1F;</h3>
+<h3 id="34-threadlocal-&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;threadlocal-&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">3.4. ThreadLocal &#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;ThreadLocal &#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h3>
+<h2 id="4&#x5185;&#x5B58;&#x6A21;&#x578B;">4.&#x5185;&#x5B58;&#x6A21;&#x578B;</h2>
+<h3 id="41-&#x4EC0;&#x4E48;&#x662F;-java-&#x5185;&#x5B58;&#x6A21;&#x578B;">4.1. &#x4EC0;&#x4E48;&#x662F; Java &#x5185;&#x5B58;&#x6A21;&#x578B;</h3>
+<h2 id="5&#x540C;&#x6B65;&#x5BB9;&#x5668;&#x548C;&#x5E76;&#x53D1;&#x5BB9;&#x5668;">5.&#x540C;&#x6B65;&#x5BB9;&#x5668;&#x548C;&#x5E76;&#x53D1;&#x5BB9;&#x5668;</h2>
+<h3 id="51-&#x4EC0;&#x4E48;&#x662F;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#xFF1F;&#x6709;&#x54EA;&#x4E9B;&#x5E38;&#x89C1;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#xFF1F;&#x5B83;&#x4EEC;&#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF1F;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#x771F;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x5417;&#xFF1F;">5.1. &#x4EC0;&#x4E48;&#x662F;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#xFF1F;&#x6709;&#x54EA;&#x4E9B;&#x5E38;&#x89C1;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#xFF1F;&#x5B83;&#x4EEC;&#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF1F;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#x771F;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x5417;&#xFF1F;</h3>
+<h3 id="52-&#x4EC0;&#x4E48;&#x662F;&#x5E76;&#x53D1;&#x5BB9;&#x5668;&#x7684;&#x5B9E;&#x73B0;&#xFF1F;">5.2. &#x4EC0;&#x4E48;&#x662F;&#x5E76;&#x53D1;&#x5BB9;&#x5668;&#x7684;&#x5B9E;&#x73B0;&#xFF1F;</h3>
+<h2 id="6&#x9501;">6.&#x9501;</h2>
+<h3 id="61-&#x5982;&#x4F55;&#x907F;&#x514D;&#x6B7B;&#x9501;&#xFF1F;">6.1. &#x5982;&#x4F55;&#x907F;&#x514D;&#x6B7B;&#x9501;&#xFF1F;</h3>
+<h3 id="62-lock-&#x63A5;&#x53E3;lock-interface&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x5BF9;&#x6BD4;&#x540C;&#x6B65;&#x5B83;&#x6709;&#x4EC0;&#x4E48;&#x4F18;&#x52BF;&#xFF1F;">6.2. Lock &#x63A5;&#x53E3;(Lock interface)&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x5BF9;&#x6BD4;&#x540C;&#x6B65;&#x5B83;&#x6709;&#x4EC0;&#x4E48;&#x4F18;&#x52BF;&#xFF1F;</h3>
+<h3 id="63-&#x4EC0;&#x4E48;&#x662F;&#x963B;&#x585E;&#x961F;&#x5217;&#xFF1F;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x963B;&#x585E;&#x961F;&#x5217;&#x6765;&#x5B9E;&#x73B0;&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;&#x8005;&#x6A21;&#x578B;&#xFF1F;">6.3. &#x4EC0;&#x4E48;&#x662F;&#x963B;&#x585E;&#x961F;&#x5217;&#xFF1F;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x963B;&#x585E;&#x961F;&#x5217;&#x6765;&#x5B9E;&#x73B0;&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;&#x8005;&#x6A21;&#x578B;&#xFF1F;</h3>
+<h2 id="7&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7C7B;">7.&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7C7B;</h2>
+<h3 id="71-&#x4EC0;&#x4E48;&#x662F;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#xFF1F;&#x6709;&#x54EA;&#x4E9B;&#x539F;&#x5B50;&#x7C7B;&#xFF1F;&#x539F;&#x5B50;&#x7C7B;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">7.1. &#x4EC0;&#x4E48;&#x662F;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#xFF1F;&#x6709;&#x54EA;&#x4E9B;&#x539F;&#x5B50;&#x7C7B;&#xFF1F;&#x539F;&#x5B50;&#x7C7B;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h3>
+<h2 id="8&#x5E76;&#x53D1;&#x5DE5;&#x5177;&#x7C7B;">8.&#x5E76;&#x53D1;&#x5DE5;&#x5177;&#x7C7B;</h2>
+<h3 id="81-cyclicbarrier-&#x548C;-countdownlatch-&#x6709;&#x4EC0;&#x4E48;&#x4E0D;&#x540C;&#xFF1F;">8.1. CyclicBarrier &#x548C; CountDownLatch &#x6709;&#x4EC0;&#x4E48;&#x4E0D;&#x540C;&#xFF1F;</h3>
+<h2 id="9&#x7EBF;&#x7A0B;&#x6C60;">9.&#x7EBF;&#x7A0B;&#x6C60;</h2>
+<h3 id="91-&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#x6C60;&#xFF1F;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;-java-&#x7EBF;&#x7A0B;&#x6C60;&#xFF1F;">9.1. &#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#x6C60;&#xFF1F;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; Java &#x7EBF;&#x7A0B;&#x6C60;&#xFF1F;</h3>
+<h3 id="92-&#x4EC0;&#x4E48;&#x662F;-executors-&#x6846;&#x67B6;&#xFF1F;">9.2. &#x4EC0;&#x4E48;&#x662F; Executors &#x6846;&#x67B6;&#xFF1F;</h3>
+<h3 id="93-executors-&#x7C7B;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">9.3. Executors &#x7C7B;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h3>
+<h3 id="94-threadpoolexecutor-&#x6709;&#x54EA;&#x4E9B;&#x53C2;&#x6570;&#xFF0C;&#x5404;&#x81EA;&#x6709;&#x4EC0;&#x4E48;&#x7528;&#xFF1F;">9.4. ThreadPoolExecutor &#x6709;&#x54EA;&#x4E9B;&#x53C2;&#x6570;&#xFF0C;&#x5404;&#x81EA;&#x6709;&#x4EC0;&#x4E48;&#x7528;&#xFF1F;</h3>
+<h3 id="95-&#x7EBF;&#x7A0B;&#x6570;&#x591A;&#x5C11;&#x624D;&#x5408;&#x7406;">9.5. &#x7EBF;&#x7A0B;&#x6570;&#x591A;&#x5C11;&#x624D;&#x5408;&#x7406;</h3>
+<h2 id="10&#x8D44;&#x6599;">10.&#x8D44;&#x6599;</h2>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="container.html" class="navigation navigation-prev " aria-label="Previous page: 容器">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="io.html" class="navigation navigation-next " aria-label="Next page: 输入输出流IO">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"并发","level":"1.2.4","depth":2,"next":{"title":"输入输出流IO","level":"1.2.5","depth":2,"path":"JavaCore/io.md","ref":"JavaCore/io.md","articles":[]},"previous":{"title":"容器","level":"1.2.3","depth":2,"path":"JavaCore/container.md","ref":"JavaCore/container.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters"],"pluginsConfig":{"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"JavaCore/concurrent.md","mtime":"2019-08-11T13:32:45.405Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-11T14:14:21.490Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
