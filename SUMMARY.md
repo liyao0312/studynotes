@@ -9,15 +9,17 @@
     * [输入输出流IO](JavaCore/io.md)
     * [Java虚拟机](JavaCore/jvm.md)
     * Java数据库操作
-* [JavaWeb](JavaCore/basics.md)
-    * 网络
+* [JavaWeb](javaweb/network-interview.md)
+    * [网络](javaweb/network-interview.md)
     * Spring
     * Spring Boot 教程
 
 -----
-* 数据库
+* [数据库](database/database.md)
 * Go核心技术教程
-* Beego框架(Go的web开发)
+* Beego框架
+* MongoDB数据库
 * 设计模式
+    * 单例设计模式
 * [怎么用Git写书](怎么用Git写书.md)
 

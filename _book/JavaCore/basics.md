@@ -1,19 +1,19 @@
 # Java基础特性
 
-- [Java基本概念](#Java基本概念)
-  - [Java语言有哪些优点：](#Java语言有哪些优点：)
-  - [java和Go的区别](#java和Go的区别)
-  - [Java和 C/C++有什么异同](#Java和 C/C++有什么异同)
-  - [Java中的clone方法有什么作用](#Java中的clone方法有什么作用)
+- [Java基本概念](#java基本概念)
+  - [Java语言有哪些优点：](#java语言有哪些优点：)
+  - [Java和Go的区别](#java和go的区别)
+  - [Java和 C/C++有什么异同](#java和-cc有什么异同)
+  - [Java中的clone方法有什么作用](#java中的clone方法有什么作用)
 - [关键字](#关键字)
   - [static关键字有哪些作用](#static关键字有哪些作用)
   - [volatile有什么作用](#volatile有什么作用)
 - [基本类型与运算](#基本类型与运算)
   - [值传递与引用传递有哪些区别](#值传递与引用传递有哪些区别)
 - [字符串与数组](#字符串与数组)
-  - [“==”、equals和hashCode有什么区别](#“==”、equals和hashCode有什么区别)
+  - [“==”、equals和hashCode有什么区别](#、equals和hashcode有什么区别)
   - [请你解释为什么重写equals还要重写hashcode？](#请你解释为什么重写equals还要重写hashcode？)
-  - [String、StringBuffer、StringBuilder和StringTokenizer有什么区别](#String、StringBuffer、StringBuilder和StringTokenizer有什么区别)
+  - [String、StringBuffer、StringBuilder和StringTokenizer有什么区别](#string、stringbuffer、stringbuilder和stringtokenizer有什么区别)
 
 ​        
 
