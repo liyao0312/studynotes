@@ -3,7 +3,7 @@
 - [Java容器collection之List](#java容器collection之list)
   - [ArrayList 类](#arraylist-类)
   - [LinkedList 类](#linkedlist-类)
-  - [ArrayList, Vector和LinkedList有什么区别](#arrayList,-vector和linkedlist有什么区别)
+  - [ArrayList, Vector和LinkedList有什么区别](#arraylist-vector和linkedlist有什么区别)
 
 ##  Java容器collection之List
 

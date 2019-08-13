@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>容器 · GitBook</title>
+        <title>Java虚拟机 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="container-list.html" />
+    <link rel="next" href="jvm-memory.html" />
     
     
-    <link rel="prev" href="../advanced.html" />
+    <link rel="prev" href="../concurrent/线程池.html" />
     
 
     </head>
@@ -146,9 +146,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.3" data-path="container.html">
+        <li class="chapter " data-level="1.2.3" data-path="../container/container.html">
             
-                <a href="container.html">
+                <a href="../container/container.html">
             
                     
                     容器
@@ -160,9 +160,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.3.1" data-path="container-list.html">
+        <li class="chapter " data-level="1.2.3.1" data-path="../container/container-list.html">
             
-                <a href="container-list.html">
+                <a href="../container/container-list.html">
             
                     
                     Collection之List
@@ -173,9 +173,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3.2" data-path="container-set.html">
+        <li class="chapter " data-level="1.2.3.2" data-path="../container/container-set.html">
             
-                <a href="container-set.html">
+                <a href="../container/container-set.html">
             
                     
                     Collection之Set
@@ -186,9 +186,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3.3" data-path="container-queue.html">
+        <li class="chapter " data-level="1.2.3.3" data-path="../container/container-queue.html">
             
-                <a href="container-queue.html">
+                <a href="../container/container-queue.html">
             
                     
                     Collection之Queue
@@ -199,9 +199,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3.4" data-path="container-map.html">
+        <li class="chapter " data-level="1.2.3.4" data-path="../container/container-map.html">
             
-                <a href="container-map.html">
+                <a href="../container/container-map.html">
             
                     
                     Map
@@ -366,9 +366,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="../jvm/jvm.html">
+        <li class="chapter active" data-level="1.2.5" data-path="jvm.html">
             
-                <a href="../jvm/jvm.html">
+                <a href="jvm.html">
             
                     
                     Java虚拟机
@@ -380,9 +380,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.5.1" data-path="../jvm/jvm-memory.html">
+        <li class="chapter " data-level="1.2.5.1" data-path="jvm-memory.html">
             
-                <a href="../jvm/jvm-memory.html">
+                <a href="jvm-memory.html">
             
                     
                     第一章 运行时数据区域
@@ -393,9 +393,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5.2" data-path="../jvm/jvm-gc.html">
+        <li class="chapter " data-level="1.2.5.2" data-path="jvm-gc.html">
             
-                <a href="../jvm/jvm-gc.html">
+                <a href="jvm-gc.html">
             
                     
                     第二章 垃圾收集
@@ -406,9 +406,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5.3" data-path="../jvm/jvm-class-loader.html">
+        <li class="chapter " data-level="1.2.5.3" data-path="jvm-class-loader.html">
             
-                <a href="../jvm/jvm-class-loader.html">
+                <a href="jvm-class-loader.html">
             
                     
                     第三章 类加载机制
@@ -419,9 +419,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5.4" data-path="../jvm/jvm-performance.html">
+        <li class="chapter " data-level="1.2.5.4" data-path="jvm-performance.html">
             
-                <a href="../jvm/jvm-performance.html">
+                <a href="jvm-performance.html">
             
                     
                     第四章 JVM 调优
@@ -718,7 +718,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >容器</a>
+        <a href="../.." >Java虚拟机</a>
     </h1>
 </div>
 
@@ -733,12 +733,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5BB9;&#x5668;">&#x5BB9;&#x5668;</h1>
-<h2 id="java&#x5BB9;&#x5668;&#x6982;&#x8FF0;">Java&#x5BB9;&#x5668;&#x6982;&#x8FF0;</h2>
-<h3 id="&#x5BB9;&#x5668;&#x6846;&#x67B6;">&#x5BB9;&#x5668;&#x6846;&#x67B6;</h3>
-<p><img src="https://gitee.com/turnon/images/raw/master/images/java/container/java-container-structure.png" alt="img"></p>
-<h3 id=""> </h3>
-<h3 id=""> </h3>
+                                <h1 id="java&#x865A;&#x62DF;&#x673A;">Java&#x865A;&#x62DF;&#x673A;</h1>
+<h2 id="&#x7B2C;&#x4E00;&#x7AE0;-&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x57DF;">&#x7B2C;&#x4E00;&#x7AE0; &#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x57DF;</h2>
+<h3 id="&#x7A0B;&#x5E8F;&#x8BA1;&#x6570;&#x5668;">&#x7A0B;&#x5E8F;&#x8BA1;&#x6570;&#x5668;</h3>
+<h3 id="&#x865A;&#x62DF;&#x673A;&#x6808;">&#x865A;&#x62DF;&#x673A;&#x6808;</h3>
+<h3 id="&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x6808;">&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x6808;</h3>
+<h3 id="&#x5806;">&#x5806;</h3>
+<h3 id="&#x65B9;&#x6CD5;&#x533A;">&#x65B9;&#x6CD5;&#x533A;</h3>
+<h3 id="&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;">&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;</h3>
+<h3 id="&#x76F4;&#x63A5;&#x5185;&#x5B58;">&#x76F4;&#x63A5;&#x5185;&#x5B58;</h3>
+<h3 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h3>
+<h2 id="&#x7B2C;&#x4E8C;&#x7AE0;-&#x5783;&#x573E;&#x6536;&#x96C6;">&#x7B2C;&#x4E8C;&#x7AE0; &#x5783;&#x573E;&#x6536;&#x96C6;</h2>
+<h2 id="&#x7B2C;&#x4E09;&#x7AE0;-&#x7C7B;&#x52A0;&#x8F7D;&#x673A;&#x5236;">&#x7B2C;&#x4E09;&#x7AE0; &#x7C7B;&#x52A0;&#x8F7D;&#x673A;&#x5236;</h2>
+<h2 id="&#x7B2C;&#x56DB;&#x7AE0;-jvm-&#x8C03;&#x4F18;">&#x7B2C;&#x56DB;&#x7AE0; JVM &#x8C03;&#x4F18;</h2>
 
                                 
                                 </section>
@@ -766,12 +773,12 @@
 
             
                 
-                <a href="../advanced.html" class="navigation navigation-prev " aria-label="Previous page: Java高级特性">
+                <a href="../concurrent/线程池.html" class="navigation navigation-prev " aria-label="Previous page: 第九章 线程池">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="container-list.html" class="navigation navigation-next " aria-label="Next page: Collection之List">
+                <a href="jvm-memory.html" class="navigation navigation-next " aria-label="Next page: 第一章 运行时数据区域">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -782,7 +789,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"容器","level":"1.2.3","depth":2,"next":{"title":"Collection之List","level":"1.2.3.1","depth":3,"path":"javacore/container/container-list.md","ref":"javacore/container/container-list.md","articles":[]},"previous":{"title":"Java高级特性","level":"1.2.2","depth":2,"path":"javacore/advanced.md","ref":"javacore/advanced.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/container/container.md","mtime":"2019-08-13T14:40:41.618Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-13T15:05:49.560Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java虚拟机","level":"1.2.5","depth":2,"next":{"title":"第一章 运行时数据区域","level":"1.2.5.1","depth":3,"path":"javacore/jvm/jvm-memory.md","ref":"javacore/jvm/jvm-memory.md","articles":[]},"previous":{"title":"第九章 线程池","level":"1.2.4.10","depth":3,"path":"javacore/concurrent/线程池.md","ref":"javacore/concurrent/线程池.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/jvm/jvm.md","mtime":"2019-08-13T14:40:41.622Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-13T15:05:49.560Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
