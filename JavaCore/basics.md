@@ -226,7 +226,7 @@ HashMap中，如果要比较key是否相等，要同时使用这两个函数！
 
 - String： 如果要操作的数据量比较小，应优先使用String类
 - StringBuilder：如果是在单线程下操作大量数据，应优先使用StringBuilder。（效率最高）
-- StringBuffer：  如果是在多线程下操作大量数据，应优先使用StringBuffer。（线程安全）但一个字符串需要经常被修改时。
+- StringBuffer：  如果是在多线程下操作大量数据，应优先使用StringBuffer。（线程安全）在一个字符串需要经常被修改时使用。
 
 ### Java中数组是不是对象
 
