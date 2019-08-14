@@ -745,6 +745,66 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="java-&#x7F51;&#x7EDC;&#x7F16;&#x7A0B;">Java &#x7F51;&#x7EDC;&#x7F16;&#x7A0B;</h1>
+<blockquote>
+<p>:notebook: &#x672C;&#x6587;&#x5DF2;&#x5F52;&#x6863;&#x5230;&#xFF1A;&#x300C;<a href="https://github.com/dunwu/javacore" target="_blank">javacore</a>&#x300D;</p>
+<p>&#x5173;&#x952E;&#x8BCD;&#xFF1A;URL&#x3001;InetAddress</p>
+</blockquote>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#inetaddress">InetAddress</a></li>
+<li><a href="#url">URL</a></li>
+<li><a href="#sockets">Sockets</a></li>
+<li><a href="#datagram">Datagram</a></li>
+</ul>
+<!-- /TOC -->
+<p>Java &#x4E2D;&#x7684;&#x7F51;&#x7EDC;&#x652F;&#x6301;&#xFF1A;</p>
+<ul>
+<li>InetAddress&#xFF1A;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x7F51;&#x7EDC;&#x4E0A;&#x7684;&#x786C;&#x4EF6;&#x8D44;&#x6E90;&#xFF0C;&#x5373; IP &#x5730;&#x5740;&#xFF1B;</li>
+<li>URL&#xFF1A;&#x7EDF;&#x4E00;&#x8D44;&#x6E90;&#x5B9A;&#x4F4D;&#x7B26;&#xFF1B;</li>
+<li>Sockets&#xFF1A;&#x4F7F;&#x7528; TCP &#x534F;&#x8BAE;&#x5B9E;&#x73B0;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#xFF1B;</li>
+<li>Datagram&#xFF1A;&#x4F7F;&#x7528; UDP &#x534F;&#x8BAE;&#x5B9E;&#x73B0;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x3002;</li>
+</ul>
+<h2 id="inetaddress">InetAddress</h2>
+<p>&#x6CA1;&#x6709;&#x516C;&#x6709;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x53EA;&#x80FD;&#x901A;&#x8FC7;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x6765;&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;&#x3002;</p>
+<pre><code class="lang-java">InetAddress.getByName(String host);
+InetAddress.getByAddress(<span class="hljs-keyword">byte</span>[] address);
+</code></pre>
+<h2 id="url">URL</h2>
+<p>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4ECE; URL &#x4E2D;&#x8BFB;&#x53D6;&#x5B57;&#x8282;&#x6D41;&#x6570;&#x636E;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>{
+
+    URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>);
+
+    <span class="hljs-comment">/* &#x5B57;&#x8282;&#x6D41; */</span>
+    InputStream is = url.openStream();
+
+    <span class="hljs-comment">/* &#x5B57;&#x7B26;&#x6D41; */</span>
+    InputStreamReader isr = <span class="hljs-keyword">new</span> InputStreamReader(is, <span class="hljs-string">&quot;utf-8&quot;</span>);
+
+    <span class="hljs-comment">/* &#x63D0;&#x4F9B;&#x7F13;&#x5B58;&#x529F;&#x80FD; */</span>
+    BufferedReader br = <span class="hljs-keyword">new</span> BufferedReader(isr);
+
+    String line;
+    <span class="hljs-keyword">while</span> ((line = br.readLine()) != <span class="hljs-keyword">null</span>) {
+        System.out.println(line);
+    }
+
+    br.close();
+}
+</code></pre>
+<h2 id="sockets">Sockets</h2>
+<ul>
+<li>ServerSocket&#xFF1A;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7C7B;</li>
+<li>Socket&#xFF1A;&#x5BA2;&#x6237;&#x7AEF;&#x7C7B;</li>
+<li>&#x670D;&#x52A1;&#x5668;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x901A;&#x8FC7; InputStream &#x548C; OutputStream &#x8FDB;&#x884C;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x3002;</li>
+</ul>
+<div align="center"> <img src="../pics/ClienteServidorSockets1521731145260.jpg"> </div>
+
+<h2 id="datagram">Datagram</h2>
+<ul>
+<li>DatagramPacket&#xFF1A;&#x6570;&#x636E;&#x5305;&#x7C7B;</li>
+<li>DatagramSocket&#xFF1A;&#x901A;&#x4FE1;&#x7C7B;</li>
+</ul>
 
                                 
                                 </section>
@@ -784,7 +844,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java 网络编程","level":"1.2.6.4","depth":3,"next":{"title":"Java数据库操作","level":"1.2.7","depth":2,"ref":"","articles":[]},"previous":{"title":"Java 序列化","level":"1.2.6.3","depth":3,"path":"javacore/io/Java序列化.md","ref":"javacore/io/Java序列化.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/io/Java网络编程.md","mtime":"2019-08-14T04:41:40.504Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-14T04:41:42.350Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java 网络编程","level":"1.2.6.4","depth":3,"next":{"title":"Java数据库操作","level":"1.2.7","depth":2,"ref":"","articles":[]},"previous":{"title":"Java 序列化","level":"1.2.6.3","depth":3,"path":"javacore/io/Java序列化.md","ref":"javacore/io/Java序列化.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/io/Java网络编程.md","mtime":"2019-08-14T04:40:08.751Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-14T04:47:17.572Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -795,6 +855,10 @@
     
         
         <script src="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
