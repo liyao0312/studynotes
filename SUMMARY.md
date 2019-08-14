@@ -1,15 +1,16 @@
 # Summary
 
 * [编者序](README.md)
-* [Java核心技术教程](javacore/basics.md)
+* Java核心技术教程
     * [Java基础特性](javacore/basics.md)
     * [Java高级特性](javacore/advanced.md)
-    * [容器](javacore/container/container.md)
+    * 容器
+        * [容器概述](javacore/container/container.md)
         * [Collection之List](javacore/container/container-list.md)
         * [Collection之Set](javacore/container/container-set.md)
         * [Collection之Queue](javacore/container/container-queue.md)
         * [Map](javacore/container/container-map.md)
-    * [并发](javacore/concurrent/concurrent.md)
+    * 并发
         * [Java 并发面试题集](javacore/concurrent/Java并发面试题集.md)
         * [第一章 并发简介](javacore/concurrent/并发简介.md)
         * [第二章 线程基础](javacore/concurrent/线程基础.md)
@@ -20,18 +21,20 @@
         * [第七章 原子变量类](javacore/concurrent/原子变量类.md)
         * [第八章 并发工具类](javacore/concurrent/并发工具类.md)
         * [第九章 线程池](javacore/concurrent/线程池.md)
-    * [Java虚拟机](javacore/jvm/jvm.md)
+    * Java虚拟机
+        * [Java虚拟机概述](javacore/jvm/jvm.md)
         * [第一章 运行时数据区域](javacore/jvm/jvm-memory.md)
         * [第二章 垃圾收集](javacore/jvm/jvm-gc.md)
         * [第三章 类加载机制](javacore/jvm/jvm-class-loader.md)
         * [第四章 JVM 调优](javacore/jvm/jvm-performance.md)
-    * [输入输出流IO](javacore/io/io.md)
+    * 输入输出流IO
+        * [输入输出流IO概述](javacore/io/io.md)
         * [Java 常用 IO 类](javacore/io/Java常用IO类.md)
         * [Java 流操作](javacore/io/Java流操作.md)
         * [Java 序列化](javacore/io/Java序列化.md)
         * [Java 网络编程](javacore/io/Java网络编程.md)
     * Java数据库操作
-* [JavaWeb](javaweb/network-interview.md)
+* JavaWeb
     * [网络](javaweb/network-interview.md)
     * Spring
     * Spring Boot 教程
