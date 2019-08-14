@@ -1,5 +1,26 @@
 # 容器
 
+- [Java容器概述](#容器)
+  - [容器框架](#容器框架)
+- [Java容器collection之List](#java容器collection之list)
+  - [ArrayList 类](#arraylist-类)
+  - [LinkedList 类](#linkedlist-类)
+  - [ArrayList, Vector和LinkedList有什么区别](#arrayList,-vector和linkedlist有什么区别)
+- [Java容器collection之Set](#java容器collection之set)
+  - [HashSet 类](#hashset-类)
+  - [TreeSet 类](#treeset-类)
+  - [LinkedHashSet 类](#linkedhashset-类)
+  - [EnumSet 类](#enumset-类)
+- [Java容器collection之Queue](#java容器collection之queue)
+  - [Queue 架构](#queue-架构)
+  - [Queue 接口](#queue-接口)
+  - [BlockingQueue 接口](#blockingqueue-接口)
+  - [AbstractQueue 抽象类](#abstractqueue-抽象类)
+  - [PriorityQueue 类](#priorityqueue-类)
+  - [PriorityBlockingQueue 类](#priorityblockingqueue-类)
+  - [LinkedBlockingQueue 类](#linkedblockingqueue-类)
+  - [ArrayBlockingQueue 类](#arrayblockingqueue-类)
+  - [SynchronousQueue](#synchronousqueue)
 - [Java容器Map](#java容器之map)
   - [Map架构](#map架构)
   - [HashMap类](#hashmap类)
@@ -8,6 +29,637 @@
   - [WeakHashMap](#weakhashmap)
   - [HashMap、Hashtable、TreeMap和WeakHashMap有什么区别](#hashmap、hashtable、treemap和weakhashmap有什么区别)
   - [用自定义类型作为HashMap或Hashtable的key需要注意哪些问题](#用自定义类型作为hashmap或hashtable的key需要注意哪些问题)
+
+##  Java容器概述
+
+### 容器框架
+
+![img](https://gitee.com/turnon/images/raw/master/images/java/container/java-container-structure.png)
+
+##  Java容器collection之List
+
+### List 概述
+
+`List` 接口定义：
+
+```java
+public interface List<E> extends Collection<E>
+```
+
+`List` 主要方法：
+
+<div align="center">
+<img src="https://gitee.com/turnon/images/raw/master/images/java/container/list-api.png" width="400"/>
+</div>
+
+`List` 常见子类：
+
+- `ArrayList` - 动态数组。
+- `LinkedList` - 双链表。
+
+### ArrayList 类
+
+#### ArrayList要点
+
+#### ArrayList原理
+
+##### 1.概览
+
+##### 2.序列化
+
+ArrayList 具有动态扩容特性，因此保存元素的数组不一定都会被使用，那么就没必要全部进行序列化。ArrayList 重写了 `writeObject()` 和 `readObject()` 来控制只序列化数组中有元素填充那部分内容。
+
+##### 3.扩容
+
+添加元素时使用 `ensureCapacityInternal()` 方法来保证容量足够，如果不够时，需要使用 grow() 方法进行扩容，新容量的大小为 `oldCapacity + (oldCapacity >> 1)`，也就是旧容量的 1.5 倍。
+
+扩容操作需要调用 `Arrays.copyOf()` 把原数组整个复制到新数组中，因此最好在创建 ArrayList 对象时就指定大概的容量大小，减少扩容操作的次数。
+
+```java
+public boolean add(E e) {
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+}
+
+private void ensureCapacityInternal(int minCapacity) {
+    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
+    }
+
+    ensureExplicitCapacity(minCapacity);
+}
+
+private void ensureExplicitCapacity(int minCapacity) {
+    modCount++;
+
+    // overflow-conscious code
+    if (minCapacity - elementData.length > 0)
+        grow(minCapacity);
+}
+
+private void grow(int minCapacity) {
+    // overflow-conscious code
+    int oldCapacity = elementData.length;
+    int newCapacity = oldCapacity + (oldCapacity >> 1);
+    if (newCapacity - minCapacity < 0)
+        newCapacity = minCapacity;
+    if (newCapacity - MAX_ARRAY_SIZE > 0)
+        newCapacity = hugeCapacity(minCapacity);
+    // minCapacity is usually close to size, so this is a win:
+    elementData = Arrays.copyOf(elementData, newCapacity);
+}
+```
+##### 4.删除元素
+
+需要调用 System.arraycopy() 将 index+1 后面的元素都复制到 index 位置上，复制的代价很高。
+
+```java
+public E remove(int index) {
+    rangeCheck(index);
+
+    modCount++;
+    E oldValue = elementData(index);
+
+    int numMoved = size - index - 1;
+    if (numMoved > 0)
+        System.arraycopy(elementData, index+1, elementData, index, numMoved);
+    elementData[--size] = null; // clear to let GC do its work
+
+    return oldValue;
+}
+```
+##### 5. Fail-Fast
+
+modCount 用来记录 ArrayList 结构发生变化的次数。结构发生变化是指添加或者删除至少一个元素的所有操作，或者是调整内部数组的大小，仅仅只是设置元素的值不算结构发生变化。
+
+在进行序列化或者迭代等操作时，需要比较操作前后 modCount 是否改变，如果改变了需要抛出 ConcurrentModificationException。
+
+```java
+private void writeObject(java.io.ObjectOutputStream s)
+    throws java.io.IOException{
+    // Write out element count, and any hidden stuff
+    int expectedModCount = modCount;
+    s.defaultWriteObject();
+
+    // Write out size as capacity for behavioural compatibility with clone()
+    s.writeInt(size);
+
+    // Write out all elements in the proper order.
+    for (int i=0; i<size; i++) {
+        s.writeObject(elementData[i]);
+    }
+
+    if (modCount != expectedModCount) {
+        throw new ConcurrentModificationException();
+    }
+}
+```
+### LinkedList 类
+
+#### LinkedList要点
+
+LinkedList 基于双向链表实现。由于是双向链表，那么它的**顺序访问会非常高效，而随机访问效率比较低。**
+
+LinkedList 定义：
+
+```java
+public class LinkedList<E>
+    extends AbstractSequentialList<E>
+    implements List<E>, Deque<E>, Cloneable, java.io.Serializable
+```
+从 LinkedList 的定义，可以得出 LinkedList 的一些基本特性：
+
+- LinkedList 是一个继承于 AbstractSequentialList 的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。
+- LinkedList 实现 List 接口，能对它进行队列操作。
+- LinkedList 实现 Deque 接口，即能将 LinkedList 当作双端队列使用。
+- LinkedList 实现了 Cloneable 接口，即覆盖了函数 clone()，能被克隆。
+- LinkedList 实现 java.io.Serializable 接口，这意味着 LinkedList 支持序列化。
+- LinkedList 是非线程安全的。
+
+#### LinkedList原理
+
+LinkedList 包含两个重要的成员：first 和 last。
+
+```java
+// 链表长度
+transient int size = 0;
+
+// 链表头节点
+transient Node<E> first;
+
+// 链表尾节点
+transient Node<E> last;
+```
+- size 表示双链表中节点的个数，初始为 0。
+- first 和 last 分别是双链表的头节点和尾节点。
+
+Node 则表示链表中的实例。Node 中包含三个元素：prev, next, item。其中，prev 是该节点的上一个节点，next 是该节点的下一个节点，item 是该节点所包含的值。
+
+```java
+private static class Node<E> {
+    E item;
+    Node<E> next;
+    Node<E> prev;
+    ...
+}
+```
+### ArrayList, Vector和LinkedList有什么区别
+
+- ArrayList 基于动态数组实现，LinkedList 基于双向链表实现；
+- ArrayList 支持随机访问，所以访问速度更快；LinkedList 在任意位置添加删除元素更快；
+- ArrayList 基于数组实现，存在容量限制，当元素数超过最大容量时，会自动扩容；LinkedList 基于双链表实现，不存在容量限制；
+- ArrayList 和 LinkedList 都不是线程安全的。
+- Vector是线程安全的。当在多线程中使用容器时（即多个线程会同时访问该容器），选用Vector较为安全。
+
+## 资料
+
+- [Java 编程思想（第 4 版）](https://item.jd.com/10058164.html)
+- https://www.cnblogs.com/skywang12345/p/3308556.html
+- http://www.cnblogs.com/skywang12345/p/3308807.html
+
+##  Java容器collection之Set
+
+### Set架构
+
+<div align="center">
+<img src="https://gitee.com/turnon/images/raw/master/images/java/container/Set-diagrams.png" width="400" />
+</div>
+
+- Set 继承了 Collection 的接口。实际上 Set 就是 Collection，只是行为略有不同：Set 集合不允许有重复元素。
+- SortedSet 继承了 Set 的接口。SortedSet 中的内容是排序的唯一值，排序的方法是通过比较器(Comparator)。
+- NavigableSet 继承了 SortedSet 的接口。相比于 NavigableSet 有一系列的导航方法；如"获取大于/等于某值的元素"、“获取小于/等于某值的元素”等等。
+- AbstractSet 是一个抽象类，它继承于 AbstractCollection，AbstractCollection 实现了 Set 中的绝大部分函数，为 Set 的实现类提供了便利。
+- HashSet 类依赖于 HashMap，它实际上是通过 HashMap 实现的。HashSet 中的元素是无序的。
+- TreeSet 类依赖于 TreeMap，它实际上是通过 TreeMap 实现的。TreeSet 中的元素是有序的。
+- LinkedHashSet 类具有 HashSet 的查找效率，且内部使用链表维护元素的插入顺序。
+- EnumSet 中所有元素都必须是指定枚举类型的枚举值。
+
+### Set 接口
+
+Set 接口定义如下：
+
+```java
+public interface Set<E> extends Collection<E> {}
+```
+
+Set 继承了 Collection 的接口。实际上，Set 就是 Collection，二者提供的方法完全相同。
+
+### SortedSet 接口
+
+SortedSet 接口定义如下：
+
+```java
+public interface SortedSet<E> extends Set<E> {}
+```
+
+SortedSet 接口新扩展的方法：
+
+- comparator - 返回 Comparator
+- subSet - 返回指定区间的子集
+- headSet - 返回小于指定元素的子集
+- tailSet - 返回大于指定元素的子集
+- first - 返回第一个元素
+- last - 返回最后一个元素
+- spliterator
+
+### NavigableSet 接口
+
+NavigableSet 接口定义如下：
+
+```java
+public interface NavigableSet<E> extends SortedSet<E> {}
+```
+
+NavigableSet 接口新扩展的方法：
+
+- lower - 返回小于指定值的元素中最接近的元素
+- higher - 返回大于指定值的元素中最接近的元素
+- floor - 返回小于或等于指定值的元素中最接近的元素
+- ceiling - 返回大于或等于指定值的元素中最接近的元素
+- pollFirst - 检索并移除第一个（最小的）元素
+- pollLast - 检索并移除最后一个（最大的）元素
+- descendingSet - 返回反序排列的 Set
+- descendingIterator - 返回反序排列的 Set 的迭代器
+- subSet - 返回指定区间的子集
+- headSet - 返回小于指定元素的子集
+- tailSet - 返回大于指定元素的子集
+
+### AbstractSet 抽象类
+
+AbstractSet 抽象类定义如下：
+
+```
+public abstract class AbstractSet<E> extends AbstractCollection<E> implements Set<E> {}
+```
+
+AbstractSet 类提供 Set 接口的骨干实现，以最大限度地减少实现 Set 接口所需的工作。
+
+事实上，主要的实现已经在 AbstractCollection 中完成。
+
+### HashSet 类
+
+采用散列函数，查找速度较快
+
+HashSet 类定义如下：
+
+```java
+public class HashSet<E>
+    extends AbstractSet<E>
+    implements Set<E>, Cloneable, java.io.Serializable {}
+```
+#### HashSet 要点
+
+1.  HashSet 类通过继承 AbstractSet 实现了 Set 接口中的骨干方法。
+2.  HashSet 实现了 Cloneable，所以支持克隆。
+3.  HashSet 实现了 Serializable，所以支持序列化。
+4.  HashSet 中存储的元素是无序的。
+5.  HashSet 允许 null 值的元素。
+6.  HashSet 不是线程安全的。
+
+#### HashSet 原理
+
+```java
+// HashSet 的核心，通过维护一个 HashMap 实体来实现 HashSet 方法
+private transient HashMap<E,Object> map;
+
+// PRESENT 是用于关联 map 中当前操作元素的一个虚拟值
+private static final Object PRESENT = new Object();
+}
+```
+**HashSet 是基于 HashMap 实现的。**
+
+HashSet 中维护了一个 HashMap 对象 map，HashSet 的重要方法，如 add、remove、iterator、clear、size 等都是围绕 map 实现的。
+
+PRESENT 是用于关联 map 中当前操作元素的一个虚拟值。
+
+HashSet 类中通过定义 `writeObject()` 和 `readObject()` 方法确定了其序列化和反序列化的机制。
+
+### TreeSet 类
+
+对元素进行排序，使用红黑树
+
+TreeSet 类定义如下：
+
+```java
+public class TreeSet<E> extends AbstractSet<E>
+    implements NavigableSet<E>, Cloneable, java.io.Serializable {}
+```
+#### TreeSet 要点
+
+1.  TreeSet 类通过继承 AbstractSet 实现了 NavigableSet 接口中的骨干方法。
+2.  TreeSet 实现了 Cloneable，所以支持克隆。
+3.  TreeSet 实现了 Serializable，所以支持序列化。
+4.  TreeSet 中存储的元素是有序的。排序规则是自然顺序或比较器（Comparator）中提供的顺序规则。
+5.  TreeSet 不是线程安全的。
+
+#### TreeSet 源码
+
+```java
+// TreeSet 的核心，通过维护一个 NavigableMap 实体来实现 TreeSet 方法
+private transient NavigableMap<E,Object> m;
+
+// PRESENT 是用于关联 map 中当前操作元素的一个虚拟值
+private static final Object PRESENT = new Object();
+```
+
+**TreeSet 是基于 TreeMap 实现的。**
+
+TreeSet 中维护了一个 NavigableMap 对象 map（实际上是一个 TreeMap 实例），TreeSet 的重要方法，如 add、remove、iterator、clear、size 等都是围绕 map 实现的。
+
+PRESENT 是用于关联 map 中当前操作元素的一个虚拟值。TreeSet 中的元素都被当成 TreeMap 的 key 存储，而 value 都填的是 PRESENT。
+
+### LinkedHashSet 类
+
+既保证了顺序，又保证查找的速度
+
+LinkedHashSet 类定义如下：
+
+```java
+public class LinkedHashSet<E>
+    extends HashSet<E>
+    implements Set<E>, Cloneable, java.io.Serializable {}
+```
+#### LinkedHashSet 要点
+
+1.  LinkedHashSet 类通过继承 HashSet 实现了 Set 接口中的骨干方法。
+2.  LinkedHashSet 实现了 Cloneable，所以支持克隆。
+3.  LinkedHashSet 实现了 Serializable，所以支持序列化。
+4.  LinkedHashSet 中存储的元素是按照插入顺序保存的。
+5.  LinkedHashSet 不是线程安全的。
+
+#### LinkedHashSet 原理
+
+LinkedHashSet 有三个构造方法，无一例外，都是调用父类 HashSet 的构造方法。
+
+```java
+public LinkedHashSet(int initialCapacity, float loadFactor) {
+    super(initialCapacity, loadFactor, true);
+}
+public LinkedHashSet(int initialCapacity) {
+    super(initialCapacity, .75f, true);
+}
+public LinkedHashSet() {
+    super(16, .75f, true);
+}
+```
+
+需要强调的是：**LinkedHashSet 构造方法实际上调用的是父类 HashSet 的非 public 构造方法。**
+
+```java
+HashSet(int initialCapacity, float loadFactor, boolean dummy) {
+    map = new LinkedHashMap<>(initialCapacity, loadFactor);
+}
+```
+
+不同于 HashSet public 构造方法中初始化的 HashMap 实例，这个构造方法中，初始化了 LinkedHashMap 实例。
+
+也就是说，实际上，LinkedHashSet 维护了一个双链表。由双链表的特性可以知道，它是按照元素的插入顺序保存的。所以，这就是 LinkedHashSet 中存储的元素是按照插入顺序保存的原理。
+
+### EnumSet 类
+
+EnumSet 类定义如下：
+
+```java
+public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E>
+    implements Cloneable, java.io.Serializable {}
+```
+
+#### EnumSet 要点
+
+1.  EnumSet 类继承了 AbstractSet，所以有 Set 接口中的骨干方法。
+2.  EnumSet 实现了 Cloneable，所以支持克隆。
+3.  EnumSet 实现了 Serializable，所以支持序列化。
+4.  EnumSet 通过 `<E extends Enum<E>>` 限定了存储元素必须是枚举值。
+5.  EnumSet 没有构造方法，只能通过类中的 static 方法来创建 EnumSet 对象。
+6.  EnumSet 是有序的。以枚举值在 EnumSet 类中的定义顺序来决定集合元素的顺序。
+7.  EnumSet 不是线程安全的。
+
+### 资料
+
+- [Java 编程思想（Thinking in java）](https://item.jd.com/10058164.html)
+
+##  Java容器collection之Queue
+
+### Queue 架构
+
+<div align="center">
+<img src="https://gitee.com/turnon/images/raw/master/images/java/container/Queue-diagrams.png" />
+</div>
+
+### Queue 接口
+
+Queue 接口定义如下：
+
+```java
+public interface Queue<E> extends Collection<E> {}
+```
+
+### BlockingQueue 接口
+
+BlockingQueue 接口定义如下：
+
+```java
+public interface BlockingQueue<E> extends Queue<E> {}
+```
+
+BlockingQueue 顾名思义，是一个阻塞队列。
+
+在 BlockingQueue 中，如果获取队列元素但是队列为空时，会阻塞，等待队列中有元素再返回；如果添加元素时，如果队列已满，那么等到队列可以放入新元素时再放入。
+
+BlockingQueue 对插入操作、移除操作、获取元素操作提供了四种不同的方法用于不同的场景中使用：
+
+1.  抛出异常；
+2.  返回特殊值（null 或 true/false，取决于具体的操作）；
+3.  阻塞等待此操作，直到这个操作成功；
+4.  阻塞等待此操作，直到成功或者超时指定时间。
+
+总结如下：
+
+|         | _Throws exception_ | _Special value_ | _Blocks_         | _Times out_          |
+| ------- | ------------------ | --------------- | ---------------- | -------------------- |
+| Insert  | add(e)             | offer(e)        | put(e)           | offer(e, time, unit) |
+| Remove  | remove()           | poll()          | take()           | poll(time, unit)     |
+| Examine | element()          | peek()          | _not applicable_ | _not applicable_     |
+
+BlockingQueue 的各个实现类都遵循了这些规则。
+
+BlockingQueue 不接受 null 值元素。
+
+### AbstractQueue 抽象类
+
+AbstractQueue 抽象类定义如下：
+
+```java
+public abstract class AbstractQueue<E>
+    extends AbstractCollection<E>
+    implements Queue<E> {}
+```
+
+AbstractQueue 类提供 Queue 接口的骨干实现，以最大限度地减少实现 Queue 接口所需的工作。
+
+### PriorityQueue 类
+
+PriorityQueue 类定义如下：
+
+```java
+public class PriorityQueue<E> extends AbstractQueue<E>
+    implements java.io.Serializable {}
+```
+
+#### PriorityQueue 要点
+
+1.  PriorityQueue 实现了 Serializable，支持序列化。
+2.  PriorityQueue 类是基于优先级堆实现的无界优先级队列。
+3.  PriorityQueue 中的元素根据自然顺序或 Comparator 提供的顺序排序。
+4.  PriorityQueue 不接受 null 值元素。
+5.  PriorityQueue 不是线程安全的。
+
+### PriorityBlockingQueue 类
+
+PriorityBlockingQueue 类定义如下：
+
+```java
+public class PriorityBlockingQueue<E> extends AbstractQueue<E>
+    implements BlockingQueue<E>, java.io.Serializable {}
+```
+
+#### PriorityBlockingQueue 要点
+
+1.  PriorityBlockingQueue 实现了 BlockingQueue，也是一个阻塞队列。
+2.  PriorityBlockingQueue 实现了 Serializable，支持序列化。
+3.  PriorityBlockingQueue 可以视为 PriorityQueue 的线程安全版本。
+4.  PriorityBlockingQueue 不接受 null 值元素。
+5.  PriorityBlockingQueue 的插入操作 put 方法不会 block，因为它是无界队列（take 方法在队列为空的时候会阻塞）。
+
+#### PriorityBlockingQueue 原理
+
+PriorityBlockingQueue 有两个重要成员：
+
+```java
+private transient Object[] queue;
+private final ReentrantLock lock;
+```
+
+- queue 是一个 Object 数组，用于保存 PriorityBlockingQueue 的元素。
+- 而可重入锁 lock 则用于在执行插入、删除操作时，保证这个方法在当前线程释放锁之前，其他线程不能访问。
+
+PriorityBlockingQueue 的容量虽然有初始化大小，但是不限制大小，如果当前容量已满，插入新元素时会自动扩容。
+
+### LinkedBlockingQueue 类
+
+LinkedBlockingQueue 类定义如下：
+
+```java
+public class LinkedBlockingQueue<E> extends AbstractQueue<E>
+        implements BlockingQueue<E>, java.io.Serializable {}
+```
+
+#### LinkedBlockingQueue 要点
+
+1.  LinkedBlockingQueue 实现了 BlockingQueue，也是一个阻塞队列。
+2.  LinkedBlockingQueue 实现了 Serializable，支持序列化。
+3.  LinkedBlockingQueue 是基于单链表实现的阻塞队列，可以当做无界队列也可以当做有界队列来使用。
+4.  LinkedBlockingQueue 中元素按照插入顺序保存（FIFO）。
+
+#### LinkedBlockingQueue 原理
+
+```java
+// 队列容量
+private final int capacity;
+
+// 队列中的元素数量
+private final AtomicInteger count = new AtomicInteger(0);
+
+// 队头
+private transient Node<E> head;
+
+// 队尾
+private transient Node<E> last;
+
+// take, poll, peek 等读操作的方法需要获取到这个锁
+private final ReentrantLock takeLock = new ReentrantLock();
+
+// 如果读操作的时候队列是空的，那么等待 notEmpty 条件
+private final Condition notEmpty = takeLock.newCondition();
+
+// put, offer 等写操作的方法需要获取到这个锁
+private final ReentrantLock putLock = new ReentrantLock();
+
+// 如果写操作的时候队列是满的，那么等待 notFull 条件
+private final Condition notFull = putLock.newCondition();
+```
+
+这里用了两个锁，两个 Condition，简单介绍如下：
+
+- takeLock 和 notEmpty 搭配：如果要获取（take）一个元素，需要获取 takeLock 锁，但是获取了锁还不够，如果队列此时为空，还需要队列不为空（notEmpty）这个条件（Condition）。
+- putLock 需要和 notFull 搭配：如果要插入（put）一个元素，需要获取 putLock 锁，但是获取了锁还不够，如果队列此时已满，还需要队列不是满的（notFull）这个条件（Condition）。
+
+### ArrayBlockingQueue 类
+
+ArrayBlockingQueue 类定义如下：
+
+```java
+public class ArrayBlockingQueue<E> extends AbstractQueue<E>
+        implements BlockingQueue<E>, java.io.Serializable {}
+```
+
+#### ArrayBlockingQueue 要点
+
+1.  ArrayBlockingQueue 实现了 BlockingQueue，也是一个阻塞队列。
+2.  ArrayBlockingQueue 实现了 Serializable，支持序列化。
+3.  ArrayBlockingQueue 是基于数组实现的无界阻塞队列。
+
+#### ArrayBlockingQueue 原理
+
+ArrayBlockingQueue 的重要成员如下：
+
+```java
+// 用于存放元素的数组
+final Object[] items;
+// 下一次读取操作的位置
+int takeIndex;
+// 下一次写入操作的位置
+int putIndex;
+// 队列中的元素数量
+int count;
+
+// 以下几个就是控制并发用的同步器
+final ReentrantLock lock;
+private final Condition notEmpty;
+private final Condition notFull;
+```
+
+ArrayBlockingQueue 实现并发同步的原理就是，读操作和写操作都需要获取到 AQS 独占锁才能进行操作。
+
+- 如果队列为空，这个时候读操作的线程进入到读线程队列排队，等待写线程写入新的元素，然后唤醒读线程队列的第一个等待线程。
+- 如果队列已满，这个时候写操作的线程进入到写线程队列排队，等待读线程将队列元素移除，然后唤醒写线程队列的第一个等待线程。
+
+对于 ArrayBlockingQueue，我们可以在构造的时候指定以下三个参数：
+
+1.  队列容量，其限制了队列中最多允许的元素个数；
+2.  指定独占锁是公平锁还是非公平锁。非公平锁的吞吐量比较高，公平锁可以保证每次都是等待最久的线程获取到锁；
+3.  可以指定用一个集合来初始化，将此集合中的元素在构造方法期间就先添加到队列中。
+
+### SynchronousQueue
+
+SynchronousQueue 定义如下：
+
+```java
+public class SynchronousQueue<E> extends AbstractQueue<E>
+    implements BlockingQueue<E>, java.io.Serializable {}
+```
+
+1.  SynchronousQueue 这个类，不过它在线程池的实现类 ScheduledThreadPoolExecutor 中得到了应用。
+2.  SynchronousQueue 的队列其实是虚的，其不提供任何空间（一个都没有）来存储元素。数据必须从某个写线程交给某个读线程，而不是写到某个队列中等待被消费。
+3.  SynchronousQueue 中不能使用 peek 方法（在这里这个方法直接返回 null），peek 方法的语义是只读取不移除，显然，这个方法的语义是不符合 SynchronousQueue 的特征的。
+4.  SynchronousQueue 也不能被迭代，因为根本就没有元素可以拿来迭代的。
+5.  虽然 SynchronousQueue 间接地实现了 Collection 接口，但是如果你将其当做 Collection 来用的话，那么集合是空的。
+6.  当然，SynchronousQueue 也不允许传递 null 值的（并发包中的容器类好像都不支持插入 null 值，因为 null 值往往用作其他用途，比如用于方法的返回值代表操作失败）。
+
+### 资料
+
+[解读 Java 并发队列 BlockingQueue](http://www.importnew.com/28053.html)
 
 ##  Java容器之Map
 
