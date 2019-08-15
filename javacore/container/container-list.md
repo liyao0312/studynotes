@@ -2,8 +2,9 @@
 
 - [Java容器collection之List](#java容器collection之list)
   - [ArrayList 类](#arraylist-类)
+  - [Vector 类](#vector-类)
+  - [CopyOnWriteArrayList](#copyonwritearrayList)
   - [LinkedList 类](#linkedlist-类)
-  - [ArrayList, Vector和LinkedList有什么区别](#arraylist-vector和linkedlist有什么区别)
 
 ##  Java容器collection之List
 
@@ -30,9 +31,38 @@ public interface List<E> extends Collection<E>
 
 #### ArrayList要点
 
+`ArrayList`是一个数组队列，相当于动态数组。与Java中的数组相比，`ArrrayList`的容量可以动态增长。
+
+`ArrayList`定义：
+
+```java
+public class ArrayList<E> extends AbstractList<E>
+  		implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+```
+
+从ArrayList的定义，不难看出ArrayList的一些基本特性：
+
+- ArrayList 实现了 List 接口，能对它进行队列操作。
+- ArrayList 实现了 RandmoAccess 接口，即提供了随机访问功能。RandmoAccess 是 java 中用来被List实现，为List提供快速访问功能的。在 ArrayList 中，我们即可以通过元素的序号快速获取元素对象；这就是快速随机访问。
+- ArrayList 实现了 Cloneable 接口，即覆盖了函数 clone() ，能被克隆。
+- ArrayList 实现 java.io.Serializable 接口，这意味着 ArrayList 支持序列化，能通过序列化去传输。
+- ArrayList 是非线程安全的。
+
 #### ArrayList原理
 
 ##### 1.概览
+
+ArrayLis 包含了两个重要的元素： elementData 和 size。
+
+```java
+transient Object[] elementData;
+private int size;
+```
+
+1. elementData 它保存了添加到 ArrayList 中的元素。 这个数组的默认大小为 10。
+2.  size 则是动态数组的实际大小。
+
+ArrayList 实现了 RandomAccess 接口，因此支持随机访问。 这是理所当然的，因为 ArrayList 是基于数组实现的。
 
 ##### 2.序列化
 
@@ -124,6 +154,75 @@ private void writeObject(java.io.ObjectOutputStream s)
     }
 }
 ```
+### Vector 类
+
+- 1.同步    它的实现与ArrayList类似，但是使用了synchronized进行同步
+
+- 与 ArrayList 的比较
+
+  - Vector 是同步的，因此开销就比 ArrayList 要大，访问速度更慢。最好使用 ArrayList 而不是 Vector，因为同步操作完全可以由程序员自己来控制；
+  - Vector 每次扩容请求其大小的 2 倍空间，而 ArrayList 是 1.5 倍。
+
+- 替代方案
+
+  - 可以使用 `Collections.synchronizedList();` 得到一个线程安全的 ArrayList。
+
+    ```java
+  List<String> list = new ArrayList<>();
+  List<String> synList = Collections.synchronizedList(list);
+    ```
+
+  - 也可以使用 concurrent 并发包下的 CopyOnWriteArrayList 类。
+
+  ```java
+  List<String> list = new CopyOnWriteArrayList<>();CopyOnWriteArrayList
+  ```
+
+## CopyOnWriteArrayList
+
+#### 读写分离
+
+写操作在一个复制的数组上进行，读操作还是在原始数组中进行，读写分离，互不影响。
+
+写操作需要加锁，防止并发写入时导致写入数据丢失。
+
+写操作结束之后需要把原始数组指向新的复制数组。
+
+```java
+public boolean add(E e){
+  final ReentrantLock lock = this.lock;
+  lock.lock();
+  try {
+        Object[] elements = getArray();
+        int len = elements.length;
+        Object[] newElements = Arrays.copyOf(elements, len + 1);
+        newElements[len] = e;
+        setArray(newElements);
+        return true;
+   } finally {
+        lock.unlock();
+   }
+}
+```
+
+```
+@SuppressWarnings("unchecked")
+private E get(Object[] a, int index) {
+    return (E) a[index];
+}
+```
+
+#### 读写分离
+
+CopyOnWriteArrayList 在写操作的同时允许读操作，大大提高了读操作的性能，因此很适合读多写少的应用场景。
+
+但是 CopyOnWriteArrayList 有其缺陷：
+
+- 内存占用：在写操作时需要复制一个新的数组，使得内存占用为原来的两倍左右；
+- 数据不一致：读操作不能读取实时性的数据，因为部分写操作的数据还未同步到读数组中。
+
+所以 CopyOnWriteArrayList 不适合内存敏感以及对实时性要求很高的场景。
+
 ### LinkedList 类
 
 #### LinkedList要点
@@ -173,13 +272,14 @@ private static class Node<E> {
     ...
 }
 ```
-### ArrayList, Vector和LinkedList有什么区别
+<div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/c8563120-cb00-4dd6-9213-9d9b337a7f7c.png" width="500px"> </div><br>
+
+## 小结
 
 - ArrayList 基于动态数组实现，LinkedList 基于双向链表实现；
 - ArrayList 支持随机访问，所以访问速度更快；LinkedList 在任意位置添加删除元素更快；
 - ArrayList 基于数组实现，存在容量限制，当元素数超过最大容量时，会自动扩容；LinkedList 基于双链表实现，不存在容量限制；
 - ArrayList 和 LinkedList 都不是线程安全的。
-- Vector是线程安全的。当在多线程中使用容器时（即多个线程会同时访问该容器），选用Vector较为安全。
 
 ## 资料
 

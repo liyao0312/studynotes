@@ -61,6 +61,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="container-map2.html" />
+    
     
     <link rel="prev" href="container-queue.html" />
     
@@ -216,6 +218,19 @@
             
                     
                     Map
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6" data-path="container-map2.html">
+            
+                <a href="container-map2.html">
+            
+                    
+                    Map之面试问题集
             
                 </a>
             
@@ -788,7 +803,7 @@
 <li><a href="#java&#x5BB9;&#x5668;&#x4E4B;map">Java&#x5BB9;&#x5668;Map</a><ul>
 <li><a href="#map&#x67B6;&#x6784;">Map&#x67B6;&#x6784;</a></li>
 <li><a href="#hashmap&#x7C7B;">HashMap&#x7C7B;</a></li>
-<li><a href="#hashtable">HashTable</a></li>
+<li><a href="#concurrenthashmap">ConcurrentHashMap</a></li>
 <li><a href="#treemap">TreeMap</a></li>
 <li><a href="#weakhashmap">WeakHashMap</a></li>
 <li><a href="#hashmap&#x3001;hashtable&#x3001;treemap&#x548C;weakhashmap&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;">HashMap&#x3001;Hashtable&#x3001;TreeMap&#x548C;WeakHashMap&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;</a></li>
@@ -1113,7 +1128,205 @@
 <p> &#x5982;&#x679C;&#x8D85;&#x8FC7;&#x4E86;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;(&#x9ED8;&#x8BA4; 0.75)&#xFF0C;&#x5219;&#x4F1A;&#x91CD;&#x65B0; resize &#x4E00;&#x4E2A;&#x539F;&#x6765;&#x957F;&#x5EA6;&#x4E24;&#x500D;&#x7684; HashMap&#xFF0C;&#x5E76;&#x4E14;&#x91CD;&#x65B0;&#x8C03;&#x7528; hash &#x65B9;&#x6CD5;&#x3002;</p>
 </li>
 </ol>
-<h3 id="hashtable">HashTable</h3>
+<h3 id="concurrenthashmap">ConcurrentHashMap</h3>
+<p>HashTable &#x548C;HashMap&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x5B83;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x540C;&#x4E00;&#x65F6;&#x523B;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x5199;&#x5165;HashTable&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x4E0D;&#x4E00;&#x81F4;&#x3002;&#x5B83;&#x662F;&#x9057;&#x7559;&#x7C7B;&#xFF0C;&#x4E0D;&#x5E94;&#x8BE5;&#x53BB;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
+<p>&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;ConcurrentHashMap&#x6765;&#x652F;&#x6301;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF0C;&#x5E76;&#x4E14;ConcurrentHashMap&#x7684;&#x6548;&#x7387;&#x4F1A;&#x66F4;&#x9AD8;&#xFF0C;&#x56E0;&#x4E3A;ConcurrentHashMap&#x5F15;&#x5165;&#x4E86;&#x5206;&#x6BB5;&#x9501;&#x3002;</p>
+<h4 id="1&#x5B58;&#x50A8;&#x7ED3;&#x6784;">1.&#x5B58;&#x50A8;&#x7ED3;&#x6784;</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashEntry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;</span>{
+  <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> hash;
+  <span class="hljs-keyword">final</span> K key;
+  <span class="hljs-keyword">volatile</span> V value;
+  <span class="hljs-keyword">volatile</span> HashEntry&lt;K,V&gt; next;
+}
+</code></pre>
+<p>ConcurrentHashMap &#x548C; HashMap &#x5B9E;&#x73B0;&#x4E0A;&#x7C7B;&#x4F3C;&#xFF0C;&#x6700;&#x4E3B;&#x8981;&#x7684;&#x5DEE;&#x522B;&#x662F; ConcurrentHashMao &#x91C7;&#x7528;&#x4E86;&#x5206;&#x6BB5;&#x9501;&#xFF08;Segment&#xFF09;&#xFF0C;&#x6BCF;&#x4E2A;&#x5206;&#x6BB5;&#x9501;&#x7EF4;&#x62A4;&#x7740;&#x51E0;&#x4E2A;&#x6876;&#xFF08;HashEntry&#xFF09;&#xFF0C;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x8BBF;&#x95EE;&#x4E0D;&#x540C;&#x5206;&#x6BB5;&#x9501;&#x4E0A;&#x7684;&#x6876;&#xFF0C;&#x4ECE;&#x800C;&#x4F7F;&#x5E76;&#x53D1;&#x5EA6;&#x66F4;&#x9AD8;&#xFF08;&#x5E76;&#x53D1;&#x5EA6;&#x5C31;&#x662F;Segment&#x7684;&#x4E2A;&#x6570;&#xFF09;&#x3002;</p>
+<p>Segment&#x7EE7;&#x627F;&#x81EA; ReentrantLock</p>
+<pre><code class="lang-java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Segement</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">ReentrantLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Serializable</span> </span>{
+      <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">2249069246763182397L</span>;
+
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_SCAN_RETRIES =
+        Runtime.getRuntime().availableProcessors() &gt; <span class="hljs-number">1</span> ? <span class="hljs-number">64</span> : <span class="hljs-number">1</span>;
+
+    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">volatile</span> HashEntry&lt;K,V&gt;[] table;
+
+    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> count;
+
+    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> modCount;
+
+    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> threshold;
+
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> loadFactor;
+}
+</code></pre>
+<pre><code class="lang-java"><span class="hljs-keyword">final</span> Segment&lt;K,V&gt;[] segments;
+</code></pre>
+<p>&#x9ED8;&#x8BA4;&#x7684;&#x5E76;&#x53D1;&#x7EA7;&#x522B;&#x4E3A;16&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x9ED8;&#x8BA4;&#x521B;&#x5EFA;16&#x4E2A; Segment&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_CONCURRENCY_LEVEL = <span class="hljs-number">16</span>;
+</code></pre>
+<p><div align="center"> <img src="https://github.com/Zds501710271/-Java/raw/master/notes/pics/db808eff-31d7-4229-a4ad-b8ae71870a3a.png" width="550px"> </div><br></p>
+<h4 id="2size&#x64CD;&#x4F5C;">2.size&#x64CD;&#x4F5C;</h4>
+<p>&#x6BCF;&#x4E2A; Segment &#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A; count &#x53D8;&#x91CF;&#x6765;&#x7EDF;&#x8BA1;&#x8BE5; Segment &#x4E2D;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x4E2A;&#x6570;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * The number of elements. Accessed only either within locks
+ * or among other volatile reads that maintain visibility.
+ */</span>
+<span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> count;
+</code></pre>
+<p>&#x5728;&#x6267;&#x884C; size &#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x904D;&#x5386;&#x6240;&#x6709; Segment &#x7136;&#x540E;&#x628A; count &#x7D2F;&#x8BA1;&#x8D77;&#x6765;&#x3002;</p>
+<p>ConcurrentHashMap &#x5728;&#x6267;&#x884C; size &#x64CD;&#x4F5C;&#x65F6;&#x5148;&#x5C1D;&#x8BD5;&#x4E0D;&#x52A0;&#x9501;&#xFF0C;&#x5982;&#x679C;&#x8FDE;&#x7EED;&#x4E24;&#x6B21;&#x4E0D;&#x52A0;&#x9501;&#x64CD;&#x4F5C;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x4E00;&#x81F4;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x662F;&#x6B63;&#x786E;&#x7684;&#x3002;</p>
+<p>&#x5C1D;&#x8BD5;&#x6B21;&#x6570;&#x4F7F;&#x7528; RETRIES_BEFORE_LOCK &#x5B9A;&#x4E49;&#xFF0C;&#x8BE5;&#x503C;&#x4E3A; 2&#xFF0C;retries &#x521D;&#x59CB;&#x503C;&#x4E3A; -1&#xFF0C;&#x56E0;&#x6B64;&#x5C1D;&#x8BD5;&#x6B21;&#x6570;&#x4E3A; 3&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5C1D;&#x8BD5;&#x7684;&#x6B21;&#x6570;&#x8D85;&#x8FC7; 3 &#x6B21;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5BF9;&#x6BCF;&#x4E2A; Segment &#x52A0;&#x9501;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * Number of unsynchronized retries in size and containsValue
+ * methods before resorting to locking. This is used to avoid
+ * unbounded retries if tables undergo continuous modification
+ * which would make it impossible to obtain an accurate result.
+ */</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> RETRIES_BEFORE_LOCK = <span class="hljs-number">2</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// Try a few times to get accurate count. On failure due to</span>
+    <span class="hljs-comment">// continuous async changes in table, resort to locking.</span>
+    <span class="hljs-keyword">final</span> Segment&lt;K,V&gt;[] segments = <span class="hljs-keyword">this</span>.segments;
+    <span class="hljs-keyword">int</span> size;
+    <span class="hljs-keyword">boolean</span> overflow; <span class="hljs-comment">// true if size overflows 32 bits</span>
+    <span class="hljs-keyword">long</span> sum;         <span class="hljs-comment">// sum of modCounts</span>
+    <span class="hljs-keyword">long</span> last = <span class="hljs-number">0L</span>;   <span class="hljs-comment">// previous sum</span>
+    <span class="hljs-keyword">int</span> retries = -<span class="hljs-number">1</span>; <span class="hljs-comment">// first iteration isn&apos;t retry</span>
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">for</span> (;;) {
+            <span class="hljs-comment">// &#x8D85;&#x8FC7;&#x5C1D;&#x8BD5;&#x6B21;&#x6570;&#xFF0C;&#x5219;&#x5BF9;&#x6BCF;&#x4E2A; Segment &#x52A0;&#x9501;</span>
+            <span class="hljs-keyword">if</span> (retries++ == RETRIES_BEFORE_LOCK) {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; segments.length; ++j)
+                    ensureSegment(j).lock(); <span class="hljs-comment">// force creation</span>
+            }
+            sum = <span class="hljs-number">0L</span>;
+            size = <span class="hljs-number">0</span>;
+            overflow = <span class="hljs-keyword">false</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; segments.length; ++j) {
+                Segment&lt;K,V&gt; seg = segmentAt(segments, j);
+                <span class="hljs-keyword">if</span> (seg != <span class="hljs-keyword">null</span>) {
+                    sum += seg.modCount;
+                    <span class="hljs-keyword">int</span> c = seg.count;
+                    <span class="hljs-keyword">if</span> (c &lt; <span class="hljs-number">0</span> || (size += c) &lt; <span class="hljs-number">0</span>)
+                        overflow = <span class="hljs-keyword">true</span>;
+                }
+            }
+            <span class="hljs-comment">// &#x8FDE;&#x7EED;&#x4E24;&#x6B21;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x4E00;&#x81F4;&#xFF0C;&#x5219;&#x8BA4;&#x4E3A;&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x662F;&#x6B63;&#x786E;&#x7684;</span>
+            <span class="hljs-keyword">if</span> (sum == last)
+                <span class="hljs-keyword">break</span>;
+            last = sum;
+        }
+    } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-keyword">if</span> (retries &gt; RETRIES_BEFORE_LOCK) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; segments.length; ++j)
+                segmentAt(segments, j).unlock();
+        }
+    }
+    <span class="hljs-keyword">return</span> overflow ? Integer.MAX_VALUE : size;
+}
+</code></pre>
+<h4 id="3-jdk-18-&#x7684;&#x6539;&#x52A8;">3. JDK 1.8 &#x7684;&#x6539;&#x52A8;</h4>
+<p>JDK 1.7 &#x4F7F;&#x7528;&#x5206;&#x6BB5;&#x9501;&#x673A;&#x5236;&#x6765;&#x5B9E;&#x73B0;&#x5E76;&#x53D1;&#x66F4;&#x65B0;&#x64CD;&#x4F5C;&#xFF0C;&#x6838;&#x5FC3;&#x7C7B;&#x4E3A; Segment&#xFF0C;&#x5B83;&#x7EE7;&#x627F;&#x81EA;&#x91CD;&#x5165;&#x9501; ReentrantLock&#xFF0C;&#x5E76;&#x53D1;&#x5EA6;&#x4E0E; Segment &#x6570;&#x91CF;&#x76F8;&#x7B49;&#x3002;</p>
+<p>JDK 1.8 &#x4F7F;&#x7528;&#x4E86; CAS &#x64CD;&#x4F5C;&#x6765;&#x652F;&#x6301;&#x66F4;&#x9AD8;&#x7684;&#x5E76;&#x53D1;&#x5EA6;&#xFF0C;&#x5728; CAS &#x64CD;&#x4F5C;&#x5931;&#x8D25;&#x65F6;&#x4F7F;&#x7528;&#x5185;&#x7F6E;&#x9501; synchronized&#x3002;</p>
+<p>&#x5E76;&#x4E14; JDK 1.8 &#x7684;&#x5B9E;&#x73B0;&#x4E5F;&#x5728;&#x94FE;&#x8868;&#x8FC7;&#x957F;&#x65F6;&#x4F1A;&#x8F6C;&#x6362;&#x4E3A;&#x7EA2;&#x9ED1;&#x6811;&#x3002;</p>
+<h3 id="linkedhashmap">LinkedHashMap</h3>
+<h4 id="&#x5B58;&#x50A8;&#x7ED3;&#x6784;">&#x5B58;&#x50A8;&#x7ED3;&#x6784;</h4>
+<p>&#x7EE7;&#x627F;&#x81EA; HashMap&#xFF0C;&#x56E0;&#x6B64;&#x5177;&#x6709;&#x548C; HashMap &#x4E00;&#x6837;&#x7684;&#x5FEB;&#x901F;&#x67E5;&#x627E;&#x7279;&#x6027;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedHashMap</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">HashMap</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;
+</span></code></pre>
+<p>&#x5185;&#x90E8;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A;&#x53CC;&#x5411;&#x94FE;&#x8868;&#xFF0C;&#x7528;&#x6765;&#x7EF4;&#x62A4;&#x63D2;&#x5165;&#x987A;&#x5E8F;&#x6216;&#x8005; LRU &#x987A;&#x5E8F;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * The head (eldest) of the doubly linked list.
+ */</span>
+<span class="hljs-keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; head;
+
+<span class="hljs-comment">/**
+ * The tail (youngest) of the doubly linked list.
+ */</span>
+<span class="hljs-keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; tail;
+</code></pre>
+<p>accessOrder &#x51B3;&#x5B9A;&#x4E86;&#x987A;&#x5E8F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; false&#xFF0C;&#x6B64;&#x65F6;&#x7EF4;&#x62A4;&#x7684;&#x662F;&#x63D2;&#x5165;&#x987A;&#x5E8F;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> accessOrder;
+</code></pre>
+<p>LinkedHashMap &#x6700;&#x91CD;&#x8981;&#x7684;&#x662F;&#x4EE5;&#x4E0B;&#x7528;&#x4E8E;&#x7EF4;&#x62A4;&#x987A;&#x5E8F;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4EEC;&#x4F1A;&#x5728; put&#x3001;get &#x7B49;&#x65B9;&#x6CD5;&#x4E2D;&#x8C03;&#x7528;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">afterNodeAccess</span><span class="hljs-params">(Node&lt;K,V&gt; p)</span> </span>{ }
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">afterNodeInsertion</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> evict)</span> </span>{ }
+</code></pre>
+<h4 id="afternodeaccess">afterNodeAccess()</h4>
+<p>&#x5F53;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x88AB;&#x8BBF;&#x95EE;&#x65F6;&#xFF0C;&#x5982;&#x679C; accessOrder &#x4E3A; true&#xFF0C;&#x5219;&#x4F1A;&#x5C06;&#x8BE5;&#x8282;&#x70B9;&#x79FB;&#x5230;&#x94FE;&#x8868;&#x5C3E;&#x90E8;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x6307;&#x5B9A;&#x4E3A; LRU &#x987A;&#x5E8F;&#x4E4B;&#x540E;&#xFF0C;&#x5728;&#x6BCF;&#x6B21;&#x8BBF;&#x95EE;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x65F6;&#xFF0C;&#x4F1A;&#x5C06;&#x8FD9;&#x4E2A;&#x8282;&#x70B9;&#x79FB;&#x5230;&#x94FE;&#x8868;&#x5C3E;&#x90E8;&#xFF0C;&#x4FDD;&#x8BC1;&#x94FE;&#x8868;&#x5C3E;&#x90E8;&#x662F;&#x6700;&#x8FD1;&#x8BBF;&#x95EE;&#x7684;&#x8282;&#x70B9;&#xFF0C;&#x90A3;&#x4E48;&#x94FE;&#x8868;&#x9996;&#x90E8;&#x5C31;&#x662F;&#x6700;&#x8FD1;&#x6700;&#x4E45;&#x672A;&#x4F7F;&#x7528;&#x7684;&#x8282;&#x70B9;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">afterNodeAccess</span><span class="hljs-params">(Node&lt;K,V&gt; e)</span> </span>{ <span class="hljs-comment">// move node to last</span>
+    LinkedHashMap.Entry&lt;K,V&gt; last;
+    <span class="hljs-keyword">if</span> (accessOrder &amp;&amp; (last = tail) != e) {
+        LinkedHashMap.Entry&lt;K,V&gt; p =
+            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
+        p.after = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">if</span> (b == <span class="hljs-keyword">null</span>)
+            head = a;
+        <span class="hljs-keyword">else</span>
+            b.after = a;
+        <span class="hljs-keyword">if</span> (a != <span class="hljs-keyword">null</span>)
+            a.before = b;
+        <span class="hljs-keyword">else</span>
+            last = b;
+        <span class="hljs-keyword">if</span> (last == <span class="hljs-keyword">null</span>)
+            head = p;
+        <span class="hljs-keyword">else</span> {
+            p.before = last;
+            last.after = p;
+        }
+        tail = p;
+        ++modCount;
+    }
+}
+</code></pre>
+<h4 id="afternodeinsertion">afterNodeInsertion()</h4>
+<p>&#x5728; put &#x7B49;&#x64CD;&#x4F5C;&#x4E4B;&#x540E;&#x6267;&#x884C;&#xFF0C;&#x5F53; removeEldestEntry() &#x65B9;&#x6CD5;&#x8FD4;&#x56DE; true &#x65F6;&#x4F1A;&#x79FB;&#x9664;&#x6700;&#x665A;&#x7684;&#x8282;&#x70B9;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x94FE;&#x8868;&#x9996;&#x90E8;&#x8282;&#x70B9; first&#x3002;</p>
+<p>evict &#x53EA;&#x6709;&#x5728;&#x6784;&#x5EFA; Map &#x7684;&#x65F6;&#x5019;&#x624D;&#x4E3A; false&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x4E3A; true&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">afterNodeInsertion</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> evict)</span> </span>{ <span class="hljs-comment">// possibly remove eldest</span>
+    LinkedHashMap.Entry&lt;K,V&gt; first;
+    <span class="hljs-keyword">if</span> (evict &amp;&amp; (first = head) != <span class="hljs-keyword">null</span> &amp;&amp; removeEldestEntry(first)) {
+        K key = first.key;
+        removeNode(hash(key), key, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>, <span class="hljs-keyword">true</span>);
+    }
+}
+</code></pre>
+<p>removeEldestEntry() &#x9ED8;&#x8BA4;&#x4E3A; false&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x8BA9;&#x5B83;&#x4E3A; true&#xFF0C;&#x9700;&#x8981;&#x7EE7;&#x627F; LinkedHashMap &#x5E76;&#x4E14;&#x8986;&#x76D6;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x8FD9;&#x5728;&#x5B9E;&#x73B0; LRU &#x7684;&#x7F13;&#x5B58;&#x4E2D;&#x7279;&#x522B;&#x6709;&#x7528;&#xFF0C;&#x901A;&#x8FC7;&#x79FB;&#x9664;&#x6700;&#x8FD1;&#x6700;&#x4E45;&#x672A;&#x4F7F;&#x7528;&#x7684;&#x8282;&#x70B9;&#xFF0C;&#x4ECE;&#x800C;&#x4FDD;&#x8BC1;&#x7F13;&#x5B58;&#x7A7A;&#x95F4;&#x8DB3;&#x591F;&#xFF0C;&#x5E76;&#x4E14;&#x7F13;&#x5B58;&#x7684;&#x6570;&#x636E;&#x90FD;&#x662F;&#x70ED;&#x70B9;&#x6570;&#x636E;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">removeEldestEntry</span><span class="hljs-params">(Map.Entry&lt;K,V&gt; eldest)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+}
+</code></pre>
+<h4 id="lru-&#x7F13;&#x5B58;">LRU &#x7F13;&#x5B58;</h4>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x4F7F;&#x7528; LinkedHashMap &#x5B9E;&#x73B0;&#x7684;&#x4E00;&#x4E2A; LRU &#x7F13;&#x5B58;&#xFF1A;</p>
+<ul>
+<li>&#x8BBE;&#x5B9A;&#x6700;&#x5927;&#x7F13;&#x5B58;&#x7A7A;&#x95F4; MAX_ENTRIES &#x4E3A; 3&#xFF1B;</li>
+<li>&#x4F7F;&#x7528; LinkedHashMap &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x5C06; accessOrder &#x8BBE;&#x7F6E;&#x4E3A; true&#xFF0C;&#x5F00;&#x542F; LRU &#x987A;&#x5E8F;&#xFF1B;</li>
+<li>&#x8986;&#x76D6; removeEldestEntry() &#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#xFF0C;&#x5728;&#x8282;&#x70B9;&#x591A;&#x4E8E; MAX_ENTRIES &#x5C31;&#x4F1A;&#x5C06;&#x6700;&#x8FD1;&#x6700;&#x4E45;&#x672A;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x79FB;&#x9664;&#x3002;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LRUCache</span>&lt;<span class="hljs-title">K</span>, <span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">LinkedHashMap</span>&lt;<span class="hljs-title">K</span>, <span class="hljs-title">V</span>&gt; </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_ENTRIES = <span class="hljs-number">3</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">removeEldestEntry</span><span class="hljs-params">(Map.Entry eldest)</span> </span>{
+        <span class="hljs-keyword">return</span> size() &gt; MAX_ENTRIES;
+    }
+
+    LRUCache() {
+        <span class="hljs-keyword">super</span>(MAX_ENTRIES, <span class="hljs-number">0.75f</span>, <span class="hljs-keyword">true</span>);
+    }
+}
+</code></pre>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+    LRUCache&lt;Integer, String&gt; cache = <span class="hljs-keyword">new</span> LRUCache&lt;&gt;();
+    cache.put(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;a&quot;</span>);
+    cache.put(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;b&quot;</span>);
+    cache.put(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;c&quot;</span>);
+    cache.get(<span class="hljs-number">1</span>);
+    cache.put(<span class="hljs-number">4</span>, <span class="hljs-string">&quot;d&quot;</span>);
+    System.out.println(cache.keySet());
+}
+</code></pre>
+<pre><code class="lang-java">[<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>]
+</code></pre>
 <h3 id="treemap">TreeMap</h3>
 <h4 id="treemap-&#x8981;&#x70B9;">TreeMap &#x8981;&#x70B9;</h4>
 <ul>
@@ -1346,10 +1559,14 @@
 
             
                 
-                <a href="container-queue.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Collection之Queue">
+                <a href="container-queue.html" class="navigation navigation-prev " aria-label="Previous page: Collection之Queue">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="container-map2.html" class="navigation navigation-next " aria-label="Next page: Map之面试问题集">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -1358,7 +1575,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Map","level":"1.2.3.5","depth":3,"next":{"title":"并发","level":"1.2.4","depth":2,"ref":"","articles":[{"title":"Java 并发面试题集","level":"1.2.4.1","depth":3,"path":"javacore/concurrent/Java并发面试题集.md","ref":"javacore/concurrent/Java并发面试题集.md","articles":[]},{"title":"第一章 并发简介","level":"1.2.4.2","depth":3,"path":"javacore/concurrent/并发简介.md","ref":"javacore/concurrent/并发简介.md","articles":[]},{"title":"第二章 线程基础","level":"1.2.4.3","depth":3,"path":"javacore/concurrent/线程基础.md","ref":"javacore/concurrent/线程基础.md","articles":[]},{"title":"第三章 并发机制的底层实现","level":"1.2.4.4","depth":3,"path":"javacore/concurrent/并发机制的底层实现.md","ref":"javacore/concurrent/并发机制的底层实现.md","articles":[]},{"title":"第四章 内存模型","level":"1.2.4.5","depth":3,"path":"javacore/concurrent/内存模型.md","ref":"javacore/concurrent/内存模型.md","articles":[]},{"title":"第五章 同步容器和并发容器","level":"1.2.4.6","depth":3,"path":"javacore/concurrent/同步容器和并发容器.md","ref":"javacore/concurrent/同步容器和并发容器.md","articles":[]},{"title":"第六章 锁","level":"1.2.4.7","depth":3,"path":"javacore/concurrent/锁.md","ref":"javacore/concurrent/锁.md","articles":[]},{"title":"第七章 原子变量类","level":"1.2.4.8","depth":3,"path":"javacore/concurrent/原子变量类.md","ref":"javacore/concurrent/原子变量类.md","articles":[]},{"title":"第八章 并发工具类","level":"1.2.4.9","depth":3,"path":"javacore/concurrent/并发工具类.md","ref":"javacore/concurrent/并发工具类.md","articles":[]},{"title":"第九章 线程池","level":"1.2.4.10","depth":3,"path":"javacore/concurrent/线程池.md","ref":"javacore/concurrent/线程池.md","articles":[]}]},"previous":{"title":"Collection之Queue","level":"1.2.3.4","depth":3,"path":"javacore/container/container-queue.md","ref":"javacore/container/container-queue.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/container/container-map.md","mtime":"2019-08-14T04:55:54.127Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-14T05:08:30.509Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Map","level":"1.2.3.5","depth":3,"next":{"title":"Map之面试问题集","level":"1.2.3.6","depth":3,"path":"javacore/container/container-map2.md","ref":"javacore/container/container-map2.md","articles":[]},"previous":{"title":"Collection之Queue","level":"1.2.3.4","depth":3,"path":"javacore/container/container-queue.md","ref":"javacore/container/container-queue.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/container/container-map.md","mtime":"2019-08-15T07:33:12.554Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-15T08:29:04.940Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

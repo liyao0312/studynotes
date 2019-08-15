@@ -10,6 +10,7 @@
         * [Collection之Set](javacore/container/container-set.md)
         * [Collection之Queue](javacore/container/container-queue.md)
         * [Map](javacore/container/container-map.md)
+        * [Map之面试问题集](javacore/container/container-map2.md)
     * 并发
         * [Java 并发面试题集](javacore/concurrent/Java并发面试题集.md)
         * [第一章 并发简介](javacore/concurrent/并发简介.md)
