@@ -1,7 +1,5 @@
 # 运行时数据区域
 
-> :notebook: 本文已归档到：「[javacore](https://github.com/dunwu/javacore)」
-
 <!-- TOC depthFrom:2 depthTo:3 -->
 
 - [程序计数器](#程序计数器)
@@ -26,7 +24,7 @@
 
 ## 虚拟机栈
 
-每个 Java 方法在执行的同时会创建一个栈帧用于存储局部变量表、操作数栈、常量池引用等信息。每一个方法从调用直至执行完成的过程，就对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程。
+每个 Java 方法在执行的同时会创建一个[栈帧](https://blog.csdn.net/xtayfjpk/article/details/41924283)用于存储局部变量表、操作数栈、常量池引用等信息。每一个方法从调用直至执行完成的过程，就对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程。
 
 <div align="center">
 <img src="https://gitee.com/turnon/images/raw/master/images/java/jvm/jmm-虚拟机栈.png" />

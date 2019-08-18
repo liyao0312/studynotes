@@ -11,8 +11,8 @@
         * [Collection之Queue](javacore/container/container-queue.md)
         * [Map](javacore/container/container-map.md)
         * [Map之面试问题集](javacore/container/container-map2.md)
-    * 并发
-        * [Java 并发面试题集](javacore/concurrent/Java并发面试题集.md)
+    * 多线程
+        * [Java 多线程面试题集](javacore/concurrent/Java多线程面试题集.md)
         * [第一章 并发简介](javacore/concurrent/并发简介.md)
         * [第二章 线程基础](javacore/concurrent/线程基础.md)
         * [第三章 并发机制的底层实现](javacore/concurrent/并发机制的底层实现.md)
@@ -23,7 +23,7 @@
         * [第八章 并发工具类](javacore/concurrent/并发工具类.md)
         * [第九章 线程池](javacore/concurrent/线程池.md)
     * Java虚拟机
-        * [Java虚拟机概述](javacore/jvm/jvm.md)
+        * [Java虚拟机面经](javacore/jvm/jvm-interview.md)
         * [第一章 运行时数据区域](javacore/jvm/jvm-memory.md)
         * [第二章 垃圾收集](javacore/jvm/jvm-gc.md)
         * [第三章 类加载机制](javacore/jvm/jvm-class-loader.md)

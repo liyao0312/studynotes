@@ -248,7 +248,7 @@
                 <span>
             
                     
-                    并发
+                    多线程
             
                 </span>
             
@@ -257,12 +257,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.4.1" data-path="Java并发面试题集.html">
+        <li class="chapter " data-level="1.2.4.1" data-path="Java多线程面试题集.html">
             
-                <a href="Java并发面试题集.html">
+                <a href="Java多线程面试题集.html">
             
                     
-                    Java 并发面试题集
+                    Java 多线程面试题集
             
                 </a>
             
@@ -406,12 +406,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.5.1" data-path="../jvm/jvm.html">
+        <li class="chapter " data-level="1.2.5.1" data-path="../jvm/jvm-interview.html">
             
-                <a href="../jvm/jvm.html">
+                <a href="../jvm/jvm-interview.html">
             
                     
-                    Java虚拟机概述
+                    Java虚拟机面经
             
                 </a>
             
@@ -800,14 +800,13 @@
                                 
                                 <h1 id="&#x9501;">&#x9501;</h1>
 <blockquote>
-<p>:notebook: &#x672C;&#x6587;&#x5DF2;&#x5F52;&#x6863;&#x5230;&#xFF1A;&#x300C;<a href="https://github.com/dunwu/javacore" target="_blank">javacore</a>&#x300D;</p>
 <p>&#x672C;&#x6587;&#x5185;&#x5BB9;&#x57FA;&#x4E8E; JDK1.8&#x3002;</p>
 </blockquote>
 <!-- TOC depthFrom:2 depthTo:3 -->
 <ul>
 <li><a href="#&#x6982;&#x8FF0;">&#x6982;&#x8FF0;</a><ul>
 <li><a href="#&#x6982;&#x5FF5;">&#x6982;&#x5FF5;</a></li>
-<li><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x7528;-lockreadwritelock">&#x4E3A;&#x4EC0;&#x4E48;&#x7528; Lock&#x3001;ReadWriteLock</a></li>
+<li><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x7528;-lock&#x3001;readwritelock">&#x4E3A;&#x4EC0;&#x4E48;&#x7528; Lock&#x3001;ReadWriteLock</a></li>
 </ul>
 </li>
 <li><a href="#lock-&#x548C;-reentrantlock">Lock &#x548C; ReentrantLock</a><ul>
@@ -817,14 +816,14 @@
 </ul>
 </li>
 <li><a href="#readwritelock-&#x548C;-reentrantreadwritelock">ReadWriteLock &#x548C; ReentrantReadWriteLock</a><ul>
-<li><a href="#&#x8981;&#x70B9;-1">&#x8981;&#x70B9;</a></li>
-<li><a href="#&#x6E90;&#x7801;-1">&#x6E90;&#x7801;</a></li>
-<li><a href="#&#x793A;&#x4F8B;-1">&#x793A;&#x4F8B;</a></li>
+<li><a href="#readwritelock-&#x548C;-reentrantreadwritelock&#x8981;&#x70B9;">&#x8981;&#x70B9;</a></li>
+<li><a href="#readwritelock-&#x548C;-reentrantreadwritelock&#x6E90;&#x7801;">&#x6E90;&#x7801;</a></li>
+<li><a href="#readwritelock-&#x548C;-reentrantreadwritelock&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</a></li>
 </ul>
 </li>
 <li><a href="#aqs">AQS</a><ul>
-<li><a href="#&#x8981;&#x70B9;-2">&#x8981;&#x70B9;</a></li>
-<li><a href="#&#x6E90;&#x7801;-2">&#x6E90;&#x7801;</a></li>
+<li><a href="#aqs&#x8981;&#x70B9;">&#x8981;&#x70B9;</a></li>
+<li><a href="#aqs&#x6E90;&#x7801;">&#x6E90;&#x7801;</a></li>
 </ul>
 </li>
 <li><a href="#&#x8D44;&#x6599;">&#x8D44;&#x6599;</a></li>
@@ -967,7 +966,7 @@ synchronized void setB() throws Exception{
 </code></pre>
 <p>:point_right: <a href="https://github.com/dunwu/JavaCore/tree/master/codes/concurrent/src/main/java/io/github/dunwu/javase/concurrent/lock" target="_blank">&#x66F4;&#x591A;&#x793A;&#x4F8B;</a></p>
 <h2 id="readwritelock-&#x548C;-reentrantreadwritelock">ReadWriteLock &#x548C; ReentrantReadWriteLock</h2>
-<h3 id="&#x8981;&#x70B9;">&#x8981;&#x70B9;</h3>
+<h3 id="readwritelock-&#x548C;-reentrantreadwritelock&#x8981;&#x70B9;">ReadWriteLock &#x548C; ReentrantReadWriteLock&#x8981;&#x70B9;</h3>
 <p>&#x5BF9;&#x4E8E;&#x7279;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#xFF0C;ReadWriteLock &#x5141;&#x8BB8;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x540C;&#x65F6;&#x5BF9;&#x5176;&#x6267;&#x884C;&#x8BFB;&#x64CD;&#x4F5C;&#xFF0C;&#x4F46;&#x662F;&#x53EA;&#x5141;&#x8BB8;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5BF9;&#x5176;&#x6267;&#x884C;&#x5199;&#x64CD;&#x4F5C;&#x3002;</p>
 <p>ReadWriteLock &#x7EF4;&#x62A4;&#x4E00;&#x5BF9;&#x76F8;&#x5173;&#x7684;&#x9501;&#x3002;&#x4E00;&#x4E2A;&#x662F;&#x8BFB;&#x9501;&#xFF1B;&#x4E00;&#x4E2A;&#x662F;&#x5199;&#x9501;&#x3002;&#x5C06;&#x8BFB;&#x5199;&#x9501;&#x5206;&#x5F00;&#xFF0C;&#x6709;&#x5229;&#x4E8E;&#x63D0;&#x9AD8;&#x5E76;&#x53D1;&#x6548;&#x7387;&#x3002;</p>
 <p>ReentrantReadWriteLock &#x5B9E;&#x73B0;&#x4E86; ReadWriteLock &#x63A5;&#x53E3;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x8BFB;&#x5199;&#x9501;&#x3002;</p>
@@ -977,7 +976,7 @@ synchronized void setB() throws Exception{
   <img src="https://gitee.com/turnon/images/raw/master/images/java/concurrent/ReadWriteLock.jpg">
 </p>
 
-<h3 id="&#x6E90;&#x7801;">&#x6E90;&#x7801;</h3>
+<h3 id="readwritelock-&#x548C;-reentrantreadwritelock&#x6E90;&#x7801;">ReadWriteLock &#x548C; ReentrantReadWriteLock&#x6E90;&#x7801;</h3>
 <h4 id="readwritelock-&#x63A5;&#x53E3;&#x5B9A;&#x4E49;">ReadWriteLock &#x63A5;&#x53E3;&#x5B9A;&#x4E49;</h4>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ReadWriteLock</span> </span>{
     <span class="hljs-comment">/**
@@ -991,7 +990,7 @@ synchronized void setB() throws Exception{
     <span class="hljs-function">Lock <span class="hljs-title">writeLock</span><span class="hljs-params">()</span></span>;
 }
 </code></pre>
-<h3 id="&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</h3>
+<h3 id="readwritelock-&#x548C;-reentrantreadwritelock&#x793A;&#x4F8B;">ReadWriteLock &#x548C; ReentrantReadWriteLock&#x793A;&#x4F8B;</h3>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReentrantReadWriteLockDemo</span> </span>{
 
     <span class="hljs-keyword">private</span> ReentrantReadWriteLock rwl = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();
@@ -1021,11 +1020,11 @@ synchronized void setB() throws Exception{
 <blockquote>
 <p>AQS &#x4F5C;&#x4E3A;&#x6784;&#x5EFA;&#x9501;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x540C;&#x6B65;&#x7EC4;&#x4EF6;&#x7684;&#x57FA;&#x7840;&#x6846;&#x67B6;&#xFF0C;&#x6709;&#x5FC5;&#x8981;&#x597D;&#x597D;&#x4E86;&#x89E3;&#x4E00;&#x4E0B;&#x5176;&#x539F;&#x7406;&#x3002;</p>
 </blockquote>
-<h3 id="&#x8981;&#x70B9;">&#x8981;&#x70B9;</h3>
+<h3 id="aqs&#x8981;&#x70B9;">AQS&#x8981;&#x70B9;</h3>
 <p>&#x4F5C;&#x7528;&#xFF1A;AQS&#xFF0C;AbstractQueuedSynchronizer&#xFF0C;&#x5373;&#x961F;&#x5217;&#x540C;&#x6B65;&#x5668;&#x3002;&#x5B83;&#x662F;&#x6784;&#x5EFA;&#x9501;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x540C;&#x6B65;&#x7EC4;&#x4EF6;&#x7684;&#x57FA;&#x7840;&#x6846;&#x67B6;&#xFF08;&#x5982; ReentrantLock&#x3001;ReentrantReadWriteLock&#x3001;Semaphore &#x7B49;&#xFF09;&#x3002;</p>
 <p>&#x573A;&#x666F;&#xFF1A;&#x5728; LOCK &#x5305;&#x4E2D;&#x7684;&#x76F8;&#x5173;&#x9501;(&#x5E38;&#x7528;&#x7684;&#x6709; ReentrantLock&#x3001; ReadWriteLock)&#x90FD;&#x662F;&#x57FA;&#x4E8E; AQS &#x6765;&#x6784;&#x5EFA;&#x3002;&#x7136;&#x800C;&#x8FD9;&#x4E9B;&#x9501;&#x90FD;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x6765;&#x7EE7;&#x627F; AQS&#xFF0C;&#x800C;&#x662F;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A; Sync &#x7C7B;&#x53BB;&#x7EE7;&#x627F; AQS&#x3002;&#x90A3;&#x4E48;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8FD9;&#x6837;&#x5462;?because:&#x9501;&#x9762;&#x5411;&#x7684;&#x662F;&#x4F7F;&#x7528;&#x7528;&#x6237;&#xFF0C;&#x800C;&#x540C;&#x6B65;&#x5668;&#x9762;&#x5411;&#x7684;&#x5219;&#x662F;&#x7EBF;&#x7A0B;&#x63A7;&#x5236;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x9501;&#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#x805A;&#x5408;&#x540C;&#x6B65;&#x5668;&#x800C;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x7EE7;&#x627F; AQS &#x5C31;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x7684;&#x9694;&#x79BB;&#x4E8C;&#x8005;&#x6240;&#x5173;&#x6CE8;&#x7684;&#x4E8B;&#x60C5;&#x3002;</p>
 <p>&#x539F;&#x7406;&#xFF1A;AQS &#x5728;&#x5185;&#x90E8;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A; int &#x53D8;&#x91CF; state&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x540C;&#x6B65;&#x72B6;&#x6001;&#x3002;AQS &#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x53CC;&#x5411;&#x7684; FIFO &#x540C;&#x6B65;&#x961F;&#x5217;&#x6765;&#x5B8C;&#x6210;&#x540C;&#x6B65;&#x72B6;&#x6001;&#x7684;&#x7BA1;&#x7406;&#xFF0C;&#x5F53;&#x6709;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#x9501;&#x5931;&#x8D25;&#x540E;&#xFF0C;&#x5C31;&#x88AB;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x672B;&#x5C3E;&#x3002;</p>
-<h3 id="&#x6E90;&#x7801;">&#x6E90;&#x7801;</h3>
+<h3 id="aqs&#x6E90;&#x7801;">AQS&#x6E90;&#x7801;</h3>
 <p>AbstractQueuedSynchronizer &#x7EE7;&#x627F;&#x81EA; AbstractOwnableSynchronize&#x3002;</p>
 <h4 id="&#x540C;&#x6B65;&#x961F;&#x5217;">&#x540C;&#x6B65;&#x961F;&#x5217;</h4>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractQueuedSynchronizer</span>
@@ -1487,7 +1486,7 @@ synchronized void setB() throws Exception{
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第六章 锁","level":"1.2.4.7","depth":3,"next":{"title":"第七章 原子变量类","level":"1.2.4.8","depth":3,"path":"javacore/concurrent/原子变量类.md","ref":"javacore/concurrent/原子变量类.md","articles":[]},"previous":{"title":"第五章 同步容器和并发容器","level":"1.2.4.6","depth":3,"path":"javacore/concurrent/同步容器和并发容器.md","ref":"javacore/concurrent/同步容器和并发容器.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/concurrent/锁.md","mtime":"2019-08-16T07:27:56.671Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-16T07:28:39.812Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第六章 锁","level":"1.2.4.7","depth":3,"next":{"title":"第七章 原子变量类","level":"1.2.4.8","depth":3,"path":"javacore/concurrent/原子变量类.md","ref":"javacore/concurrent/原子变量类.md","articles":[]},"previous":{"title":"第五章 同步容器和并发容器","level":"1.2.4.6","depth":3,"path":"javacore/concurrent/同步容器和并发容器.md","ref":"javacore/concurrent/同步容器和并发容器.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/concurrent/锁.md","mtime":"2019-08-17T07:24:04.828Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-17T06:26:46.551Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
