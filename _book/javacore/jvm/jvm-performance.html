@@ -1,0 +1,1551 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第四章 JVM 调优 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="jvm-class-loader.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    编者序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Java核心技术教程
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../basics.html">
+            
+                <a href="../basics.html">
+            
+                    
+                    Java基础特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../advanced.html">
+            
+                <a href="../advanced.html">
+            
+                    
+                    Java高级特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" >
+            
+                <span>
+            
+                    
+                    容器
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../container/container.html">
+            
+                <a href="../container/container.html">
+            
+                    
+                    容器概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2" data-path="../container/container-list.html">
+            
+                <a href="../container/container-list.html">
+            
+                    
+                    Collection之List
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.3" data-path="../container/container-set.html">
+            
+                <a href="../container/container-set.html">
+            
+                    
+                    Collection之Set
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4" data-path="../container/container-queue.html">
+            
+                <a href="../container/container-queue.html">
+            
+                    
+                    Collection之Queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.5" data-path="../container/container-map.html">
+            
+                <a href="../container/container-map.html">
+            
+                    
+                    Map
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6" data-path="../container/container-map2.html">
+            
+                <a href="../container/container-map2.html">
+            
+                    
+                    Map之面试问题集
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" >
+            
+                <span>
+            
+                    
+                    多线程
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../concurrent/Java多线程面试题集.html">
+            
+                <a href="../concurrent/Java多线程面试题集.html">
+            
+                    
+                    Java 多线程面试题集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.2" data-path="../concurrent/并发简介.html">
+            
+                <a href="../concurrent/并发简介.html">
+            
+                    
+                    第一章 并发简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.3" data-path="../concurrent/线程基础.html">
+            
+                <a href="../concurrent/线程基础.html">
+            
+                    
+                    第二章 线程基础
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.4" data-path="../concurrent/并发机制的底层实现.html">
+            
+                <a href="../concurrent/并发机制的底层实现.html">
+            
+                    
+                    第三章 并发机制的底层实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.5" data-path="../concurrent/内存模型.html">
+            
+                <a href="../concurrent/内存模型.html">
+            
+                    
+                    第四章 内存模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.6" data-path="../concurrent/同步容器和并发容器.html">
+            
+                <a href="../concurrent/同步容器和并发容器.html">
+            
+                    
+                    第五章 同步容器和并发容器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.7" data-path="../concurrent/锁.html">
+            
+                <a href="../concurrent/锁.html">
+            
+                    
+                    第六章 锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.8" data-path="../concurrent/原子变量类.html">
+            
+                <a href="../concurrent/原子变量类.html">
+            
+                    
+                    第七章 原子变量类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.9" data-path="../concurrent/并发工具类.html">
+            
+                <a href="../concurrent/并发工具类.html">
+            
+                    
+                    第八章 并发工具类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.10" data-path="../concurrent/线程池.html">
+            
+                <a href="../concurrent/线程池.html">
+            
+                    
+                    第九章 线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" >
+            
+                <span>
+            
+                    
+                    Java虚拟机
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="jvm-interview.html">
+            
+                <a href="jvm-interview.html">
+            
+                    
+                    Java虚拟机面经
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="jvm-memory.html">
+            
+                <a href="jvm-memory.html">
+            
+                    
+                    第一章 运行时数据区域
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3" data-path="jvm-gc.html">
+            
+                <a href="jvm-gc.html">
+            
+                    
+                    第二章 垃圾收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.4" data-path="jvm-class-loader.html">
+            
+                <a href="jvm-class-loader.html">
+            
+                    
+                    第三章 类加载机制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.5.5" data-path="jvm-performance.html">
+            
+                <a href="jvm-performance.html">
+            
+                    
+                    第四章 JVM 调优
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" >
+            
+                <span>
+            
+                    
+                    输入输出流IO
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" data-path="../io/io.html">
+            
+                <a href="../io/io.html">
+            
+                    
+                    输入输出流IO概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.2" data-path="../io/Java常用IO类.html">
+            
+                <a href="../io/Java常用IO类.html">
+            
+                    
+                    Java 常用 IO 类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.3" data-path="../io/Java流操作.html">
+            
+                <a href="../io/Java流操作.html">
+            
+                    
+                    Java 流操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.4" data-path="../io/Java序列化.html">
+            
+                <a href="../io/Java序列化.html">
+            
+                    
+                    Java 序列化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.5" data-path="../io/Java网络编程.html">
+            
+                <a href="../io/Java网络编程.html">
+            
+                    
+                    Java 网络编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" >
+            
+                <span>
+            
+                    
+                    Java数据库操作
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    JavaWeb
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../javaweb/network-interview.html">
+            
+                <a href="../../javaweb/network-interview.html">
+            
+                    
+                    网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" >
+            
+                <span>
+            
+                    
+                    Spring
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" >
+            
+                <span>
+            
+                    
+                    Spring Boot 教程
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../../database/database.html">
+            
+                <a href="../../database/database.html">
+            
+                    
+                    数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" >
+            
+                <span>
+            
+                    
+                    Go核心技术教程
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" >
+            
+                <span>
+            
+                    
+                    Beego框架
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" >
+            
+                <span>
+            
+                    
+                    MongoDB数据库
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" >
+            
+                <span>
+            
+                    
+                    设计模式
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.5.1" >
+            
+                <span>
+            
+                    
+                    单例设计模式
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../../linux/linux.html">
+            
+                <a href="../../linux/linux.html">
+            
+                    
+                    Linux
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="../../怎么用Git写书.html">
+            
+                <a href="../../怎么用Git写书.html">
+            
+                    
+                    怎么用Git写书
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >第四章 JVM 调优</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="jvm-&#x8C03;&#x4F18;">JVM &#x8C03;&#x4F18;</h1>
+<blockquote>
+<p>:notebook: &#x672C;&#x6587;&#x5DF2;&#x5F52;&#x6863;&#x5230;&#xFF1A;&#x300C;<a href="https://github.com/dunwu/javacore" target="_blank">javacore</a>&#x300D;    </p>
+</blockquote>
+<h2 id="jvm-&#x8C03;&#x4F18;&#x6982;&#x8FF0;">JVM &#x8C03;&#x4F18;&#x6982;&#x8FF0;</h2>
+<h3 id="&#x6027;&#x80FD;&#x5B9A;&#x4E49;">&#x6027;&#x80FD;&#x5B9A;&#x4E49;</h3>
+<ul>
+<li><code>&#x541E;&#x5410;&#x91CF;</code> - &#x6307;&#x4E0D;&#x8003;&#x8651; GC &#x5F15;&#x8D77;&#x7684;&#x505C;&#x987F;&#x65F6;&#x95F4;&#x6216;&#x5185;&#x5B58;&#x6D88;&#x8017;&#xFF0C;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x80FD;&#x652F;&#x6491;&#x5E94;&#x7528;&#x8FBE;&#x5230;&#x7684;&#x6700;&#x9AD8;&#x6027;&#x80FD;&#x6307;&#x6807;&#x3002;</li>
+<li><code>&#x5EF6;&#x8FDF;</code> - &#x5176;&#x5EA6;&#x91CF;&#x6807;&#x51C6;&#x662F;&#x7F29;&#x77ED;&#x7531;&#x4E8E;&#x5783;&#x573E;&#x554A;&#x6536;&#x96C6;&#x5F15;&#x8D77;&#x7684;&#x505C;&#x987F;&#x65F6;&#x95F4;&#x6216;&#x8005;&#x5B8C;&#x5168;&#x6D88;&#x9664;&#x56E0;&#x5783;&#x573E;&#x6536;&#x96C6;&#x6240;&#x5F15;&#x8D77;&#x7684;&#x505C;&#x987F;&#xFF0C;&#x907F;&#x514D;&#x5E94;&#x7528;&#x8FD0;&#x884C;&#x65F6;&#x53D1;&#x751F;&#x6296;&#x52A8;&#x3002;</li>
+<li><code>&#x5185;&#x5B58;&#x5360;&#x7528;</code> - &#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x6D41;&#x7545;&#x8FD0;&#x884C;&#x6240;&#x9700;&#x8981;&#x7684;&#x5185;&#x5B58;&#x6570;&#x91CF;&#x3002;</li>
+</ul>
+<h3 id="&#x8C03;&#x4F18;&#x539F;&#x5219;">&#x8C03;&#x4F18;&#x539F;&#x5219;</h3>
+<p>GC &#x4F18;&#x5316;&#x7684;&#x4E24;&#x4E2A;&#x76EE;&#x6807;&#xFF1A;</p>
+<ol>
+<li>&#x5C06;&#x8FDB;&#x5165;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x91CF;&#x964D;&#x5230;&#x6700;&#x4F4E;</li>
+<li>&#x51CF;&#x5C11; Full GC &#x7684;&#x6267;&#x884C;&#x65F6;&#x95F4;</li>
+</ol>
+<p>GC &#x4F18;&#x5316;&#x7684;&#x57FA;&#x672C;&#x539F;&#x5219;&#x662F;&#xFF1A;&#x5C06;&#x4E0D;&#x540C;&#x7684; GC &#x53C2;&#x6570;&#x5E94;&#x7528;&#x5230;&#x4E24;&#x4E2A;&#x53CA;&#x4EE5;&#x4E0A;&#x7684;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x7136;&#x540E;&#x6BD4;&#x8F83;&#x5B83;&#x4EEC;&#x7684;&#x6027;&#x80FD;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x90A3;&#x4E9B;&#x88AB;&#x8BC1;&#x660E;&#x53EF;&#x4EE5;&#x63D0;&#x9AD8;&#x6027;&#x80FD;&#x6216;&#x51CF;&#x5C11; GC &#x6267;&#x884C;&#x65F6;&#x95F4;&#x7684;&#x53C2;&#x6570;&#x5E94;&#x7528;&#x4E8E;&#x6700;&#x7EC8;&#x7684;&#x5DE5;&#x4F5C;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x3002;</p>
+<h4 id="&#x5C06;&#x8FDB;&#x5165;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x91CF;&#x964D;&#x5230;&#x6700;&#x4F4E;">&#x5C06;&#x8FDB;&#x5165;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x91CF;&#x964D;&#x5230;&#x6700;&#x4F4E;</h4>
+<p>&#x9664;&#x4E86;&#x53EF;&#x4EE5;&#x5728; JDK7 &#x53CA;&#x66F4;&#x9AD8;&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;&#x7684; G1 &#x6536;&#x96C6;&#x5668;&#x4EE5;&#x5916;&#xFF0C;&#x5176;&#x4ED6;&#x5206;&#x4EE3; GC &#x90FD;&#x662F;&#x7531; Oracle JVM &#x63D0;&#x4F9B;&#x7684;&#x3002;&#x5173;&#x4E8E;&#x5206;&#x4EE3; GC&#xFF0C;&#x5C31;&#x662F;&#x5BF9;&#x8C61;&#x5728; Eden &#x533A;&#x88AB;&#x521B;&#x5EFA;&#xFF0C;&#x968F;&#x540E;&#x88AB;&#x8F6C;&#x79FB;&#x5230; Survivor &#x533A;&#xFF0C;&#x5728;&#x6B64;&#x4E4B;&#x540E;&#x5269;&#x4F59;&#x7684;&#x5BF9;&#x8C61;&#x4F1A;&#x88AB;&#x8F6C;&#x5165;&#x8001;&#x5E74;&#x4EE3;&#x3002;&#x4E5F;&#x6709;&#x4E00;&#x4E9B;&#x5BF9;&#x8C61;&#x7531;&#x4E8E;&#x5360;&#x7528;&#x5185;&#x5B58;&#x8FC7;&#x5927;&#xFF0C;&#x5728; Eden &#x533A;&#x88AB;&#x521B;&#x5EFA;&#x540E;&#x4F1A;&#x76F4;&#x63A5;&#x88AB;&#x4F20;&#x5165;&#x8001;&#x5E74;&#x4EE3;&#x3002;&#x8001;&#x5E74;&#x4EE3; GC &#x76F8;&#x5BF9;&#x6765;&#x8BF4;&#x4F1A;&#x6BD4;&#x65B0;&#x751F;&#x4EE3; GC &#x66F4;&#x8017;&#x65F6;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x51CF;&#x5C11;&#x8FDB;&#x5165;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x91CF;&#x53EF;&#x4EE5;&#x663E;&#x8457;&#x964D;&#x4F4E; Full GC &#x7684;&#x9891;&#x7387;&#x3002;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x4EE5;&#x4E3A;&#x51CF;&#x5C11;&#x8FDB;&#x5165;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x91CF;&#x610F;&#x5473;&#x7740;&#x628A;&#x5B83;&#x4EEC;&#x7559;&#x5728;&#x65B0;&#x751F;&#x4EE3;&#xFF0C;&#x4E8B;&#x5B9E;&#x6B63;&#x597D;&#x76F8;&#x53CD;&#xFF0C;&#x65B0;&#x751F;&#x4EE3;&#x5185;&#x5B58;&#x7684;&#x5927;&#x5C0F;&#x662F;&#x53EF;&#x4EE5;&#x8C03;&#x8282;&#x7684;&#x3002;</p>
+<h4 id="&#x964D;&#x4F4E;-full-gc-&#x7684;&#x65F6;&#x95F4;">&#x964D;&#x4F4E; Full GC &#x7684;&#x65F6;&#x95F4;</h4>
+<p>Full GC &#x7684;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x6BD4; Minor GC &#x8981;&#x957F;&#x5F88;&#x591A;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x5728; Full GC &#x4E0A;&#x82B1;&#x8D39;&#x8FC7;&#x591A;&#x7684;&#x65F6;&#x95F4;&#xFF08;&#x8D85;&#x8FC7; 1s&#xFF09;&#xFF0C;&#x5C06;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x8D85;&#x65F6;&#x9519;&#x8BEF;&#x3002;</p>
+<ul>
+<li>&#x5982;&#x679C;<strong>&#x901A;&#x8FC7;&#x51CF;&#x5C0F;&#x8001;&#x5E74;&#x4EE3;&#x5185;&#x5B58;&#x6765;&#x51CF;&#x5C11; Full GC &#x65F6;&#x95F4;</strong>&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5F15;&#x8D77; OutOfMemoryError &#x6216;&#x8005;&#x5BFC;&#x81F4; Full GC &#x7684;&#x9891;&#x7387;&#x5347;&#x9AD8;&#x3002;</li>
+<li>&#x53E6;&#x5916;&#xFF0C;&#x5982;&#x679C;<strong>&#x901A;&#x8FC7;&#x589E;&#x52A0;&#x8001;&#x5E74;&#x4EE3;&#x5185;&#x5B58;&#x6765;&#x964D;&#x4F4E; Full GC &#x7684;&#x9891;&#x7387;</strong>&#xFF0C;Full GC &#x7684;&#x65F6;&#x95F4;&#x53EF;&#x80FD;&#x56E0;&#x6B64;&#x589E;&#x52A0;&#x3002;</li>
+</ul>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x4F60;<strong>&#x9700;&#x8981;&#x628A;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x5927;&#x5C0F;&#x8BBE;&#x7F6E;&#x6210;&#x4E00;&#x4E2A;&#x201C;&#x5408;&#x9002;&#x201D;&#x7684;&#x503C;</strong>&#x3002;</p>
+<p><strong>GC &#x4F18;&#x5316;&#x9700;&#x8981;&#x8003;&#x8651;&#x7684; JVM &#x53C2;&#x6570;</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>&#x7C7B;&#x578B;</strong></th>
+<th><strong>&#x53C2;&#x6570;</strong></th>
+<th><strong>&#x63CF;&#x8FF0;</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x5806;&#x5185;&#x5B58;&#x5927;&#x5C0F;</td>
+<td><code>-Xms</code></td>
+<td>&#x542F;&#x52A8; JVM &#x65F6;&#x5806;&#x5185;&#x5B58;&#x7684;&#x5927;&#x5C0F;</td>
+</tr>
+<tr>
+<td></td>
+<td><code>-Xmx</code></td>
+<td>&#x5806;&#x5185;&#x5B58;&#x6700;&#x5927;&#x9650;&#x5236;</td>
+</tr>
+<tr>
+<td>&#x65B0;&#x751F;&#x4EE3;&#x7A7A;&#x95F4;&#x5927;&#x5C0F;</td>
+<td><code>-XX:NewRatio</code></td>
+<td>&#x65B0;&#x751F;&#x4EE3;&#x548C;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x5185;&#x5B58;&#x6BD4;</td>
+</tr>
+<tr>
+<td></td>
+<td><code>-XX:NewSize</code></td>
+<td>&#x65B0;&#x751F;&#x4EE3;&#x5185;&#x5B58;&#x5927;&#x5C0F;</td>
+</tr>
+<tr>
+<td></td>
+<td><code>-XX:SurvivorRatio</code></td>
+<td>Eden &#x533A;&#x548C; Survivor &#x533A;&#x7684;&#x5185;&#x5B58;&#x6BD4;</td>
+</tr>
+</tbody>
+</table>
+<p>GC &#x4F18;&#x5316;&#x65F6;&#x6700;&#x5E38;&#x7528;&#x7684;&#x53C2;&#x6570;&#x662F;<code>-Xms</code>,<code>-Xmx</code>&#x548C;<code>-XX:NewRatio</code>&#x3002;<code>-Xms</code>&#x548C;<code>-Xmx</code>&#x53C2;&#x6570;&#x901A;&#x5E38;&#x662F;&#x5FC5;&#x987B;&#x7684;&#xFF0C;&#x6240;&#x4EE5;<code>NewRatio</code>&#x7684;&#x503C;&#x5C06;&#x5BF9; GC &#x6027;&#x80FD;&#x4EA7;&#x751F;&#x91CD;&#x8981;&#x7684;&#x5F71;&#x54CD;&#x3002;</p>
+<p>&#x6709;&#x4E9B;&#x4EBA;&#x53EF;&#x80FD;&#x4F1A;&#x95EE;<strong>&#x5982;&#x4F55;&#x8BBE;&#x7F6E;&#x6C38;&#x4E45;&#x4EE3;&#x5185;&#x5B58;&#x5927;&#x5C0F;</strong>&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7528;<code>-XX:PermSize</code>&#x548C;<code>-XX:MaxPermSize</code>&#x53C2;&#x6570;&#x6765;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x8BB0;&#x4F4F;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x51FA;&#x73B0;<code>OutOfMemoryError</code>&#x9519;&#x8BEF;&#x65F6;&#x4F60;&#x624D;&#x9700;&#x8981;&#x53BB;&#x8BBE;&#x7F6E;&#x6C38;&#x4E45;&#x4EE3;&#x5185;&#x5B58;&#x3002;</p>
+<h3 id="gc-&#x4F18;&#x5316;&#x7684;&#x8FC7;&#x7A0B;">GC &#x4F18;&#x5316;&#x7684;&#x8FC7;&#x7A0B;</h3>
+<p>GC &#x4F18;&#x5316;&#x7684;&#x8FC7;&#x7A0B;&#x548C;&#x5927;&#x591A;&#x6570;&#x5E38;&#x89C1;&#x7684;&#x63D0;&#x5347;&#x6027;&#x80FD;&#x7684;&#x8FC7;&#x7A0B;&#x76F8;&#x4F3C;&#xFF0C;&#x4E0B;&#x9762;&#x662F;&#x7B14;&#x8005;&#x4F7F;&#x7528;&#x7684;&#x6D41;&#x7A0B;&#xFF1A;</p>
+<h4 id="1&#x76D1;&#x63A7;-gc-&#x72B6;&#x6001;">1.&#x76D1;&#x63A7; GC &#x72B6;&#x6001;</h4>
+<p>&#x4F60;&#x9700;&#x8981;&#x76D1;&#x63A7; GC &#x4ECE;&#x800C;&#x68C0;&#x67E5;&#x7CFB;&#x7EDF;&#x4E2D;&#x8FD0;&#x884C;&#x7684; GC &#x7684;&#x5404;&#x79CD;&#x72B6;&#x6001;&#x3002;</p>
+<h4 id="2&#x5206;&#x6790;&#x76D1;&#x63A7;&#x7ED3;&#x679C;&#x540E;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x9700;&#x8981;&#x4F18;&#x5316;-gc">2.&#x5206;&#x6790;&#x76D1;&#x63A7;&#x7ED3;&#x679C;&#x540E;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x9700;&#x8981;&#x4F18;&#x5316; GC</h4>
+<p>&#x5728;&#x68C0;&#x67E5; GC &#x72B6;&#x6001;&#x540E;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x5206;&#x6790;&#x76D1;&#x63A7;&#x7ED3;&#x6784;&#x5E76;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x9700;&#x8981;&#x8FDB;&#x884C; GC &#x4F18;&#x5316;&#x3002;&#x5982;&#x679C;&#x5206;&#x6790;&#x7ED3;&#x679C;&#x663E;&#x793A;&#x8FD0;&#x884C; GC &#x7684;&#x65F6;&#x95F4;&#x53EA;&#x6709; 0.1-0.3 &#x79D2;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x628A;&#x65F6;&#x95F4;&#x6D6A;&#x8D39;&#x5728; GC &#x4F18;&#x5316;&#x4E0A;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x8FD0;&#x884C; GC &#x7684;&#x65F6;&#x95F4;&#x8FBE;&#x5230; 1-3 &#x79D2;&#xFF0C;&#x751A;&#x81F3;&#x5927;&#x4E8E; 10 &#x79D2;&#xFF0C;&#x90A3;&#x4E48; GC &#x4F18;&#x5316;&#x5C06;&#x662F;&#x5F88;&#x6709;&#x5FC5;&#x8981;&#x7684;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5DF2;&#x7ECF;&#x5206;&#x914D;&#x4E86;&#x5927;&#x7EA6; 10GB &#x5185;&#x5B58;&#x7ED9; Java&#xFF0C;&#x5E76;&#x4E14;&#x8FD9;&#x4E9B;&#x5185;&#x5B58;&#x65E0;&#x6CD5;&#x7701;&#x4E0B;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x65E0;&#x6CD5;&#x8FDB;&#x884C; GC &#x4F18;&#x5316;&#x4E86;&#x3002;&#x5728;&#x8FDB;&#x884C; GC &#x4F18;&#x5316;&#x4E4B;&#x524D;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x8003;&#x8651;&#x4E3A;&#x4EC0;&#x4E48;&#x4F60;&#x9700;&#x8981;&#x5206;&#x914D;&#x8FD9;&#x4E48;&#x5927;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5206;&#x914D;&#x4E86; 1GB &#x6216; 2GB &#x5927;&#x5C0F;&#x7684;&#x5185;&#x5B58;&#x5E76;&#x4E14;&#x51FA;&#x73B0;&#x4E86;<code>OutOfMemoryError</code>&#xFF0C;&#x90A3;&#x4F60;&#x5C31;&#x5E94;&#x8BE5;&#x6267;&#x884C;<strong>&#x5806;&#x5FEB;&#x7167;&#xFF08;heap dump&#xFF09;</strong>&#x6765;&#x6D88;&#x9664;&#x5BFC;&#x81F4;&#x5F02;&#x5E38;&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<blockquote>
+<p>&#x6CE8;&#x610F;&#xFF1A;</p>
+<p><strong>&#x5806;&#x5FEB;&#x7167;&#xFF08;heap dump&#xFF09;</strong>&#x662F;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x68C0;&#x67E5; Java &#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#x548C;&#x6570;&#x636E;&#x7684;&#x5185;&#x5B58;&#x6587;&#x4EF6;&#x3002;&#x8BE5;&#x6587;&#x4EF6;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6267;&#x884C; JDK &#x4E2D;&#x7684;<code>jmap</code>&#x547D;&#x4EE4;&#x6765;&#x521B;&#x5EFA;&#x3002;&#x5728;&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6240;&#x6709; Java &#x7A0B;&#x5E8F;&#x90FD;&#x5C06;&#x6682;&#x505C;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x4E0D;&#x8981;&#x5728;&#x7CFB;&#x7EDF;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x521B;&#x5EFA;&#x8BE5;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x4E92;&#x8054;&#x7F51;&#x4E0A;&#x641C;&#x7D22; heap dump &#x7684;&#x8BE6;&#x7EC6;&#x8BF4;&#x660E;&#x3002;</p>
+</blockquote>
+<h4 id="3&#x8BBE;&#x7F6E;-gc-&#x7C7B;&#x578B;&#x5185;&#x5B58;&#x5927;&#x5C0F;">3.&#x8BBE;&#x7F6E; GC &#x7C7B;&#x578B;/&#x5185;&#x5B58;&#x5927;&#x5C0F;</h4>
+<p>&#x5982;&#x679C;&#x4F60;&#x51B3;&#x5B9A;&#x8981;&#x8FDB;&#x884C; GC &#x4F18;&#x5316;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x9700;&#x8981;&#x9009;&#x62E9;&#x4E00;&#x4E2A; GC &#x7C7B;&#x578B;&#x5E76;&#x4E14;&#x4E3A;&#x5B83;&#x8BBE;&#x7F6E;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x3002;&#x6B64;&#x65F6;&#x5982;&#x679C;&#x4F60;&#x6709;&#x591A;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x8BF7;&#x5982;&#x4E0A;&#x6587;&#x63D0;&#x5230;&#x7684;&#x90A3;&#x6837;&#xFF0C;&#x5728;&#x6BCF;&#x53F0;&#x673A;&#x5668;&#x4E0A;&#x8BBE;&#x7F6E;&#x4E0D;&#x540C;&#x7684; GC &#x53C2;&#x6570;&#x5E76;&#x5206;&#x6790;&#x5B83;&#x4EEC;&#x7684;&#x533A;&#x522B;&#x3002;</p>
+<h4 id="4&#x5206;&#x6790;&#x7ED3;&#x679C;">4.&#x5206;&#x6790;&#x7ED3;&#x679C;</h4>
+<p>&#x5728;&#x8BBE;&#x7F6E;&#x5B8C; GC &#x53C2;&#x6570;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x5F00;&#x59CB;&#x6536;&#x96C6;&#x6570;&#x636E;&#xFF0C;&#x8BF7;&#x5728;&#x6536;&#x96C6;&#x81F3;&#x5C11; 24 &#x5C0F;&#x65F6;&#x540E;&#x518D;&#x8FDB;&#x884C;&#x7ED3;&#x679C;&#x5206;&#x6790;&#x3002;&#x5982;&#x679C;&#x4F60;&#x8DB3;&#x591F;&#x5E78;&#x8FD0;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x627E;&#x5230;&#x7CFB;&#x7EDF;&#x7684;&#x6700;&#x4F73; GC &#x53C2;&#x6570;&#x3002;&#x5982;&#x82E5;&#x4E0D;&#x7136;&#xFF0C;&#x4F60;&#x8FD8;&#x9700;&#x8981;&#x5206;&#x6790;&#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x5E76;&#x68C0;&#x67E5;&#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x7136;&#x540E;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x4E0D;&#x65AD;&#x8C03;&#x6574; GC &#x7C7B;&#x578B;/&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x6765;&#x627E;&#x5230;&#x7CFB;&#x7EDF;&#x7684;&#x6700;&#x4F73;&#x53C2;&#x6570;&#x3002;</p>
+<h4 id="5&#x5982;&#x679C;&#x7ED3;&#x679C;&#x4EE4;&#x4EBA;&#x6EE1;&#x610F;&#xFF0C;&#x5C06;&#x53C2;&#x6570;&#x5E94;&#x7528;&#x5230;&#x6240;&#x6709;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x5E76;&#x7ED3;&#x675F;-gc-&#x4F18;&#x5316;">5.&#x5982;&#x679C;&#x7ED3;&#x679C;&#x4EE4;&#x4EBA;&#x6EE1;&#x610F;&#xFF0C;&#x5C06;&#x53C2;&#x6570;&#x5E94;&#x7528;&#x5230;&#x6240;&#x6709;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x5E76;&#x7ED3;&#x675F; GC &#x4F18;&#x5316;</h4>
+<p>&#x5982;&#x679C; GC &#x4F18;&#x5316;&#x7684;&#x7ED3;&#x679C;&#x4EE4;&#x4EBA;&#x6EE1;&#x610F;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5C06;&#x53C2;&#x6570;&#x5E94;&#x7528;&#x5230;&#x6240;&#x6709;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#xFF0C;&#x5E76;&#x505C;&#x6B62; GC &#x4F18;&#x5316;&#x3002;</p>
+<p>&#x5728;&#x4E0B;&#x9762;&#x7684;&#x7AE0;&#x8282;&#x4E2D;&#xFF0C;&#x4F60;&#x5C06;&#x4F1A;&#x770B;&#x5230;&#x4E0A;&#x8FF0;&#x6BCF;&#x4E00;&#x6B65;&#x6240;&#x505A;&#x7684;&#x5177;&#x4F53;&#x5DE5;&#x4F5C;&#x3002;</p>
+<h2 id="&#x547D;&#x4EE4;">&#x547D;&#x4EE4;</h2>
+<h3 id="jmap">jmap</h3>
+<p>jmap &#x5373; JVM Memory Map&#x3002;</p>
+<p><strong>jmap &#x7528;&#x4E8E;&#x751F;&#x6210; heap dump &#x6587;&#x4EF6;</strong>&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>-XX:+HeapDumpOnOutOfMemoryError</code> &#x53C2;&#x6570;&#x6765;&#x8BA9;&#x865A;&#x62DF;&#x673A;&#x51FA;&#x73B0; OOM &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x81EA;&#x52A8;&#x751F;&#x6210; dump &#x6587;&#x4EF6;&#x3002;</p>
+<p>jmap &#x4E0D;&#x4EC5;&#x80FD;&#x751F;&#x6210; dump &#x6587;&#x4EF6;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x67E5;&#x8BE2; finalize &#x6267;&#x884C;&#x961F;&#x5217;&#x3001;Java &#x5806;&#x548C;&#x6C38;&#x4E45;&#x4EE3;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#xFF0C;&#x5982;&#x5F53;&#x524D;&#x4F7F;&#x7528;&#x7387;&#x3001;&#x5F53;&#x524D;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x54EA;&#x79CD;&#x6536;&#x96C6;&#x5668;&#x7B49;&#x3002;</p>
+<p>&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre><code>jmap [option] LVMID
+</code></pre><p>option &#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li>dump - &#x751F;&#x6210;&#x5806;&#x8F6C;&#x50A8;&#x5FEB;&#x7167;</li>
+<li>finalizerinfo - &#x663E;&#x793A;&#x5728; F-Queue &#x961F;&#x5217;&#x7B49;&#x5F85; Finalizer &#x7EBF;&#x7A0B;&#x6267;&#x884C; finalizer &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;</li>
+<li>heap - &#x663E;&#x793A; Java &#x5806;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;</li>
+<li>histo - &#x663E;&#x793A;&#x5806;&#x4E2D;&#x5BF9;&#x8C61;&#x7684;&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;</li>
+<li>permstat - to print permanent generation statistics</li>
+<li>F - &#x5F53;-dump &#x6CA1;&#x6709;&#x54CD;&#x5E94;&#x65F6;&#xFF0C;&#x5F3A;&#x5236;&#x751F;&#x6210; dump &#x5FEB;&#x7167;</li>
+</ul>
+<h4 id="&#x793A;&#x4F8B;&#xFF1A;jmap--dump-pid-&#x751F;&#x6210;&#x5806;&#x5FEB;&#x7167;">&#x793A;&#x4F8B;&#xFF1A;jmap -dump PID &#x751F;&#x6210;&#x5806;&#x5FEB;&#x7167;</h4>
+<p>dump &#x5806;&#x5230;&#x6587;&#x4EF6;&#xFF0C;format &#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#xFF0C;live &#x6307;&#x660E;&#x662F;&#x6D3B;&#x7740;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;file &#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x540D;</p>
+<pre><code>$ jmap -dump:live,format=b,file=dump.hprof 28920
+Dumping heap to /home/xxx/dump.hprof ...
+Heap dump file created
+</code></pre><p>dump.hprof &#x8FD9;&#x4E2A;&#x540E;&#x7F00;&#x662F;&#x4E3A;&#x4E86;&#x540E;&#x7EED;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7528; MAT(Memory Anlysis Tool)&#x6253;&#x5F00;&#x3002;</p>
+<h4 id="&#x793A;&#x4F8B;&#xFF1A;jmap--heap-&#x67E5;&#x770B;&#x6307;&#x5B9A;&#x8FDB;&#x7A0B;&#x7684;&#x5806;&#x4FE1;&#x606F;">&#x793A;&#x4F8B;&#xFF1A;jmap -heap &#x67E5;&#x770B;&#x6307;&#x5B9A;&#x8FDB;&#x7A0B;&#x7684;&#x5806;&#x4FE1;&#x606F;</h4>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x4F7F;&#x7528; CMS GC &#x60C5;&#x51B5;&#x4E0B;&#xFF0C;jmap -heap &#x7684;&#x6267;&#x884C;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4; java &#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#x3002;</p>
+<pre><code class="lang-java">jmap -heap PID
+[root@chances bin]# ./jmap -heap 12379
+Attaching to process ID 12379, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 17.0-b16
+
+using thread-local object allocation.
+Parallel GC with 6 thread(s)
+
+Heap Configuration:
+   MinHeapFreeRatio = 40
+   MaxHeapFreeRatio = 70
+   MaxHeapSize      = 83886080 (80.0MB)
+   NewSize          = 1310720 (1.25MB)
+   MaxNewSize       = 17592186044415 MB
+   OldSize          = 5439488 (5.1875MB)
+   NewRatio         = 2
+   SurvivorRatio    = 8
+   PermSize         = 20971520 (20.0MB)
+   MaxPermSize      = 88080384 (84.0MB)
+
+Heap Usage:
+PS Young Generation
+Eden Space:
+   capacity = 9306112 (8.875MB)
+   used     = 5375360 (5.1263427734375MB)
+   free     = 3930752 (3.7486572265625MB)
+   57.761608714788736% used
+From Space:
+   capacity = 9306112 (8.875MB)
+   used     = 3425240 (3.2665634155273438MB)
+   free     = 5880872 (5.608436584472656MB)
+   36.80634834397007% used
+To Space:
+   capacity = 9306112 (8.875MB)
+   used     = 0 (0.0MB)
+   free     = 9306112 (8.875MB)
+   0.0% used
+PS Old Generation
+   capacity = 55967744 (53.375MB)
+   used     = 48354640 (46.11457824707031MB)
+   free     = 7613104 (7.2604217529296875MB)
+   86.39733629427693% used
+PS Perm Generation
+   capacity = 62062592 (59.1875MB)
+   used     = 60243112 (57.452308654785156MB)
+   free     = 1819480 (1.7351913452148438MB)
+   97.06831451706046% used
+</code></pre>
+<h3 id="jstack">jstack</h3>
+<p><strong>jstack &#x7528;&#x4E8E;&#x751F;&#x6210; java &#x865A;&#x62DF;&#x673A;&#x5F53;&#x524D;&#x65F6;&#x523B;&#x7684;&#x7EBF;&#x7A0B;&#x5FEB;&#x7167;&#x3002;</strong></p>
+<p>&#x7EBF;&#x7A0B;&#x5FEB;&#x7167;&#x662F;&#x5F53;&#x524D; java &#x865A;&#x62DF;&#x673A;&#x5185;&#x6BCF;&#x4E00;&#x6761;&#x7EBF;&#x7A0B;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x65B9;&#x6CD5;&#x5806;&#x6808;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x751F;&#x6210;&#x7EBF;&#x7A0B;&#x5FEB;&#x7167;&#x7684;&#x4E3B;&#x8981;&#x76EE;&#x7684;&#x662F;&#x5B9A;&#x4F4D;&#x7EBF;&#x7A0B;&#x51FA;&#x73B0;&#x957F;&#x65F6;&#x95F4;&#x505C;&#x987F;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x5982;&#x7EBF;&#x7A0B;&#x95F4;&#x6B7B;&#x9501;&#x3001;&#x6B7B;&#x5FAA;&#x73AF;&#x3001;&#x8BF7;&#x6C42;&#x5916;&#x90E8;&#x8D44;&#x6E90;&#x5BFC;&#x81F4;&#x7684;&#x957F;&#x65F6;&#x95F4;&#x7B49;&#x5F85;&#x7B49;&#x3002;</p>
+<p>&#x7EBF;&#x7A0B;&#x51FA;&#x73B0;&#x505C;&#x987F;&#x7684;&#x65F6;&#x5019;&#x901A;&#x8FC7; jstack &#x6765;&#x67E5;&#x770B;&#x5404;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x8C03;&#x7528;&#x5806;&#x6808;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x77E5;&#x9053;&#x6CA1;&#x6709;&#x54CD;&#x5E94;&#x7684;&#x7EBF;&#x7A0B;&#x5230;&#x5E95;&#x5728;&#x540E;&#x53F0;&#x505A;&#x4EC0;&#x4E48;&#x4E8B;&#x60C5;&#xFF0C;&#x6216;&#x8005;&#x7B49;&#x5F85;&#x4EC0;&#x4E48;&#x8D44;&#x6E90;&#x3002; &#x5982;&#x679C; java &#x7A0B;&#x5E8F;&#x5D29;&#x6E83;&#x751F;&#x6210; core &#x6587;&#x4EF6;&#xFF0C;jstack &#x5DE5;&#x5177;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x83B7;&#x5F97; core &#x6587;&#x4EF6;&#x7684; java stack &#x548C; native stack &#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x4ECE;&#x800C;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x5730;&#x77E5;&#x9053; java &#x7A0B;&#x5E8F;&#x662F;&#x5982;&#x4F55;&#x5D29;&#x6E83;&#x548C;&#x5728;&#x7A0B;&#x5E8F;&#x4F55;&#x5904;&#x53D1;&#x751F;&#x95EE;&#x9898;&#x3002;&#x53E6;&#x5916;&#xFF0C;jstack &#x5DE5;&#x5177;&#x8FD8;&#x53EF;&#x4EE5;&#x9644;&#x5C5E;&#x5230;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684; java &#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x770B;&#x5230;&#x5F53;&#x65F6;&#x8FD0;&#x884C;&#x7684; java &#x7A0B;&#x5E8F;&#x7684; java stack &#x548C; native stack &#x7684;&#x4FE1;&#x606F;, &#x5982;&#x679C;&#x73B0;&#x5728;&#x8FD0;&#x884C;&#x7684; java &#x7A0B;&#x5E8F;&#x5448;&#x73B0; hung &#x7684;&#x72B6;&#x6001;&#xFF0C;jstack &#x662F;&#x975E;&#x5E38;&#x6709;&#x7528;&#x7684;&#x3002;</p>
+<p>&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre><code>jstack [option] pid
+jstack [option] executable core
+jstack [option] [server-id@]remote-hostname-or-ip
+</code></pre><p>option &#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li><code>-F</code> - &#x5F53;&#x6B63;&#x5E38;&#x8F93;&#x51FA;&#x8BF7;&#x6C42;&#x4E0D;&#x88AB;&#x54CD;&#x5E94;&#x65F6;&#xFF0C;&#x5F3A;&#x5236;&#x8F93;&#x51FA;&#x7EBF;&#x7A0B;&#x5806;&#x6808;</li>
+<li><code>-l</code> - &#x9664;&#x5806;&#x6808;&#x5916;&#xFF0C;&#x663E;&#x793A;&#x5173;&#x4E8E;&#x9501;&#x7684;&#x9644;&#x52A0;&#x4FE1;&#x606F;</li>
+<li><code>-m</code> - &#x5982;&#x679C;&#x8C03;&#x7528;&#x5230;&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x663E;&#x793A; C/C++&#x7684;&#x5806;&#x6808;</li>
+</ul>
+<p>&#x5B9E;&#x6218;&#xFF1A;&#x627E;&#x51FA;&#x67D0; Java &#x8FDB;&#x7A0B;&#x4E2D;&#x6700;&#x8017;&#x8D39; CPU &#x7684; Java &#x7EBF;&#x7A0B;</p>
+<p>&#xFF08;1&#xFF09;&#x627E;&#x51FA; Java &#x8FDB;&#x7A0B;</p>
+<p>&#x5047;&#x8BBE;&#x5E94;&#x7528;&#x540D;&#x79F0;&#x4E3A; myapp&#xFF1A;</p>
+<pre><code>$ ps -ef | grep myapp | grep -v grep
+root     21711     1  1 14:47 pts/3    00:02:10 java -jar myapp.jar
+</code></pre><p>&#x5F97;&#x5230;&#x8FDB;&#x7A0B; ID &#x4E3A; 21711</p>
+<p>&#xFF08;2&#xFF09;&#x627E;&#x51FA;&#x8BE5;&#x8FDB;&#x7A0B;&#x5185;&#x6700;&#x8017;&#x8D39; CPU &#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>ps -Lfp pid</code> &#x6216;&#x8005; <code>ps -mp pid -o THREAD, tid, time</code> &#x6216;&#x8005; <code>top -Hp pid</code></p>
+<div align="center"><img src="http://static.oschina.net/uploads/space/2014/0128/170402_A57i_111708.png"></div>
+
+<p>TIME &#x5217;&#x5C31;&#x662F;&#x5404;&#x4E2A; Java &#x7EBF;&#x7A0B;&#x8017;&#x8D39;&#x7684; CPU &#x65F6;&#x95F4;&#xFF0C;CPU &#x65F6;&#x95F4;&#x6700;&#x957F;&#x7684;&#x662F;&#x7EBF;&#x7A0B; ID &#x4E3A; 21742 &#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x7528;</p>
+<pre><code>printf &quot;%x\n&quot; 21742
+</code></pre><p> &#x5F97;&#x5230; 21742 &#x7684;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x503C;&#x4E3A; 54ee&#xFF0C;&#x4E0B;&#x9762;&#x4F1A;&#x7528;&#x5230;&#x3002;</p>
+<p>&#xFF08;3&#xFF09;&#x4F7F;&#x7528; jstack &#x6253;&#x5370;&#x7EBF;&#x7A0B;&#x5806;&#x6808;&#x4FE1;&#x606F;</p>
+<p>&#x4E0B;&#x4E00;&#x6B65;&#x7EC8;&#x4E8E;&#x8F6E;&#x5230; jstack &#x4E0A;&#x573A;&#x4E86;&#xFF0C;&#x5B83;&#x7528;&#x6765;&#x8F93;&#x51FA;&#x8FDB;&#x7A0B; 21711 &#x7684;&#x5806;&#x6808;&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x6839;&#x636E;&#x7EBF;&#x7A0B; ID &#x7684;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x503C; grep&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>root@ubuntu:/# jstack 21711 | grep 54ee
+&quot;PollIntervalRetrySchedulerThread&quot; prio=10 tid=0x00007f950043e000 nid=0x54ee in Object.wait() [0x00007f94c6eda000]
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230; CPU &#x6D88;&#x8017;&#x5728; PollIntervalRetrySchedulerThread &#x8FD9;&#x4E2A;&#x7C7B;&#x7684; Object.wait()&#xFF0C;&#x6211;&#x627E;&#x4E86;&#x4E0B;&#x6211;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x5B9A;&#x4F4D;&#x5230;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// Idle wait</span>
+getLog().info(<span class="hljs-string">&quot;Thread [&quot;</span> + getName() + <span class="hljs-string">&quot;] is idle waiting...&quot;</span>);
+schedulerThreadState = PollTaskSchedulerThreadState.IdleWaiting;
+<span class="hljs-keyword">long</span> now = System.currentTimeMillis();
+<span class="hljs-keyword">long</span> waitTime = now + getIdleWaitTime();
+<span class="hljs-keyword">long</span> timeUntilContinue = waitTime - now;
+<span class="hljs-keyword">synchronized</span>(sigLock) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">if</span>(!halted.get()) {
+            sigLock.wait(timeUntilContinue);
+        }
+    }
+    <span class="hljs-keyword">catch</span> (InterruptedException ignore) {
+    }
+}
+</code></pre>
+<p>&#x5B83;&#x662F;&#x8F6E;&#x8BE2;&#x4EFB;&#x52A1;&#x7684;&#x7A7A;&#x95F2;&#x7B49;&#x5F85;&#x4EE3;&#x7801;&#xFF0C;&#x4E0A;&#x9762;&#x7684; sigLock.wait(timeUntilContinue) &#x5C31;&#x5BF9;&#x5E94;&#x4E86;&#x524D;&#x9762;&#x7684; Object.wait()&#x3002;</p>
+<h3 id="jps">jps</h3>
+<p>jps(JVM Process Status Tool)&#xFF0C;&#x663E;&#x793A;&#x6307;&#x5B9A;&#x7CFB;&#x7EDF;&#x5185;&#x6240;&#x6709;&#x7684; HotSpot &#x865A;&#x62DF;&#x673A;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre><code>jps [options] [hostid]
+</code></pre><p>&#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A; hostid &#x5C31;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x4E3B;&#x673A;&#x6216;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
+<p>option &#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li><code>-l</code> - &#x8F93;&#x51FA; main &#x7C7B;&#x5168;&#x540D;&#x6216; jar &#x8DEF;&#x5F84;</li>
+<li><code>-q</code> - &#x4E0D;&#x8F93;&#x51FA;&#x7C7B;&#x540D;&#x3001;Jar &#x540D;&#x548C;&#x4F20;&#x5165; main &#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x53EA;&#x8F93;&#x51FA; LVMID</li>
+<li><code>-m</code> - &#x8F93;&#x51FA; JVM &#x542F;&#x52A8;&#x65F6;&#x4F20;&#x9012;&#x7ED9; main() &#x7684;&#x53C2;&#x6570;</li>
+<li><code>-v</code> - &#x8F93;&#x51FA; JVM &#x542F;&#x52A8;&#x65F6;&#x663E;&#x793A;&#x6307;&#x5B9A;&#x7684; JVM &#x53C2;&#x6570;</li>
+</ul>
+<p>&#x5176;&#x4E2D;[option]&#x3001;[hostid]&#x53C2;&#x6570;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5199;&#x3002;</p>
+<pre><code>$ jps -l -m
+28920 org.apache.catalina.startup.Bootstrap start
+11589 org.apache.catalina.startup.Bootstrap start
+25816 sun.tools.jps.Jps -l -m
+</code></pre><h3 id="jstat">jstat</h3>
+<p>jstat(JVM statistics Monitoring)&#xFF0C;&#x662F;&#x7528;&#x4E8E;&#x76D1;&#x89C6;&#x865A;&#x62DF;&#x673A;&#x8FD0;&#x884C;&#x65F6;&#x72B6;&#x6001;&#x4FE1;&#x606F;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x663E;&#x793A;&#x51FA;&#x865A;&#x62DF;&#x673A;&#x8FDB;&#x7A0B;&#x4E2D;&#x7684;&#x7C7B;&#x88C5;&#x8F7D;&#x3001;&#x5185;&#x5B58;&#x3001;&#x5783;&#x573E;&#x6536;&#x96C6;&#x3001;JIT &#x7F16;&#x8BD1;&#x7B49;&#x8FD0;&#x884C;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre><code>jstat [option] LVMID [interval] [count]
+</code></pre><p>&#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li>[option] - &#x64CD;&#x4F5C;&#x53C2;&#x6570;</li>
+<li>LVMID - &#x672C;&#x5730;&#x865A;&#x62DF;&#x673A;&#x8FDB;&#x7A0B; ID</li>
+<li>[interval] - &#x8FDE;&#x7EED;&#x8F93;&#x51FA;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;</li>
+<li>[count] - &#x8FDE;&#x7EED;&#x8F93;&#x51FA;&#x7684;&#x6B21;&#x6570;</li>
+</ul>
+<h3 id="jhat">jhat</h3>
+<p>jhat(JVM Heap Analysis Tool)&#xFF0C;&#x662F;&#x4E0E; jmap &#x642D;&#x914D;&#x4F7F;&#x7528;&#xFF0C;&#x7528;&#x6765;&#x5206;&#x6790; jmap &#x751F;&#x6210;&#x7684; dump&#xFF0C;jhat &#x5185;&#x7F6E;&#x4E86;&#x4E00;&#x4E2A;&#x5FAE;&#x578B;&#x7684; HTTP/HTML &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x751F;&#x6210; dump &#x7684;&#x5206;&#x6790;&#x7ED3;&#x679C;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x67E5;&#x770B;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x4E00;&#x822C;&#x4E0D;&#x4F1A;&#x76F4;&#x63A5;&#x5728;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x8FDB;&#x884C;&#x5206;&#x6790;&#xFF0C;&#x56E0;&#x4E3A; jhat &#x662F;&#x4E00;&#x4E2A;&#x8017;&#x65F6;&#x5E76;&#x4E14;&#x8017;&#x8D39;&#x786C;&#x4EF6;&#x8D44;&#x6E90;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x4E00;&#x822C;&#x628A;&#x670D;&#x52A1;&#x5668;&#x751F;&#x6210;&#x7684; dump &#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230;&#x672C;&#x5730;&#x6216;&#x5176;&#x4ED6;&#x673A;&#x5668;&#x4E0A;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;</p>
+<p>&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre><code>jhat [dumpfile]
+</code></pre><h3 id="jinfo">jinfo</h3>
+<p>jinfo(JVM Configuration info)&#xFF0C;&#x7528;&#x4E8E;&#x5B9E;&#x65F6;&#x67E5;&#x770B;&#x548C;&#x8C03;&#x6574;&#x865A;&#x62DF;&#x673A;&#x8FD0;&#x884C;&#x53C2;&#x6570;&#x3002;</p>
+<p>&#x4E4B;&#x524D;&#x7684; jps -v &#x53E3;&#x4EE4;&#x53EA;&#x80FD;&#x67E5;&#x770B;&#x5230;&#x663E;&#x793A;&#x6307;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x8981;&#x67E5;&#x770B;&#x672A;&#x88AB;&#x663E;&#x793A;&#x6307;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#x7684;&#x503C;&#x5C31;&#x8981;&#x4F7F;&#x7528; jinfo &#x53E3;&#x4EE4;</p>
+<p>&#x547D;&#x4EE4;&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre><code>jinfo [option] [args] LVMID
+</code></pre><p>option &#x53C2;&#x6570;&#xFF1A;</p>
+<blockquote>
+<ul>
+<li>-flag : &#x8F93;&#x51FA;&#x6307;&#x5B9A; args &#x53C2;&#x6570;&#x7684;&#x503C;</li>
+<li>-flags : &#x4E0D;&#x9700;&#x8981; args &#x53C2;&#x6570;&#xFF0C;&#x8F93;&#x51FA;&#x6240;&#x6709; JVM &#x53C2;&#x6570;&#x7684;&#x503C;</li>
+<li>-sysprops : &#x8F93;&#x51FA;&#x7CFB;&#x7EDF;&#x5C5E;&#x6027;&#xFF0C;&#x7B49;&#x540C;&#x4E8E; System.getProperties()</li>
+</ul>
+</blockquote>
+<h2 id="hotspot-vm-&#x53C2;&#x6570;">HotSpot VM &#x53C2;&#x6570;</h2>
+<blockquote>
+<p>&#x8BE6;&#x7EC6;&#x53C2;&#x6570;&#x8BF4;&#x660E;&#x8BF7;&#x53C2;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF1A;<a href="http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html" target="_blank">Java HotSpot VM Options</a>&#xFF0C;&#x8FD9;&#x91CC;&#x4EC5;&#x5217;&#x4E3E;&#x5E38;&#x7528;&#x53C2;&#x6570;&#x3002;</p>
+</blockquote>
+<h3 id="jvm-&#x5185;&#x5B58;&#x914D;&#x7F6E;">JVM &#x5185;&#x5B58;&#x914D;&#x7F6E;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x914D;&#x7F6E;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-Xms</code></td>
+<td>&#x5806;&#x7A7A;&#x95F4;&#x521D;&#x59CB;&#x503C;&#x3002;</td>
+</tr>
+<tr>
+<td><code>-Xmx</code></td>
+<td>&#x5806;&#x7A7A;&#x95F4;&#x6700;&#x5927;&#x503C;&#x3002;</td>
+</tr>
+<tr>
+<td><code>-XX:NewSize</code></td>
+<td>&#x65B0;&#x751F;&#x4EE3;&#x7A7A;&#x95F4;&#x521D;&#x59CB;&#x503C;&#x3002;</td>
+</tr>
+<tr>
+<td><code>-XX:MaxNewSize</code></td>
+<td>&#x65B0;&#x751F;&#x4EE3;&#x7A7A;&#x95F4;&#x6700;&#x5927;&#x503C;&#x3002;</td>
+</tr>
+<tr>
+<td><code>-Xmn</code></td>
+<td>&#x65B0;&#x751F;&#x4EE3;&#x7A7A;&#x95F4;&#x5927;&#x5C0F;&#x3002;</td>
+</tr>
+<tr>
+<td><code>-XX:PermSize</code></td>
+<td>&#x6C38;&#x4E45;&#x4EE3;&#x7A7A;&#x95F4;&#x7684;&#x521D;&#x59CB;&#x503C;&#x3002;</td>
+</tr>
+<tr>
+<td><code>-XX:MaxPermSize</code></td>
+<td>&#x6C38;&#x4E45;&#x4EE3;&#x7A7A;&#x95F4;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gc-&#x7C7B;&#x578B;&#x914D;&#x7F6E;">GC &#x7C7B;&#x578B;&#x914D;&#x7F6E;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x914D;&#x7F6E;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-XX:+UseSerialGC</td>
+<td>&#x4E32;&#x884C;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;</td>
+</tr>
+<tr>
+<td>-XX:+UseParallelGC</td>
+<td>&#x5E76;&#x884C;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;</td>
+</tr>
+<tr>
+<td>-XX:+UseParNewGC</td>
+<td>&#x4F7F;&#x7528; ParNew + Serial Old &#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;&#x7EC4;&#x5408;</td>
+</tr>
+<tr>
+<td>-XX:+UseConcMarkSweepGC</td>
+<td>&#x5E76;&#x53D1;&#x6807;&#x8BB0;&#x626B;&#x63CF;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;</td>
+</tr>
+<tr>
+<td>-XX:ParallelCMSThreads</td>
+<td>&#x5E76;&#x53D1;&#x6807;&#x8BB0;&#x626B;&#x63CF;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668; = &#x4E3A;&#x4F7F;&#x7528;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;</td>
+</tr>
+<tr>
+<td>-XX:+UseG1GC</td>
+<td>G1 &#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="jmx">JMX</h3>
+<p>&#x5F00;&#x542F; JMX &#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; JConsole &#x6216; Visual VM &#x8FDB;&#x884C;&#x76D1;&#x63A7; Java &#x7A0B;&#x5E8F;&#x7684;&#x57FA;&#x672C;&#x4FE1;&#x606F;&#x548C;&#x8FD0;&#x884C;&#x60C5;&#x51B5;&#x3002;</p>
+<pre><code class="lang-java">-Dcom.sun.management.jmxremote=<span class="hljs-keyword">true</span>
+-Dcom.sun.management.jmxremote.ssl=<span class="hljs-keyword">false</span>
+-Dcom.sun.management.jmxremote.authenticate=<span class="hljs-keyword">false</span>
+-Djava.rmi.server.hostname=<span class="hljs-number">127.0</span>.0.1
+-Dcom.sun.management.jmxremote.port=<span class="hljs-number">18888</span>
+</code></pre>
+<p><code>-Djava.rmi.server.hostname</code> &#x6307;&#x5B9A; Java &#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x7684;&#x670D;&#x52A1;&#x5668;&#xFF0C;<code>-Dcom.sun.management.jmxremote.port</code> &#x6307;&#x5B9A;&#x670D;&#x52A1;&#x76D1;&#x542C;&#x7AEF;&#x53E3;&#x3002;</p>
+<h3 id="&#x8FDC;&#x7A0B;-debug">&#x8FDC;&#x7A0B; DEBUG</h3>
+<p>&#x5982;&#x679C;&#x5F00;&#x542F; Java &#x5E94;&#x7528;&#x7684;&#x8FDC;&#x7A0B; Debug &#x529F;&#x80FD;&#xFF0C;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x5982;&#x4E0B;&#x53C2;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-java">-Xdebug
+-Xnoagent
+-Djava.compiler=NONE
+-Xrunjdwp:transport=dt_socket,address=<span class="hljs-number">28888</span>,server=y,suspend=n
+</code></pre>
+<p>address &#x5373;&#x4E3A;&#x8FDC;&#x7A0B; debug &#x7684;&#x76D1;&#x542C;&#x7AEF;&#x53E3;&#x3002;</p>
+<h3 id="heapdump">HeapDump</h3>
+<pre><code>-XX:-OmitStackTraceInFastThrow -XX:+HeapDumpOnOutOfMemoryError
+</code></pre><h3 id="&#x8F85;&#x52A9;&#x914D;&#x7F6E;">&#x8F85;&#x52A9;&#x914D;&#x7F6E;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x914D;&#x7F6E;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-XX:+PrintGCDetails</code></td>
+<td>&#x6253;&#x5370; GC &#x65E5;&#x5FD7;</td>
+</tr>
+<tr>
+<td><code>-Xloggc:&lt;filename&gt;</code></td>
+<td>&#x6307;&#x5B9A; GC &#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x540D;</td>
+</tr>
+<tr>
+<td><code>-XX:+HeapDumpOnOutOfMemoryError</code></td>
+<td>&#x5185;&#x5B58;&#x6EA2;&#x51FA;&#x65F6;&#x8F93;&#x51FA;&#x5806;&#x5FEB;&#x7167;&#x6587;&#x4EF6;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x5178;&#x578B;&#x914D;&#x7F6E;">&#x5178;&#x578B;&#x914D;&#x7F6E;</h2>
+<h3 id="&#x5806;&#x5927;&#x5C0F;&#x8BBE;&#x7F6E;">&#x5806;&#x5927;&#x5C0F;&#x8BBE;&#x7F6E;</h3>
+<p><strong>&#x5E74;&#x8F7B;&#x4EE3;&#x7684;&#x8BBE;&#x7F6E;&#x5F88;&#x5173;&#x952E;&#x3002;</strong></p>
+<p>JVM &#x4E2D;&#x6700;&#x5927;&#x5806;&#x5927;&#x5C0F;&#x6709;&#x4E09;&#x65B9;&#x9762;&#x9650;&#x5236;&#xFF1A;</p>
+<ol>
+<li>&#x76F8;&#x5173;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x6570;&#x636E;&#x6A21;&#x578B;&#xFF08;32-bt &#x8FD8;&#x662F; 64-bit&#xFF09;&#x9650;&#x5236;&#xFF1B;</li>
+<li>&#x7CFB;&#x7EDF;&#x7684;&#x53EF;&#x7528;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x9650;&#x5236;&#xFF1B;</li>
+<li>&#x7CFB;&#x7EDF;&#x7684;&#x53EF;&#x7528;&#x7269;&#x7406;&#x5185;&#x5B58;&#x9650;&#x5236;&#x3002;</li>
+</ol>
+<pre><code>&#x6574;&#x4E2A;&#x5806;&#x5927;&#x5C0F; = &#x5E74;&#x8F7B;&#x4EE3;&#x5927;&#x5C0F; + &#x5E74;&#x8001;&#x4EE3;&#x5927;&#x5C0F; + &#x6301;&#x4E45;&#x4EE3;&#x5927;&#x5C0F;
+</code></pre><ul>
+<li>&#x6301;&#x4E45;&#x4EE3;&#x4E00;&#x822C;&#x56FA;&#x5B9A;&#x5927;&#x5C0F;&#x4E3A; 64m&#x3002;&#x4F7F;&#x7528; <code>-XX:PermSize</code> &#x8BBE;&#x7F6E;&#x3002;</li>
+<li>&#x5B98;&#x65B9;&#x63A8;&#x8350;&#x5E74;&#x8F7B;&#x4EE3;&#x5360;&#x6574;&#x4E2A;&#x5806;&#x7684; 3/8&#x3002;&#x4F7F;&#x7528; <code>-Xmn</code> &#x8BBE;&#x7F6E;&#x3002;</li>
+</ul>
+<h3 id="&#x56DE;&#x6536;&#x5668;&#x9009;&#x62E9;">&#x56DE;&#x6536;&#x5668;&#x9009;&#x62E9;</h3>
+<p>JVM &#x7ED9;&#x4E86;&#x4E09;&#x79CD;&#x9009;&#x62E9;&#xFF1A;&#x4E32;&#x884C;&#x6536;&#x96C6;&#x5668;&#x3001;&#x5E76;&#x884C;&#x6536;&#x96C6;&#x5668;&#x3001;&#x5E76;&#x53D1;&#x6536;&#x96C6;&#x5668;&#x3002;</p>
+<h2 id="jvm-&#x5B9E;&#x6218;">JVM &#x5B9E;&#x6218;</h2>
+<h3 id="&#x5206;&#x6790;-gc-&#x65E5;&#x5FD7;">&#x5206;&#x6790; GC &#x65E5;&#x5FD7;</h3>
+<h3 id="&#x83B7;&#x53D6;-gc-&#x65E5;&#x5FD7;">&#x83B7;&#x53D6; GC &#x65E5;&#x5FD7;</h3>
+<p>&#x83B7;&#x53D6; GC &#x65E5;&#x5FD7;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li>&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x52A8;&#x6001;&#x67E5;&#x770B;</li>
+<li>&#x5728;&#x5BB9;&#x5668;&#x4E2D;&#x8BBE;&#x7F6E;&#x76F8;&#x5173;&#x53C2;&#x6570;&#x6253;&#x5370; GC &#x65E5;&#x5FD7;</li>
+</ul>
+<p><code>jstat -gc</code> &#x7EDF;&#x8BA1;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5806;&#x7684;&#x884C;&#x4E3A;&#xFF1A;</p>
+<pre><code>jstat -gc 1262
+ S0C    S1C     S0U     S1U   EC       EU        OC         OU        PC       PU         YGC    YGCT    FGC    FGCT     GCT
+26112.0 24064.0 6562.5  0.0   564224.0 76274.5   434176.0   388518.3  524288.0 42724.7    320    6.417   1      0.398    6.815
+</code></pre><p>&#x4E5F;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x95F4;&#x9694;&#x56FA;&#x5B9A;&#x65F6;&#x95F4;&#x6765;&#x6253;&#x5370;&#xFF1A;</p>
+<pre><code>$ jstat -gc 1262 2000 20
+</code></pre><p>&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x610F;&#x601D;&#x5C31;&#x662F;&#x6BCF;&#x9694; 2000ms &#x8F93;&#x51FA; 1262 &#x7684; gc &#x60C5;&#x51B5;&#xFF0C;&#x4E00;&#x5171;&#x8F93;&#x51FA; 20 &#x6B21;</p>
+<p>Tomcat &#x8BBE;&#x7F6E;&#x793A;&#x4F8B;&#xFF1A;</p>
+<pre><code>JAVA_OPTS=&quot;-server -Xms2000m -Xmx2000m -Xmn800m -XX:PermSize=64m -XX:MaxPermSize=256m -XX:SurvivorRatio=4
+-verbose:gc -Xloggc:$CATALINA_HOME/logs/gc.log
+-Djava.awt.headless=true
+-XX:+PrintGCTimeStamps -XX:+PrintGCDetails
+-Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000
+-XX:+UseConcMarkSweepGC -XX:MaxTenuringThreshold=15&quot;
+</code></pre><ul>
+<li><code>-Xms2000m -Xmx2000m -Xmn800m -XX:PermSize=64m -XX:MaxPermSize=256m</code>
+Xms&#xFF0C;&#x5373;&#x4E3A; jvm &#x542F;&#x52A8;&#x65F6;&#x5F97; JVM &#x521D;&#x59CB;&#x5806;&#x5927;&#x5C0F;,Xmx &#x4E3A; jvm &#x7684;&#x6700;&#x5927;&#x5806;&#x5927;&#x5C0F;&#xFF0C;xmn &#x4E3A;&#x65B0;&#x751F;&#x4EE3;&#x7684;&#x5927;&#x5C0F;&#xFF0C;permsize &#x4E3A;&#x6C38;&#x4E45;&#x4EE3;&#x7684;&#x521D;&#x59CB;&#x5927;&#x5C0F;&#xFF0C;MaxPermSize &#x4E3A;&#x6C38;&#x4E45;&#x4EE3;&#x7684;&#x6700;&#x5927;&#x7A7A;&#x95F4;&#x3002;</li>
+<li><code>-XX:SurvivorRatio=4</code>
+SurvivorRatio &#x4E3A;&#x65B0;&#x751F;&#x4EE3;&#x7A7A;&#x95F4;&#x4E2D;&#x7684; Eden &#x533A;&#x548C;&#x6551;&#x52A9;&#x7A7A;&#x95F4; Survivor &#x533A;&#x7684;&#x5927;&#x5C0F;&#x6BD4;&#x503C;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F; 8&#xFF0C;&#x5219;&#x4E24;&#x4E2A; Survivor &#x533A;&#x4E0E;&#x4E00;&#x4E2A; Eden &#x533A;&#x7684;&#x6BD4;&#x503C;&#x4E3A; 2:8,&#x4E00;&#x4E2A; Survivor &#x533A;&#x5360;&#x6574;&#x4E2A;&#x5E74;&#x8F7B;&#x4EE3;&#x7684; 1/10&#x3002;&#x8C03;&#x5C0F;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x5C06;&#x589E;&#x5927; survivor &#x533A;&#xFF0C;&#x8BA9;&#x5BF9;&#x8C61;&#x5C3D;&#x91CF;&#x5728; survitor &#x533A;&#x5446;&#x957F;&#x4E00;&#x70B9;&#xFF0C;&#x51CF;&#x5C11;&#x8FDB;&#x5165;&#x5E74;&#x8001;&#x4EE3;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x53BB;&#x6389;&#x6551;&#x52A9;&#x7A7A;&#x95F4;&#x7684;&#x60F3;&#x6CD5;&#x662F;&#x8BA9;&#x5927;&#x90E8;&#x5206;&#x4E0D;&#x80FD;&#x9A6C;&#x4E0A;&#x56DE;&#x6536;&#x7684;&#x6570;&#x636E;&#x5C3D;&#x5FEB;&#x8FDB;&#x5165;&#x5E74;&#x8001;&#x4EE3;&#xFF0C;&#x52A0;&#x5FEB;&#x5E74;&#x8001;&#x4EE3;&#x7684;&#x56DE;&#x6536;&#x9891;&#x7387;&#xFF0C;&#x51CF;&#x5C11;&#x5E74;&#x8001;&#x4EE3;&#x66B4;&#x6DA8;&#x7684;&#x53EF;&#x80FD;&#x6027;&#xFF0C;&#x8FD9;&#x4E2A;&#x662F;&#x901A;&#x8FC7;&#x5C06;-XX:SurvivorRatio &#x8BBE;&#x7F6E;&#x6210;&#x6BD4;&#x8F83;&#x5927;&#x7684;&#x503C;&#xFF08;&#x6BD4;&#x5982; 65536)&#x6765;&#x505A;&#x5230;&#x3002;</li>
+<li><code>-verbose:gc -Xloggc:$CATALINA_HOME/logs/gc.log</code>
+&#x5C06;&#x865A;&#x62DF;&#x673A;&#x6BCF;&#x6B21;&#x5783;&#x573E;&#x56DE;&#x6536;&#x7684;&#x4FE1;&#x606F;&#x5199;&#x5230;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x6587;&#x4EF6;&#x540D;&#x7531; file &#x6307;&#x5B9A;&#xFF0C;&#x6587;&#x4EF6;&#x683C;&#x5F0F;&#x662F;&#x5E73;&#x6587;&#x4EF6;&#xFF0C;&#x5185;&#x5BB9;&#x548C;-verbose:gc &#x8F93;&#x51FA;&#x5185;&#x5BB9;&#x76F8;&#x540C;&#x3002;</li>
+<li><code>-Djava.awt.headless=true</code> Headless &#x6A21;&#x5F0F;&#x662F;&#x7CFB;&#x7EDF;&#x7684;&#x4E00;&#x79CD;&#x914D;&#x7F6E;&#x6A21;&#x5F0F;&#x3002;&#x5728;&#x8BE5;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x7CFB;&#x7EDF;&#x7F3A;&#x5C11;&#x4E86;&#x663E;&#x793A;&#x8BBE;&#x5907;&#x3001;&#x952E;&#x76D8;&#x6216;&#x9F20;&#x6807;&#x3002;</li>
+<li><code>-XX:+PrintGCTimeStamps -XX:+PrintGCDetails</code>
+&#x8BBE;&#x7F6E; gc &#x65E5;&#x5FD7;&#x7684;&#x683C;&#x5F0F;</li>
+<li><code>-Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000</code>
+&#x6307;&#x5B9A; rmi &#x8C03;&#x7528;&#x65F6; gc &#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;</li>
+<li><code>-XX:+UseConcMarkSweepGC -XX:MaxTenuringThreshold=15</code> &#x91C7;&#x7528;&#x5E76;&#x53D1; gc &#x65B9;&#x5F0F;&#xFF0C;&#x7ECF;&#x8FC7; 15 &#x6B21; minor gc &#x540E;&#x8FDB;&#x5165;&#x5E74;&#x8001;&#x4EE3;</li>
+</ul>
+<h3 id="&#x5982;&#x4F55;&#x5206;&#x6790;-gc-&#x65E5;&#x5FD7;">&#x5982;&#x4F55;&#x5206;&#x6790; GC &#x65E5;&#x5FD7;</h3>
+<p>Young GC &#x56DE;&#x6536;&#x65E5;&#x5FD7;:</p>
+<pre><code>2016-07-05T10:43:18.093+0800: 25.395: [GC [PSYoungGen: 274931K-&gt;10738K(274944K)] 371093K-&gt;147186K(450048K), 0.0668480 secs] [Times: user=0.17 sys=0.08, real=0.07 secs]
+</code></pre><p>Full GC &#x56DE;&#x6536;&#x65E5;&#x5FD7;:</p>
+<pre><code>2016-07-05T10:43:18.160+0800: 25.462: [Full GC [PSYoungGen: 10738K-&gt;0K(274944K)] [ParOldGen: 136447K-&gt;140379K(302592K)] 147186K-&gt;140379K(577536K) [PSPermGen: 85411K-&gt;85376K(171008K)], 0.6763541 secs] [Times: user=1.75 sys=0.02, real=0.68 secs]
+</code></pre><p>&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#x65E5;&#x5FD7;&#x5206;&#x6790;&#x5F97;&#x51FA;&#xFF0C;PSYoungGen&#x3001;ParOldGen&#x3001;PSPermGen &#x5C5E;&#x4E8E; Parallel &#x6536;&#x96C6;&#x5668;&#x3002;&#x5176;&#x4E2D; PSYoungGen &#x8868;&#x793A; gc &#x56DE;&#x6536;&#x524D;&#x540E;&#x5E74;&#x8F7B;&#x4EE3;&#x7684;&#x5185;&#x5B58;&#x53D8;&#x5316;&#xFF1B;ParOldGen &#x8868;&#x793A; gc &#x56DE;&#x6536;&#x524D;&#x540E;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x5185;&#x5B58;&#x53D8;&#x5316;&#xFF1B;PSPermGen &#x8868;&#x793A; gc &#x56DE;&#x6536;&#x524D;&#x540E;&#x6C38;&#x4E45;&#x533A;&#x7684;&#x5185;&#x5B58;&#x53D8;&#x5316;&#x3002;young gc &#x4E3B;&#x8981;&#x662F;&#x9488;&#x5BF9;&#x5E74;&#x8F7B;&#x4EE3;&#x8FDB;&#x884C;&#x5185;&#x5B58;&#x56DE;&#x6536;&#x6BD4;&#x8F83;&#x9891;&#x7E41;&#xFF0C;&#x8017;&#x65F6;&#x77ED;&#xFF1B;full gc &#x4F1A;&#x5BF9;&#x6574;&#x4E2A;&#x5806;&#x5185;&#x5B58;&#x8FDB;&#x884C;&#x56DE;&#x57CE;&#xFF0C;&#x8017;&#x65F6;&#x957F;&#xFF0C;&#x56E0;&#x6B64;&#x4E00;&#x822C;&#x5C3D;&#x91CF;&#x51CF;&#x5C11; full gc &#x7684;&#x6B21;&#x6570;</p>
+<p>&#x901A;&#x8FC7;&#x4E24;&#x5F20;&#x56FE;&#x975E;&#x5E38;&#x660E;&#x663E;&#x770B;&#x51FA; gc &#x65E5;&#x5FD7;&#x6784;&#x6210;&#xFF1A;</p>
+<div align="center"><img src="http://ityouknow.com/assets/images/2017/jvm/Young%20GC.png"></div>
+
+<div align="center"><img src="http://ityouknow.com/assets/images/2017/jvm/Full%20GC.png"></div>
+
+<h3 id="outofmemoryoom&#x5206;&#x6790;">OutOfMemory(OOM)&#x5206;&#x6790;</h3>
+<p>OutOfMemory &#xFF0C;&#x5373;&#x5185;&#x5B58;&#x6EA2;&#x51FA;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x89C1;&#x7684; JVM &#x95EE;&#x9898;&#x3002;&#x90A3;&#x4E48;&#x5206;&#x6790; OOM &#x7684;&#x601D;&#x8DEF;&#x662F;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x8981;&#x77E5;&#x9053;&#x6709;&#x4E09;&#x79CD; OutOfMemoryError&#xFF1A;</p>
+<ul>
+<li><strong>OutOfMemoryError:Java heap space</strong> - &#x5806;&#x7A7A;&#x95F4;&#x6EA2;&#x51FA;</li>
+<li><strong>OutOfMemoryError:PermGen space</strong> - &#x65B9;&#x6CD5;&#x533A;&#x548C;&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;&#x6EA2;&#x51FA;</li>
+<li><strong>OutOfMemoryError:unable to create new native thread</strong> - &#x7EBF;&#x7A0B;&#x8FC7;&#x591A;</li>
+</ul>
+<h4 id="outofmemoryerrorpermgen-space">OutOfMemoryError:PermGen space</h4>
+<p>OutOfMemoryError:PermGen space &#x8868;&#x793A;&#x65B9;&#x6CD5;&#x533A;&#x548C;&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;&#x6EA2;&#x51FA;&#x3002;</p>
+<p><strong>&#x539F;&#x56E0;&#xFF1A;</strong></p>
+<p>Perm &#x533A;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x5B58;&#x653E; Class &#x548C; Meta &#x4FE1;&#x606F;&#x7684;&#xFF0C;Class &#x5728;&#x88AB; Loader &#x65F6;&#x5C31;&#x4F1A;&#x88AB;&#x653E;&#x5230; PermGen space&#xFF0C;&#x8FD9;&#x4E2A;&#x533A;&#x57DF;&#x79F0;&#x4E3A;&#x5E74;&#x8001;&#x4EE3;&#x3002;GC &#x5728;&#x4E3B;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x671F;&#x95F4;&#x4E0D;&#x4F1A;&#x5BF9;&#x5E74;&#x8001;&#x533A;&#x8FDB;&#x884C;&#x6E05;&#x7406;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F; 64M &#x5927;&#x5C0F;&#x3002;</p>
+<p>&#x5F53;&#x7A0B;&#x5E8F;&#x7A0B;&#x5E8F;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x5927;&#x91CF;&#x7684; jar &#x6216; class&#xFF0C;&#x4F7F; java &#x865A;&#x62DF;&#x673A;&#x88C5;&#x8F7D;&#x7C7B;&#x7684;&#x7A7A;&#x95F4;&#x4E0D;&#x591F;&#xFF0C;&#x8D85;&#x8FC7; 64M &#x5C31;&#x4F1A;&#x62A5;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5B58;&#x6EA2;&#x51FA;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x52A0;&#x5927;&#x5185;&#x5B58;&#x5206;&#x914D;&#xFF0C;&#x4E00;&#x822C; 128m &#x8DB3;&#x591F;&#x3002;</p>
+<p><strong>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</strong></p>
+<p>&#xFF08;1&#xFF09;&#x6269;&#x5927;&#x6C38;&#x4E45;&#x4EE3;&#x7A7A;&#x95F4;</p>
+<ul>
+<li>JDK7 &#x4EE5;&#x524D;&#x4F7F;&#x7528; <code>-XX:PermSize</code> &#x548C; <code>-XX:MaxPermSize</code> &#x6765;&#x63A7;&#x5236;&#x6C38;&#x4E45;&#x4EE3;&#x5927;&#x5C0F;&#x3002;</li>
+<li>JDK8 &#x4EE5;&#x540E;&#x628A;&#x539F;&#x672C;&#x653E;&#x5728;&#x6C38;&#x4E45;&#x4EE3;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x79FB;&#x51FA;, &#x653E;&#x5728; Java &#x5806;&#x4E2D;(&#x5143;&#x7A7A;&#x95F4; Metaspace)&#x4E2D;&#xFF0C;&#x5143;&#x6570;&#x636E;&#x5E76;&#x4E0D;&#x5728;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x672C;&#x5730;&#x7684;&#x5185;&#x5B58;&#x3002;&#x4F7F;&#x7528; <code>-XX:MetaspaceSize</code> &#x548C; <code>-XX:MaxMetaspaceSize</code> &#x63A7;&#x5236;&#x5143;&#x7A7A;&#x95F4;&#x5927;&#x5C0F;&#x3002;</li>
+</ul>
+<blockquote>
+<p>&#x6CE8;&#x610F;&#xFF1A;<code>-XX:PermSize</code> &#x4E00;&#x822C;&#x8BBE;&#x4E3A; 64M</p>
+</blockquote>
+<p>&#xFF08;2&#xFF09;&#x6E05;&#x7406;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D; <code>WEB-INF/lib</code> &#x4E0B;&#x7684; jar&#xFF0C;&#x7528;&#x4E0D;&#x4E0A;&#x7684; jar &#x5220;&#x9664;&#x6389;&#xFF0C;&#x591A;&#x4E2A;&#x5E94;&#x7528;&#x516C;&#x5171;&#x7684; jar &#x79FB;&#x52A8;&#x5230; Tomcat &#x7684; lib &#x76EE;&#x5F55;&#xFF0C;&#x51CF;&#x5C11;&#x91CD;&#x590D;&#x52A0;&#x8F7D;&#x3002;</p>
+<h4 id="outofmemoryerrorjava-heap-space">OutOfMemoryError:Java heap space</h4>
+<p>OutOfMemoryError:Java heap space &#x8868;&#x793A;&#x5806;&#x7A7A;&#x95F4;&#x6EA2;&#x51FA;&#x3002;</p>
+<p>&#x539F;&#x56E0;&#xFF1A;JVM &#x5206;&#x914D;&#x7ED9;&#x5806;&#x5185;&#x5B58;&#x7684;&#x7A7A;&#x95F4;&#x5DF2;&#x7ECF;&#x7528;&#x6EE1;&#x4E86;&#x3002;</p>
+<h5 id="&#x95EE;&#x9898;&#x5B9A;&#x4F4D;">&#x95EE;&#x9898;&#x5B9A;&#x4F4D;</h5>
+<p>&#xFF08;1&#xFF09;&#x4F7F;&#x7528; jmap &#x6216; -XX:+HeapDumpOnOutOfMemoryError &#x83B7;&#x53D6;&#x5806;&#x5FEB;&#x7167;&#x3002;
+&#xFF08;2&#xFF09;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x5206;&#x6790;&#x5DE5;&#x5177;&#xFF08;visualvm&#x3001;mat&#x3001;jProfile &#x7B49;&#xFF09;&#x5BF9;&#x5806;&#x5FEB;&#x7167;&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;
+&#xFF08;3&#xFF09;&#x6839;&#x636E;&#x5206;&#x6790;&#x56FE;&#xFF0C;&#x91CD;&#x70B9;&#x662F;&#x786E;&#x8BA4;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x662F;&#x5FC5;&#x8981;&#x7684;&#xFF0C;&#x5206;&#x6E05;&#x7A76;&#x7ADF;&#x662F;&#x662F;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#xFF08;Memory Leak&#xFF09;&#x8FD8;&#x662F;&#x5185;&#x5B58;&#x6EA2;&#x51FA;&#xFF08;Memory Overflow&#xFF09;&#x3002;</p>
+<h6 id="&#x5185;&#x5B58;&#x6CC4;&#x9732;">&#x5185;&#x5B58;&#x6CC4;&#x9732;</h6>
+<p>&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x662F;&#x6307;&#x7531;&#x4E8E;&#x758F;&#x5FFD;&#x6216;&#x9519;&#x8BEF;&#x9020;&#x6210;&#x7A0B;&#x5E8F;&#x672A;&#x80FD;&#x91CA;&#x653E;&#x5DF2;&#x7ECF;&#x4E0D;&#x518D;&#x4F7F;&#x7528;&#x7684;&#x5185;&#x5B58;&#x7684;&#x60C5;&#x51B5;&#x3002;</p>
+<p>&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x5E76;&#x975E;&#x6307;&#x5185;&#x5B58;&#x5728;&#x7269;&#x7406;&#x4E0A;&#x7684;&#x6D88;&#x5931;&#xFF0C;&#x800C;&#x662F;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5206;&#x914D;&#x67D0;&#x6BB5;&#x5185;&#x5B58;&#x540E;&#xFF0C;&#x7531;&#x4E8E;&#x8BBE;&#x8BA1;&#x9519;&#x8BEF;&#xFF0C;&#x5931;&#x53BB;&#x4E86;&#x5BF9;&#x8BE5;&#x6BB5;&#x5185;&#x5B58;&#x7684;&#x63A7;&#x5236;&#xFF0C;&#x56E0;&#x800C;&#x9020;&#x6210;&#x4E86;&#x5185;&#x5B58;&#x7684;&#x6D6A;&#x8D39;&#x3002;</p>
+<p>&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x968F;&#x7740;&#x88AB;&#x6267;&#x884C;&#x7684;&#x6B21;&#x6570;&#x8D8A;&#x591A;-&#x6700;&#x7EC8;&#x4F1A;&#x5BFC;&#x81F4;&#x5185;&#x5B58;&#x6EA2;&#x51FA;&#x3002;</p>
+<p>&#x800C;&#x56E0;&#x7A0B;&#x5E8F;&#x6B7B;&#x5FAA;&#x73AF;&#x5BFC;&#x81F4;&#x7684;&#x4E0D;&#x65AD;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;-&#x53EA;&#x8981;&#x88AB;&#x6267;&#x884C;&#x5230;&#x5C31;&#x4F1A;&#x4EA7;&#x751F;&#x5185;&#x5B58;&#x6EA2;&#x51FA;&#x3002;</p>
+<p>&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x5E38;&#x89C1;&#x51E0;&#x4E2A;&#x60C5;&#x51B5;&#xFF1A;</p>
+<ul>
+<li>&#x9759;&#x6001;&#x96C6;&#x5408;&#x7C7B;<ul>
+<li>&#x58F0;&#x660E;&#x4E3A;&#x9759;&#x6001;&#xFF08;static&#xFF09;&#x7684; HashMap&#x3001;Vector &#x7B49;&#x96C6;&#x5408;</li>
+<li>&#x901A;&#x4FD7;&#x6765;&#x8BB2; A &#x4E2D;&#x6709; B&#xFF0C;&#x5F53;&#x524D;&#x53EA;&#x628A; B &#x8BBE;&#x7F6E;&#x4E3A;&#x7A7A;&#xFF0C;A &#x6CA1;&#x6709;&#x8BBE;&#x7F6E;&#x4E3A;&#x7A7A;&#xFF0C;&#x56DE;&#x6536;&#x65F6; B &#x65E0;&#x6CD5;&#x56DE;&#x6536;-&#x56E0;&#x88AB; A &#x5F15;&#x7528;&#x3002;</li>
+</ul>
+</li>
+<li>&#x76D1;&#x542C;&#x5668;<ul>
+<li>&#x76D1;&#x542C;&#x5668;&#x88AB;&#x6CE8;&#x518C;&#x540E;&#x91CA;&#x653E;&#x5BF9;&#x8C61;&#x65F6;&#x6CA1;&#x6709;&#x5220;&#x9664;&#x76D1;&#x542C;&#x5668;</li>
+</ul>
+</li>
+<li>&#x7269;&#x7406;&#x8FDE;&#x63A5;<ul>
+<li>DataSource.getConnection()&#x5EFA;&#x7ACB;&#x94FE;&#x63A5;&#xFF0C;&#x5FC5;&#x987B;&#x901A;&#x8FC7; close()&#x5173;&#x95ED;&#x94FE;&#x63A5;</li>
+</ul>
+</li>
+<li>&#x5185;&#x90E8;&#x7C7B;&#x548C;&#x5916;&#x90E8;&#x6A21;&#x5757;&#x7B49;&#x7684;&#x5F15;&#x7528;<ul>
+<li>&#x53D1;&#x73B0;&#x5B83;&#x7684;&#x65B9;&#x5F0F;&#x540C;&#x5185;&#x5B58;&#x6EA2;&#x51FA;&#xFF0C;&#x53EF;&#x518D;&#x52A0;&#x4E2A;&#x5B9E;&#x65F6;&#x89C2;&#x5BDF;</li>
+<li>jstat -gcutil 7362 2500 70</li>
+</ul>
+</li>
+</ul>
+<p>&#x91CD;&#x70B9;&#x5173;&#x6CE8;&#xFF1A;</p>
+<ul>
+<li>FGC &#x2014; &#x4ECE;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x5230;&#x91C7;&#x6837;&#x65F6;&#x53D1;&#x751F; Full GC &#x7684;&#x6B21;&#x6570;&#x3002;</li>
+<li>FGCT &#x2014; &#x4ECE;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x5230;&#x91C7;&#x6837;&#x65F6; Full GC &#x6240;&#x7528;&#x7684;&#x65F6;&#x95F4;&#xFF08;&#x5355;&#x4F4D;&#x79D2;&#xFF09;&#x3002;</li>
+<li>FGC &#x6B21;&#x6570;&#x8D8A;&#x591A;&#xFF0C;FGCT &#x6240;&#x9700;&#x65F6;&#x95F4;&#x8D8A;&#x591A;-&#x53EF;&#x975E;&#x5E38;&#x6709;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x3002;</li>
+</ul>
+<h5 id="&#x89E3;&#x51B3;&#x65B9;&#x6848;">&#x89E3;&#x51B3;&#x65B9;&#x6848;</h5>
+<p>&#xFF08;1&#xFF09;&#x68C0;&#x67E5;&#x7A0B;&#x5E8F;&#xFF0C;&#x770B;&#x662F;&#x5426;&#x6709;&#x6B7B;&#x5FAA;&#x73AF;&#x6216;&#x4E0D;&#x5FC5;&#x8981;&#x5730;&#x91CD;&#x590D;&#x521B;&#x5EFA;&#x5927;&#x91CF;&#x5BF9;&#x8C61;&#x3002;&#x6709;&#x5219;&#x6539;&#x4E4B;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x91CD;&#x590D;&#x521B;&#x5EFA;&#x5185;&#x5B58;&#x7684;&#x793A;&#x4F8B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OOM</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        Integer sum1=<span class="hljs-number">300000</span>;
+        Integer sum2=<span class="hljs-number">400000</span>;
+        OOM oom = <span class="hljs-keyword">new</span> OOM();
+        System.out.println(<span class="hljs-string">&quot;&#x5F80;ArrayList&#x4E2D;&#x52A0;&#x5165;30w&#x5185;&#x5BB9;&quot;</span>);
+        oom.javaHeapSpace(sum1);
+        oom.memoryTotal();
+        System.out.println(<span class="hljs-string">&quot;&#x5F80;ArrayList&#x4E2D;&#x52A0;&#x5165;40w&#x5185;&#x5BB9;&quot;</span>);
+        oom.javaHeapSpace(sum2);
+        oom.memoryTotal();
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">javaHeapSpace</span><span class="hljs-params">(Integer sum)</span></span>{
+        Random random = <span class="hljs-keyword">new</span> Random();
+        ArrayList openList = <span class="hljs-keyword">new</span> ArrayList();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;sum;i++){
+            String charOrNum = String.valueOf(random.nextInt(<span class="hljs-number">10</span>));
+            openList.add(charOrNum);
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">memoryTotal</span><span class="hljs-params">()</span></span>{
+        Runtime run = Runtime.getRuntime();
+        <span class="hljs-keyword">long</span> max = run.maxMemory();
+        <span class="hljs-keyword">long</span> total = run.totalMemory();
+        <span class="hljs-keyword">long</span> free = run.freeMemory();
+        <span class="hljs-keyword">long</span> usable = max - total + free;
+        System.out.println(<span class="hljs-string">&quot;&#x6700;&#x5927;&#x5185;&#x5B58; = &quot;</span> + max);
+        System.out.println(<span class="hljs-string">&quot;&#x5DF2;&#x5206;&#x914D;&#x5185;&#x5B58; = &quot;</span> + total);
+        System.out.println(<span class="hljs-string">&quot;&#x5DF2;&#x5206;&#x914D;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5269;&#x4F59;&#x7A7A;&#x95F4; = &quot;</span> + free);
+        System.out.println(<span class="hljs-string">&quot;&#x6700;&#x5927;&#x53EF;&#x7528;&#x5185;&#x5B58; = &quot;</span> + usable);
+    }
+}
+</code></pre>
+<p>&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF1A;</p>
+<pre><code>&#x5F80;ArrayList&#x4E2D;&#x52A0;&#x5165;30w&#x5185;&#x5BB9;
+&#x6700;&#x5927;&#x5185;&#x5B58; = 20447232
+&#x5DF2;&#x5206;&#x914D;&#x5185;&#x5B58; = 20447232
+&#x5DF2;&#x5206;&#x914D;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5269;&#x4F59;&#x7A7A;&#x95F4; = 4032576
+&#x6700;&#x5927;&#x53EF;&#x7528;&#x5185;&#x5B58; = 4032576
+&#x5F80;ArrayList&#x4E2D;&#x52A0;&#x5165;40w&#x5185;&#x5BB9;
+Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
+    at java.util.Arrays.copyOf(Arrays.java:2245)
+    at java.util.Arrays.copyOf(Arrays.java:2219)
+    at java.util.ArrayList.grow(ArrayList.java:242)
+    at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:216)
+    at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:208)
+    at java.util.ArrayList.add(ArrayList.java:440)
+    at pers.qingqian.study.seven.OOM.javaHeapSpace(OOM.java:36)
+    at pers.qingqian.study.seven.OOM.main(OOM.java:26)
+</code></pre><p>&#xFF08;2&#xFF09;&#x6269;&#x5927;&#x5806;&#x5185;&#x5B58;&#x7A7A;&#x95F4;</p>
+<p>&#x4F7F;&#x7528; <code>-Xms</code> &#x548C; <code>-Xmx</code> &#x6765;&#x63A7;&#x5236;&#x5806;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x5927;&#x5C0F;&#x3002;</p>
+<h4 id="outofmemoryerror-gc-overhead-limit-exceeded">OutOfMemoryError: GC overhead limit exceeded</h4>
+<p>&#x539F;&#x56E0;&#xFF1A;JDK6 &#x65B0;&#x589E;&#x9519;&#x8BEF;&#x7C7B;&#x578B;&#xFF0C;&#x5F53; GC &#x4E3A;&#x91CA;&#x653E;&#x5F88;&#x5C0F;&#x7A7A;&#x95F4;&#x5360;&#x7528;&#x5927;&#x91CF;&#x65F6;&#x95F4;&#x65F6;&#x629B;&#x51FA;&#xFF1B;&#x4E00;&#x822C;&#x662F;&#x56E0;&#x4E3A;&#x5806;&#x592A;&#x5C0F;&#xFF0C;&#x5BFC;&#x81F4;&#x5F02;&#x5E38;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x6CA1;&#x6709;&#x8DB3;&#x591F;&#x7684;&#x5185;&#x5B58;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</p>
+<p>&#x67E5;&#x770B;&#x7CFB;&#x7EDF;&#x662F;&#x5426;&#x6709;&#x4F7F;&#x7528;&#x5927;&#x5185;&#x5B58;&#x7684;&#x4EE3;&#x7801;&#x6216;&#x6B7B;&#x5FAA;&#x73AF;&#xFF1B;
+&#x901A;&#x8FC7;&#x6DFB;&#x52A0; JVM &#x914D;&#x7F6E;&#xFF0C;&#x6765;&#x9650;&#x5236;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#xFF1A;</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">jvm-arg</span>&gt;</span>-XX:-UseGCOverheadLimit<span class="hljs-tag">&lt;/<span class="hljs-name">jvm-arg</span>&gt;</span>
+</code></pre>
+<h4 id="outofmemoryerror&#xFF1A;unable-to-create-new-native-thread">OutOfMemoryError&#xFF1A;unable to create new native thread</h4>
+<p>&#x539F;&#x56E0;&#xFF1A;&#x7EBF;&#x7A0B;&#x8FC7;&#x591A;</p>
+<p>&#x90A3;&#x4E48;&#x80FD;&#x521B;&#x5EFA;&#x591A;&#x5C11;&#x7EBF;&#x7A0B;&#x5462;&#xFF1F;&#x8FD9;&#x91CC;&#x6709;&#x4E00;&#x4E2A;&#x516C;&#x5F0F;&#xFF1A;</p>
+<pre><code>(MaxProcessMemory - JVMMemory - ReservedOsMemory) / (ThreadStackSize) = Number of threads
+MaxProcessMemory &#x6307;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x7684;&#x6700;&#x5927;&#x5185;&#x5B58;
+JVMMemory         JVM&#x5185;&#x5B58;
+ReservedOsMemory  &#x4FDD;&#x7559;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5185;&#x5B58;
+ThreadStackSize      &#x7EBF;&#x7A0B;&#x6808;&#x7684;&#x5927;&#x5C0F;
+</code></pre><p>&#x5F53;&#x53D1;&#x8D77;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x521B;&#x5EFA;&#x65F6;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x4F1A;&#x5728; JVM &#x5185;&#x5B58;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; Thread &#x5BF9;&#x8C61;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EBF;&#x7A0B;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x7CFB;&#x7EDF;&#x7EBF;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x7528;&#x7684;&#x4E0D;&#x662F; JVMMemory&#xFF0C;&#x800C;&#x662F;&#x7CFB;&#x7EDF;&#x4E2D;&#x5269;&#x4E0B;&#x7684;&#x5185;&#x5B58;&#xFF1A;
+(MaxProcessMemory - JVMMemory - ReservedOsMemory)
+&#x7ED3;&#x8BBA;&#xFF1A;&#x4F60;&#x7ED9; JVM &#x5185;&#x5B58;&#x8D8A;&#x591A;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x80FD;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x7684;&#x7CFB;&#x7EDF;&#x7EBF;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x5C31;&#x4F1A;&#x8D8A;&#x5C11;&#xFF0C;&#x8D8A;&#x5BB9;&#x6613;&#x53D1;&#x751F; java.lang.OutOfMemoryError: unable to create new native thread&#x3002;</p>
+<h4 id="cpu-&#x8FC7;&#x9AD8;">CPU &#x8FC7;&#x9AD8;</h4>
+<p>&#x5B9A;&#x4F4D;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<p>&#xFF08;1&#xFF09;&#x6267;&#x884C; top -c &#x547D;&#x4EE4;&#xFF0C;&#x627E;&#x5230; cpu &#x6700;&#x9AD8;&#x7684;&#x8FDB;&#x7A0B;&#x7684; id</p>
+<p>&#xFF08;2&#xFF09;jstack PID &#x5BFC;&#x51FA; Java &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x7EBF;&#x7A0B;&#x5806;&#x6808;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x793A;&#x4F8B;&#xFF1A;</p>
+<pre><code>jstack 6795
+
+&quot;Low Memory Detector&quot; daemon prio=10 tid=0x081465f8 nid=0x7 runnable [0x00000000..0x00000000]
+        &quot;CompilerThread0&quot; daemon prio=10 tid=0x08143c58 nid=0x6 waiting on condition [0x00000000..0xfb5fd798]
+        &quot;Signal Dispatcher&quot; daemon prio=10 tid=0x08142f08 nid=0x5 waiting on condition [0x00000000..0x00000000]
+        &quot;Finalizer&quot; daemon prio=10 tid=0x08137ca0 nid=0x4 in Object.wait() [0xfbeed000..0xfbeeddb8]
+
+        at java.lang.Object.wait(Native Method)
+
+        - waiting on &lt;0xef600848&gt; (a java.lang.ref.ReferenceQueue$Lock)
+
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:116)
+
+        - locked &lt;0xef600848&gt; (a java.lang.ref.ReferenceQueue$Lock)
+
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:132)
+
+        at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:159)
+
+        &quot;Reference Handler&quot; daemon prio=10 tid=0x081370f0 nid=0x3 in Object.wait() [0xfbf4a000..0xfbf4aa38]
+
+        at java.lang.Object.wait(Native Method)
+
+        - waiting on &lt;0xef600758&gt; (a java.lang.ref.Reference$Lock)
+
+        at java.lang.Object.wait(Object.java:474)
+
+        at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:116)
+
+        - locked &lt;0xef600758&gt; (a java.lang.ref.Reference$Lock)
+
+        &quot;VM Thread&quot; prio=10 tid=0x08134878 nid=0x2 runnable
+
+        &quot;VM Periodic Task Thread&quot; prio=10 tid=0x08147768 nid=0x8 waiting on condition
+</code></pre><p>&#x5728;&#x6253;&#x5370;&#x7684;&#x5806;&#x6808;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;tid &#x548C; nid &#x7684;&#x542B;&#x4E49;&#xFF1A;</p>
+<pre><code>nid : &#x5BF9;&#x5E94;&#x7684; Linux &#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E0B;&#x7684; tid &#x7EBF;&#x7A0B;&#x53F7;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x524D;&#x9762;&#x8F6C;&#x5316;&#x7684; 16 &#x8FDB;&#x5236;&#x6570;&#x5B57;
+tid: &#x8FD9;&#x4E2A;&#x5E94;&#x8BE5;&#x662F; jvm &#x7684; jmm &#x5185;&#x5B58;&#x89C4;&#x8303;&#x4E2D;&#x7684;&#x552F;&#x4E00;&#x5730;&#x5740;&#x5B9A;&#x4F4D;
+</code></pre><p>&#x5728; CPU &#x8FC7;&#x9AD8;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x67E5;&#x627E;&#x54CD;&#x5E94;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x4E00;&#x822C;&#x5B9A;&#x4F4D;&#x90FD;&#x662F;&#x7528; nid &#x6765;&#x5B9A;&#x4F4D;&#x7684;&#x3002;&#x800C;&#x5982;&#x679C;&#x53D1;&#x751F;&#x6B7B;&#x9501;&#x4E4B;&#x7C7B;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4E00;&#x822C;&#x7528; tid &#x6765;&#x5B9A;&#x4F4D;&#x3002;</p>
+<p>&#xFF08;3&#xFF09;&#x5B9A;&#x4F4D; CPU &#x9AD8;&#x7684;&#x7EBF;&#x7A0B;&#x6253;&#x5370;&#x5176; nid</p>
+<p>&#x67E5;&#x770B;&#x7EBF;&#x7A0B;&#x4E0B;&#x5177;&#x4F53;&#x8FDB;&#x7A0B;&#x4FE1;&#x606F;&#x7684;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>top -H -p 6735</p>
+<pre><code>top - 14:20:09 up 611 days,  2:56,  1 user,  load average: 13.19, 7.76, 7.82
+Threads: 6991 total,  17 running, 6974 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 90.4 us,  2.1 sy,  0.0 ni,  7.0 id,  0.0 wa,  0.0 hi,  0.4 si,  0.0 st
+KiB Mem:  32783044 total, 32505008 used,   278036 free,   120304 buffers
+KiB Swap:        0 total,        0 used,        0 free.  4497428 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+ 6800 root      20   0 27.299g 0.021t   7172 S 54.7 70.1 187:55.61 java
+ 6803 root      20   0 27.299g 0.021t   7172 S 54.4 70.1 187:52.59 java
+ 6798 root      20   0 27.299g 0.021t   7172 S 53.7 70.1 187:55.08 java
+ 6801 root      20   0 27.299g 0.021t   7172 S 53.7 70.1 187:55.25 java
+ 6797 root      20   0 27.299g 0.021t   7172 S 53.1 70.1 187:52.78 java
+ 6804 root      20   0 27.299g 0.021t   7172 S 53.1 70.1 187:55.76 java
+ 6802 root      20   0 27.299g 0.021t   7172 S 52.1 70.1 187:54.79 java
+ 6799 root      20   0 27.299g 0.021t   7172 S 51.8 70.1 187:53.36 java
+ 6807 root      20   0 27.299g 0.021t   7172 S 13.6 70.1  48:58.60 java
+11014 root      20   0 27.299g 0.021t   7172 R  8.4 70.1   8:00.32 java
+10642 root      20   0 27.299g 0.021t   7172 R  6.5 70.1   6:32.06 java
+ 6808 root      20   0 27.299g 0.021t   7172 S  6.1 70.1 159:08.40 java
+11315 root      20   0 27.299g 0.021t   7172 S  3.9 70.1   5:54.10 java
+12545 root      20   0 27.299g 0.021t   7172 S  3.9 70.1   6:55.48 java
+23353 root      20   0 27.299g 0.021t   7172 S  3.9 70.1   2:20.55 java
+24868 root      20   0 27.299g 0.021t   7172 S  3.9 70.1   2:12.46 java
+ 9146 root      20   0 27.299g 0.021t   7172 S  3.6 70.1   7:42.72 java
+</code></pre><p>&#x7531;&#x6B64;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x5360;&#x7528; CPU &#x8F83;&#x9AD8;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E9B;&#x8FD8;&#x4E0D;&#x9AD8;&#xFF0C;&#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x5B9A;&#x4F4D;&#x5230;&#x5177;&#x4F53;&#x7684;&#x7C7B;&#x3002;nid &#x662F; 16 &#x8FDB;&#x5236;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x8981;&#x83B7;&#x53D6;&#x7EBF;&#x7A0B;&#x7684; 16 &#x8FDB;&#x5236; ID&#xFF1A;</p>
+<pre><code>printf &quot;%x\n&quot; 6800
+</code></pre><pre><code>&#x8F93;&#x51FA;&#x7ED3;&#x679C;:45cd
+</code></pre><p>&#x7136;&#x540E;&#x6839;&#x636E;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x5230; jstack &#x6253;&#x5370;&#x7684;&#x5806;&#x6808;&#x65E5;&#x5FD7;&#x4E2D;&#x67E5;&#x5B9A;&#x4F4D;&#xFF1A;</p>
+<pre><code>&quot;catalina-exec-5692&quot; daemon prio=10 tid=0x00007f3b05013800 nid=0x45cd waiting on condition [0x00007f3ae08e3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+        at sun.misc.Unsafe.park(Native Method)
+        - parking to wait for  &lt;0x00000006a7800598&gt; (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+        at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:226)
+        at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2082)
+        at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
+        at org.apache.tomcat.util.threads.TaskQueue.poll(TaskQueue.java:86)
+        at org.apache.tomcat.util.threads.TaskQueue.poll(TaskQueue.java:32)
+        at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1068)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+        at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+        at java.lang.Thread.run(Thread.java:745)
+</code></pre><h2 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h2>
+<ul>
+<li><a href="https://item.jd.com/11252778.html" target="_blank">&#x6DF1;&#x5165;&#x7406;&#x89E3; Java &#x865A;&#x62DF;&#x673A;&#xFF1A;JVM &#x9AD8;&#x7EA7;&#x7279;&#x6027;&#x4E0E;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#xFF08;&#x7B2C; 2 &#x7248;&#xFF09;</a></li>
+<li><a href="https://www.douban.com/doulist/2545443/" target="_blank">&#x4ECE;&#x8868;&#x5230;&#x91CC;&#x5B66;&#x4E60; JVM &#x5B9E;&#x73B0;</a></li>
+<li><a href="http://www.importnew.com/23761.html" target="_blank">JVM&#xFF08;4&#xFF09;&#xFF1A;Jvm &#x8C03;&#x4F18;-&#x547D;&#x4EE4;&#x7BC7;</a></li>
+<li><a href="https://www.cnblogs.com/zhguang/p/Java-JVM-GC.html" target="_blank">Java &#x7CFB;&#x5217;&#x7B14;&#x8BB0;(4) - JVM &#x76D1;&#x63A7;&#x4E0E;&#x8C03;&#x4F18;</a></li>
+<li><a href="https://segmentfault.com/a/1190000005174819" target="_blank">Java &#x670D;&#x52A1; GC &#x53C2;&#x6570;&#x8C03;&#x4F18;&#x6848;&#x4F8B;</a></li>
+<li><a href="http://www.importnew.com/19264.html" target="_blank">JVM &#x8C03;&#x4F18;&#x603B;&#x7ED3;&#xFF08;5&#xFF09;&#xFF1A;&#x5178;&#x578B;&#x914D;&#x7F6E;</a></li>
+<li><a href="https://juejin.im/post/59f02f406fb9a0451869f01c" target="_blank">&#x5982;&#x4F55;&#x5408;&#x7406;&#x7684;&#x89C4;&#x5212;&#x4E00;&#x6B21; jvm &#x6027;&#x80FD;&#x8C03;&#x4F18;</a></li>
+<li><a href="http://www.ityouknow.com/jvm/2017/09/21/How-to-optimize-Java-GC.html" target="_blank">jvm &#x7CFB;&#x5217;(&#x4E5D;):&#x5982;&#x4F55;&#x4F18;&#x5316; Java GC&#x300C;&#x8BD1;&#x300D;</a></li>
+<li><a href="https://www.jianshu.com/p/28935cbfbae0" target="_blank">&#x4F5C;&#x4E3A;&#x6D4B;&#x8BD5;&#x4F60;&#x5E94;&#x8BE5;&#x77E5;&#x9053;&#x7684; JAVA OOM &#x53CA;&#x5B9A;&#x4F4D;&#x5206;&#x6790;</a></li>
+<li><a href="https://blog.csdn.net/sinat_29912455/article/details/51125748" target="_blank">&#x5F02;&#x5E38;&#x3001;&#x5806;&#x5185;&#x5B58;&#x6EA2;&#x51FA;&#x3001;OOM &#x7684;&#x51E0;&#x79CD;&#x60C5;&#x51B5;</a></li>
+<li><a href="https://my.oschina.net/feichexia/blog/196575" target="_blank">https://my.oschina.net/feichexia/blog/196575</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="jvm-class-loader.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 第三章 类加载机制">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第四章 JVM 调优","level":"1.2.5.5","depth":3,"next":{"title":"输入输出流IO","level":"1.2.6","depth":2,"ref":"","articles":[{"title":"输入输出流IO概述","level":"1.2.6.1","depth":3,"path":"javacore/io/io.md","ref":"javacore/io/io.md","articles":[]},{"title":"Java 常用 IO 类","level":"1.2.6.2","depth":3,"path":"javacore/io/Java常用IO类.md","ref":"javacore/io/Java常用IO类.md","articles":[]},{"title":"Java 流操作","level":"1.2.6.3","depth":3,"path":"javacore/io/Java流操作.md","ref":"javacore/io/Java流操作.md","articles":[]},{"title":"Java 序列化","level":"1.2.6.4","depth":3,"path":"javacore/io/Java序列化.md","ref":"javacore/io/Java序列化.md","articles":[]},{"title":"Java 网络编程","level":"1.2.6.5","depth":3,"path":"javacore/io/Java网络编程.md","ref":"javacore/io/Java网络编程.md","articles":[]}]},"previous":{"title":"第三章 类加载机制","level":"1.2.5.4","depth":3,"path":"javacore/jvm/jvm-class-loader.md","ref":"javacore/jvm/jvm-class-loader.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/jvm/jvm-performance.md","mtime":"2019-08-16T07:27:56.714Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-18T11:41:55.771Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
