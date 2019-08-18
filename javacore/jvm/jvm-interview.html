@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Java虚拟机概述 · GitBook</title>
+        <title>Java虚拟机面经 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -246,7 +246,7 @@
                 <span>
             
                     
-                    并发
+                    多线程
             
                 </span>
             
@@ -255,12 +255,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.4.1" data-path="../concurrent/Java并发面试题集.html">
+        <li class="chapter " data-level="1.2.4.1" data-path="../concurrent/Java多线程面试题集.html">
             
-                <a href="../concurrent/Java并发面试题集.html">
+                <a href="../concurrent/Java多线程面试题集.html">
             
                     
-                    Java 并发面试题集
+                    Java 多线程面试题集
             
                 </a>
             
@@ -404,12 +404,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.5.1" data-path="jvm.html">
+        <li class="chapter active" data-level="1.2.5.1" data-path="jvm-interview.html">
             
-                <a href="jvm.html">
+                <a href="jvm-interview.html">
             
                     
-                    Java虚拟机概述
+                    Java虚拟机面经
             
                 </a>
             
@@ -781,7 +781,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Java虚拟机概述</a>
+        <a href="../.." >Java虚拟机面经</a>
     </h1>
 </div>
 
@@ -797,18 +797,17 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="java&#x865A;&#x62DF;&#x673A;">Java&#x865A;&#x62DF;&#x673A;</h1>
-<h2 id="&#x7B2C;&#x4E00;&#x7AE0;-&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x57DF;">&#x7B2C;&#x4E00;&#x7AE0; &#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x57DF;</h2>
-<h3 id="&#x7A0B;&#x5E8F;&#x8BA1;&#x6570;&#x5668;">&#x7A0B;&#x5E8F;&#x8BA1;&#x6570;&#x5668;</h3>
-<h3 id="&#x865A;&#x62DF;&#x673A;&#x6808;">&#x865A;&#x62DF;&#x673A;&#x6808;</h3>
-<h3 id="&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x6808;">&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x6808;</h3>
-<h3 id="&#x5806;">&#x5806;</h3>
-<h3 id="&#x65B9;&#x6CD5;&#x533A;">&#x65B9;&#x6CD5;&#x533A;</h3>
-<h3 id="&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;">&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;</h3>
-<h3 id="&#x76F4;&#x63A5;&#x5185;&#x5B58;">&#x76F4;&#x63A5;&#x5185;&#x5B58;</h3>
-<h3 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h3>
-<h2 id="&#x7B2C;&#x4E8C;&#x7AE0;-&#x5783;&#x573E;&#x6536;&#x96C6;">&#x7B2C;&#x4E8C;&#x7AE0; &#x5783;&#x573E;&#x6536;&#x96C6;</h2>
-<h2 id="&#x7B2C;&#x4E09;&#x7AE0;-&#x7C7B;&#x52A0;&#x8F7D;&#x673A;&#x5236;">&#x7B2C;&#x4E09;&#x7AE0; &#x7C7B;&#x52A0;&#x8F7D;&#x673A;&#x5236;</h2>
-<h2 id="&#x7B2C;&#x56DB;&#x7AE0;-jvm-&#x8C03;&#x4F18;">&#x7B2C;&#x56DB;&#x7AE0; JVM &#x8C03;&#x4F18;</h2>
+<ul>
+<li>1 &#x7ED3;&#x6784;&#x56FE;&#x548C;&#x6D41;&#x7A0B;&#x53EF;&#x4EE5;&#x5927;&#x81F4;&#x8BF4;&#x4E0B;&#x3002;</li>
+<li><p>2 &#x4E00;&#x5B9A;&#x5F97;&#x4E86;&#x89E3;&#x9488;&#x5BF9;&#x5806;&#x7684;&#x5783;&#x573E;&#x56DE;&#x6536;&#x673A;&#x5236;&#xFF0C;&#x5177;&#x4F53;&#x800C;&#x8A00;&#xFF0C;&#x53EF;&#x4EE5;&#x753B;&#x4E2A;&#x56FE;&#xFF0C;&#x8BF4;&#x4E0B;&#x5E74;&#x8F7B;&#x4EE3;&#x5E74;&#x8001;&#x4EE3;&#x7B49;&#x3002;</p>
+</li>
+<li><p>3 &#x8BF4;&#x4E0B;&#x5783;&#x573E;&#x56DE;&#x6536;&#x7684;&#x6D41;&#x7A0B;&#xFF0C;&#x7136;&#x540E;&#x9488;&#x5BF9;&#x6027;&#x5730;&#x8BF4;&#x4E0B;&#x5982;&#x4F55;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x4F18;&#x5316;&#x5185;&#x5B58;&#x6027;&#x80FD;&#x3002;</p>
+</li>
+<li><p>4 &#x6700;&#x597D;&#x8BF4;&#x4E0B;&#x5982;&#x679C;&#x51FA;&#x73B0;&#x4E86;OOM&#x5F02;&#x5E38;&#xFF0C;&#x8BE5;&#x600E;&#x4E48;&#x6392;&#x67E5;&#xFF1F;&#x5982;&#x4F55;&#x770B;Dump&#x6587;&#x4EF6;&#x3002;</p>
+</li>
+<li><p>5 GC&#x7684;&#x4E00;&#x4E9B;&#x6982;&#x5FF5;&#xFF0C;&#x6BD4;&#x5982;&#x5F3A;&#x5F31;&#x8F6F;&#x5F15;&#x7528;&#xFF0C;finalize&#x65B9;&#x6CD5;&#x7B49;&#xFF0C;&#x8FD9;&#x4E9B;&#x53EF;&#x4EE5;&#x51C6;&#x5907;&#x4E0B;&#x3002; </p>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -848,7 +847,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java虚拟机概述","level":"1.2.5.1","depth":3,"next":{"title":"第一章 运行时数据区域","level":"1.2.5.2","depth":3,"path":"javacore/jvm/jvm-memory.md","ref":"javacore/jvm/jvm-memory.md","articles":[]},"previous":{"title":"Java虚拟机","level":"1.2.5","depth":2,"ref":"","articles":[{"title":"Java虚拟机概述","level":"1.2.5.1","depth":3,"path":"javacore/jvm/jvm.md","ref":"javacore/jvm/jvm.md","articles":[]},{"title":"第一章 运行时数据区域","level":"1.2.5.2","depth":3,"path":"javacore/jvm/jvm-memory.md","ref":"javacore/jvm/jvm-memory.md","articles":[]},{"title":"第二章 垃圾收集","level":"1.2.5.3","depth":3,"path":"javacore/jvm/jvm-gc.md","ref":"javacore/jvm/jvm-gc.md","articles":[]},{"title":"第三章 类加载机制","level":"1.2.5.4","depth":3,"path":"javacore/jvm/jvm-class-loader.md","ref":"javacore/jvm/jvm-class-loader.md","articles":[]},{"title":"第四章 JVM 调优","level":"1.2.5.5","depth":3,"path":"javacore/jvm/jvm-performance.md","ref":"javacore/jvm/jvm-performance.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/jvm/jvm.md","mtime":"2019-08-16T07:24:31.461Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-16T07:27:37.564Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java虚拟机面经","level":"1.2.5.1","depth":3,"next":{"title":"第一章 运行时数据区域","level":"1.2.5.2","depth":3,"path":"javacore/jvm/jvm-memory.md","ref":"javacore/jvm/jvm-memory.md","articles":[]},"previous":{"title":"Java虚拟机","level":"1.2.5","depth":2,"ref":"","articles":[{"title":"Java虚拟机面经","level":"1.2.5.1","depth":3,"path":"javacore/jvm/jvm-interview.md","ref":"javacore/jvm/jvm-interview.md","articles":[]},{"title":"第一章 运行时数据区域","level":"1.2.5.2","depth":3,"path":"javacore/jvm/jvm-memory.md","ref":"javacore/jvm/jvm-memory.md","articles":[]},{"title":"第二章 垃圾收集","level":"1.2.5.3","depth":3,"path":"javacore/jvm/jvm-gc.md","ref":"javacore/jvm/jvm-gc.md","articles":[]},{"title":"第三章 类加载机制","level":"1.2.5.4","depth":3,"path":"javacore/jvm/jvm-class-loader.md","ref":"javacore/jvm/jvm-class-loader.md","articles":[]},{"title":"第四章 JVM 调优","level":"1.2.5.5","depth":3,"path":"javacore/jvm/jvm-performance.md","ref":"javacore/jvm/jvm-performance.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/jvm/jvm-interview.md","mtime":"2019-08-17T07:39:48.070Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-18T11:48:28.277Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

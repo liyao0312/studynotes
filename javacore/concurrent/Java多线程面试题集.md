@@ -1,4 +1,4 @@
-# Java 并发夺命连环问
+# Java 多线程夺命连环问
 
 > ​:notebook: 本文已归档到：「[javacore](https://github.com/dunwu/javacore)」
 
