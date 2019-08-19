@@ -1,7 +1,5 @@
 # Java 网络编程
 
-> :notebook: 本文已归档到：「[javacore](https://github.com/dunwu/javacore)」
->
 > 关键词：URL、InetAddress
 
 <!-- TOC depthFrom:2 depthTo:3 -->

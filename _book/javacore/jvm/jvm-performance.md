@@ -1,6 +1,19 @@
 # JVM 调优
 
-> :notebook: 本文已归档到：「[javacore](https://github.com/dunwu/javacore)」	
+- [JVM 调优概述](#jvm-调优概述)
+- [命令](#命令)
+  - [jmap](#jmap)      [jstack](#jstack)      [jsp](#jsp)      [jstat](#jstat)      [jhat](#jhat)      [jinfo](#jinfo)
+- [HotSpot VM 参数](#hotspot-vm-参数)
+  - [JVM 内存配置](#jvm-内存配置)
+  - [GC 类型配置](gc-类型配置)
+  - [JMX](#jmx)
+  - [远程 DEBUG](#远程-debug)
+  - [HeapDump](#heapdump)
+  - [辅助配置](#辅助配置)
+- [典型配置](#典型配置)
+  - [堆大小设置](#堆大小设置)
+  - [回收器选择](#回收器选择)
+- [JAM 实战](#jvm-实战)
 
 ## JVM 调优概述
 
@@ -34,13 +47,13 @@ Full GC 的执行时间比 Minor GC 要长很多，因此，如果在 Full GC �
 
 **GC 优化需要考虑的 JVM 参数**
 
-| **类型**       | **参数**            | **描述**                      |
-| -------------- | ------------------- | ----------------------------- |
-| 堆内存大小     | `-Xms`              | 启动 JVM 时堆内存的大小       |
-|                | `-Xmx`              | 堆内存最大限制                |
-| 新生代空间大小 | `-XX:NewRatio`      | 新生代和老年代的内存比        |
-|                | `-XX:NewSize`       | 新生代内存大小                |
-|                | `-XX:SurvivorRatio` | Eden 区和 Survivor 区的内存比 |
+| **类型**  | **参数**              | **描述**                 |
+| ------- | ------------------- | ---------------------- |
+| 堆内存大小   | `-Xms`              | 启动 JVM 时堆内存的大小         |
+|         | `-Xmx`              | 堆内存最大限制                |
+| 新生代空间大小 | `-XX:NewRatio`      | 新生代和老年代的内存比            |
+|         | `-XX:NewSize`       | 新生代内存大小                |
+|         | `-XX:SurvivorRatio` | Eden 区和 Survivor 区的内存比 |
 
 GC 优化时最常用的参数是`-Xms`,`-Xmx`和`-XX:NewRatio`。`-Xms`和`-Xmx`参数通常是必须的，所以`NewRatio`的值将对 GC 性能产生重要的影响。
 
@@ -334,26 +347,26 @@ option 参数：
 
 ### JVM 内存配置
 
-| 配置              | 描述                 |
-| ----------------- | -------------------- |
-| `-Xms`            | 堆空间初始值。       |
-| `-Xmx`            | 堆空间最大值。       |
-| `-XX:NewSize`     | 新生代空间初始值。   |
-| `-XX:MaxNewSize`  | 新生代空间最大值。   |
-| `-Xmn`            | 新生代空间大小。     |
+| 配置                | 描述         |
+| ----------------- | ---------- |
+| `-Xms`            | 堆空间初始值。    |
+| `-Xmx`            | 堆空间最大值。    |
+| `-XX:NewSize`     | 新生代空间初始值。  |
+| `-XX:MaxNewSize`  | 新生代空间最大值。  |
+| `-Xmn`            | 新生代空间大小。   |
 | `-XX:PermSize`    | 永久代空间的初始值。 |
 | `-XX:MaxPermSize` | 永久代空间的最大值。 |
 
 ### GC 类型配置
 
-| 配置                    | 描述                                      |
-| ----------------------- | ----------------------------------------- |
-| -XX:+UseSerialGC        | 串行垃圾回收器                            |
-| -XX:+UseParallelGC      | 并行垃圾回收器                            |
-| -XX:+UseParNewGC        | 使用 ParNew + Serial Old 垃圾回收器组合   |
+| 配置                      | 描述                             |
+| ----------------------- | ------------------------------ |
+| -XX:+UseSerialGC        | 串行垃圾回收器                        |
+| -XX:+UseParallelGC      | 并行垃圾回收器                        |
+| -XX:+UseParNewGC        | 使用 ParNew + Serial Old 垃圾回收器组合 |
 | -XX:+UseConcMarkSweepGC | 并发标记扫描垃圾回收器                    |
-| -XX:ParallelCMSThreads  | 并发标记扫描垃圾回收器 = 为使用的线程数量 |
-| -XX:+UseG1GC            | G1 垃圾回收器                             |
+| -XX:ParallelCMSThreads  | 并发标记扫描垃圾回收器 = 为使用的线程数量         |
+| -XX:+UseG1GC            | G1 垃圾回收器                       |
 
 ### JMX
 
@@ -390,10 +403,10 @@ address 即为远程 debug 的监听端口。
 
 ### 辅助配置
 
-| 配置                              | 描述                     |
-| --------------------------------- | ------------------------ |
-| `-XX:+PrintGCDetails`             | 打印 GC 日志             |
-| `-Xloggc:<filename>`              | 指定 GC 日志文件名       |
+| 配置                                | 描述           |
+| --------------------------------- | ------------ |
+| `-XX:+PrintGCDetails`             | 打印 GC 日志     |
+| `-Xloggc:<filename>`              | 指定 GC 日志文件名  |
 | `-XX:+HeapDumpOnOutOfMemoryError` | 内存溢出时输出堆快照文件 |
 
 ## 典型配置

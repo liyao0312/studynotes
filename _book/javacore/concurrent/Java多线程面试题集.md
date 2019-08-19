@@ -1,7 +1,5 @@
 # Java 多线程夺命连环问
 
-> ​:notebook: 本文已归档到：「[javacore](https://github.com/dunwu/javacore)」
-
 <!-- TOC depthFrom:2 depthTo:3 -->
 
 - [1. 并发简介](#1-并发简介)

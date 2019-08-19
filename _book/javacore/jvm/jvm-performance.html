@@ -493,7 +493,7 @@
                 <a href="../io/io.html">
             
                     
-                    输入输出流IO概述
+                    IO面经
             
                 </a>
             
@@ -797,9 +797,28 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="jvm-&#x8C03;&#x4F18;">JVM &#x8C03;&#x4F18;</h1>
-<blockquote>
-<p>:notebook: &#x672C;&#x6587;&#x5DF2;&#x5F52;&#x6863;&#x5230;&#xFF1A;&#x300C;<a href="https://github.com/dunwu/javacore" target="_blank">javacore</a>&#x300D;    </p>
-</blockquote>
+<ul>
+<li><a href="#jvm-&#x8C03;&#x4F18;&#x6982;&#x8FF0;">JVM &#x8C03;&#x4F18;&#x6982;&#x8FF0;</a></li>
+<li><a href="#&#x547D;&#x4EE4;">&#x547D;&#x4EE4;</a><ul>
+<li><a href="#jmap">jmap</a>      <a href="#jstack">jstack</a>      <a href="#jsp">jsp</a>      <a href="#jstat">jstat</a>      <a href="#jhat">jhat</a>      <a href="#jinfo">jinfo</a></li>
+</ul>
+</li>
+<li><a href="#hotspot-vm-&#x53C2;&#x6570;">HotSpot VM &#x53C2;&#x6570;</a><ul>
+<li><a href="#jvm-&#x5185;&#x5B58;&#x914D;&#x7F6E;">JVM &#x5185;&#x5B58;&#x914D;&#x7F6E;</a></li>
+<li><a href="gc-&#x7C7B;&#x578B;&#x914D;&#x7F6E;">GC &#x7C7B;&#x578B;&#x914D;&#x7F6E;</a></li>
+<li><a href="#jmx">JMX</a></li>
+<li><a href="#&#x8FDC;&#x7A0B;-debug">&#x8FDC;&#x7A0B; DEBUG</a></li>
+<li><a href="#heapdump">HeapDump</a></li>
+<li><a href="#&#x8F85;&#x52A9;&#x914D;&#x7F6E;">&#x8F85;&#x52A9;&#x914D;&#x7F6E;</a></li>
+</ul>
+</li>
+<li><a href="#&#x5178;&#x578B;&#x914D;&#x7F6E;">&#x5178;&#x578B;&#x914D;&#x7F6E;</a><ul>
+<li><a href="#&#x5806;&#x5927;&#x5C0F;&#x8BBE;&#x7F6E;">&#x5806;&#x5927;&#x5C0F;&#x8BBE;&#x7F6E;</a></li>
+<li><a href="#&#x56DE;&#x6536;&#x5668;&#x9009;&#x62E9;">&#x56DE;&#x6536;&#x5668;&#x9009;&#x62E9;</a></li>
+</ul>
+</li>
+<li><a href="#jvm-&#x5B9E;&#x6218;">JAM &#x5B9E;&#x6218;</a></li>
+</ul>
 <h2 id="jvm-&#x8C03;&#x4F18;&#x6982;&#x8FF0;">JVM &#x8C03;&#x4F18;&#x6982;&#x8FF0;</h2>
 <h3 id="&#x6027;&#x80FD;&#x5B9A;&#x4E49;">&#x6027;&#x80FD;&#x5B9A;&#x4E49;</h3>
 <ul>
@@ -1508,7 +1527,7 @@ KiB Swap:        0 total,        0 used,        0 free.  4497428 cached Mem
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第四章 JVM 调优","level":"1.2.5.5","depth":3,"next":{"title":"输入输出流IO","level":"1.2.6","depth":2,"ref":"","articles":[{"title":"输入输出流IO概述","level":"1.2.6.1","depth":3,"path":"javacore/io/io.md","ref":"javacore/io/io.md","articles":[]},{"title":"Java 常用 IO 类","level":"1.2.6.2","depth":3,"path":"javacore/io/Java常用IO类.md","ref":"javacore/io/Java常用IO类.md","articles":[]},{"title":"Java 流操作","level":"1.2.6.3","depth":3,"path":"javacore/io/Java流操作.md","ref":"javacore/io/Java流操作.md","articles":[]},{"title":"Java 序列化","level":"1.2.6.4","depth":3,"path":"javacore/io/Java序列化.md","ref":"javacore/io/Java序列化.md","articles":[]},{"title":"Java 网络编程","level":"1.2.6.5","depth":3,"path":"javacore/io/Java网络编程.md","ref":"javacore/io/Java网络编程.md","articles":[]}]},"previous":{"title":"第三章 类加载机制","level":"1.2.5.4","depth":3,"path":"javacore/jvm/jvm-class-loader.md","ref":"javacore/jvm/jvm-class-loader.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/jvm/jvm-performance.md","mtime":"2019-08-16T07:27:56.714Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-18T11:48:28.277Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第四章 JVM 调优","level":"1.2.5.5","depth":3,"next":{"title":"输入输出流IO","level":"1.2.6","depth":2,"ref":"","articles":[{"title":"IO面经","level":"1.2.6.1","depth":3,"path":"javacore/io/io.md","ref":"javacore/io/io.md","articles":[]},{"title":"Java 常用 IO 类","level":"1.2.6.2","depth":3,"path":"javacore/io/Java常用IO类.md","ref":"javacore/io/Java常用IO类.md","articles":[]},{"title":"Java 流操作","level":"1.2.6.3","depth":3,"path":"javacore/io/Java流操作.md","ref":"javacore/io/Java流操作.md","articles":[]},{"title":"Java 序列化","level":"1.2.6.4","depth":3,"path":"javacore/io/Java序列化.md","ref":"javacore/io/Java序列化.md","articles":[]},{"title":"Java 网络编程","level":"1.2.6.5","depth":3,"path":"javacore/io/Java网络编程.md","ref":"javacore/io/Java网络编程.md","articles":[]}]},"previous":{"title":"第三章 类加载机制","level":"1.2.5.4","depth":3,"path":"javacore/jvm/jvm-class-loader.md","ref":"javacore/jvm/jvm-class-loader.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","livereload"],"pluginsConfig":{"expandable-chapters":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/jvm/jvm-performance.md","mtime":"2019-08-19T10:39:04.830Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-18T12:35:49.213Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -1519,6 +1538,10 @@ KiB Swap:        0 total,        0 used,        0 free.  4497428 cached Mem
     
         
         <script src="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
