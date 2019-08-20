@@ -1,81 +1,12 @@
 # 输入输出流IO
 
-## Java常用IO类
+## java文件读取
 
-### File
+FileReader 类是将文件按字符流的方式读取char数组或者String
 
-### RandomAccessFile
+FileInputStream 则按字节流的方式读取文件 byte 数组
 
-### System
-
-### Scanner
-
-## Java流操作
-
-### 字符流和字节流
-
-### FileReader 和 FileWriter
-
-### InputStreamReader 和 OutputStreamWriter
-
-### BufferedReader
-
-### PrintStream
-
-### FileInputStream 和 FileOutputStream
-
-### ByteArrayInputStream 和 ByteArrayOutputStream
-
-### PipedInputStream 和 PipedOutputStream
-
-### DataInputStream 和 DataOutputStream
-
-### ZipInputStream 和 ZipOutputStream
-
-### ObjectInputStream 和 ObjectOutputStream
-
-## Java序列化
-
-### 简介
-
-### 序列化和反序列化
-
-### Serializable 接口
-
-### serialVersionUID
-
-### 默认序列化机制
-
-### 非默认序列化机制
-
-### transient 关键字
-
-### Externalizable 接口
-
-### Externalizable 接口的替代方法
-
-### readResolve() 方法
-
-### 序列化工具
-
-### 小结
-
-### 参考资料
-
-## Java网络编程
-
-Java 中的网络支持：
-
-InetAddress：用于表示网络上的硬件资源，即 IP 地址；
-URL：统一资源定位符；
-Sockets：使用 TCP 协议实现网络通信；
-Datagram：使用 UDP 协议实现网络通信。
-
-### InetAddress
-
-### URL
-
-### Sockets
-
-### Datagram
-
+1. 首先获得一个文件句柄。File file = new File()；file 即为文件句柄。两人之间连通电话网络了，接下来就可以开始打电话了。
+2. 通过这条线路读取甲方的信息： New FileInputStream(file) 目前这个信息已经读进来内存当中了。接下来需要解读成乙方可以理解的东西
+3. 既然你使用了 FileInputStream()。那么对应的需要使用 InputStreamReader() 这个方法进行解读刚才撞进来内存当中的数据
+4. 解读完成后要输出。那当然要转换成IO可以识别的数据。那就需要调用字节码读取的方法 BufferedReader()。同时使用 bufferedReader()的readline()方法读取txt文件中的每一行数据。
