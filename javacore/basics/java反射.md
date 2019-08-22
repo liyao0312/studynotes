@@ -56,7 +56,7 @@
 
 ### 类加载过程
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/snap/1553611895164.png!zp"/></div>
+<div align="center"><img src="https://raw.githubusercontent.com/liyao0312/studynotes/master/imag/javacore/leijiazaiguocheng.png"/></div>
 
 类加载的完整过程如下：
 
