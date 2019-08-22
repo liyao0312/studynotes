@@ -1378,7 +1378,80 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5BB9;&#x5668;&#x6982;&#x8FF0;">&#x5BB9;&#x5668;&#x6982;&#x8FF0;</h1>
+                                <h1 id="&#x5BB9;&#x5668;">&#x5BB9;&#x5668;</h1>
+<ul>
+<li><a href="#&#x4E00;&#x6982;&#x89C8;">&#x4E00;&#x3001;&#x6982;&#x89C8;</a><ul>
+<li><a href="#collection">Collection</a><ul>
+<li><a href="#1list">1.List</a></li>
+<li><a href="#2set">2.Set</a></li>
+<li><a href="#3queue">3.Queue</a></li>
+</ul>
+</li>
+<li><a href="#map">Map</a></li>
+</ul>
+</li>
+<li><a href="#&#x4E8C;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;">&#x4E8C;&#x3001;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;</a><ul>
+<li><a href="#&#x8FED;&#x4EE3;&#x5668;&#x6A21;&#x5F0F;">&#x8FED;&#x4EE3;&#x5668;&#x6A21;&#x5F0F;</a></li>
+<li><a href="#&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;">&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x4E00;&#x3001;java&#x5BB9;&#x5668;&#x6982;&#x8FF0;">&#x4E00;&#x3001;Java&#x5BB9;&#x5668;&#x6982;&#x8FF0;</h2>
+<p>&#x5BB9;&#x5668;&#x4E3B;&#x8981;&#x5305;&#x62EC; Collection &#x548C; Map &#x4E24;&#x79CD;&#xFF0C;Collection &#x5B58;&#x50A8;&#x7740;&#x5BF9;&#x8C61;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x800C; Map &#x5B58;&#x50A8;&#x7740;&#x952E;&#x503C;&#x5BF9;&#xFF08;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#xFF09;&#x7684;&#x6620;&#x5C04;&#x8868;&#x3002;</p>
+<h3 id="collection">Collection</h3>
+<p><div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/73403d84-d921-49f1-93a9-d8fe050f3497.png" width="800px"> </div><br></p>
+<h4 id="1list">1.List</h4>
+<ul>
+<li>ArrayList&#xFF1A;&#x57FA;&#x4E8E;&#x52A8;&#x6001;&#x6570;&#x7EC4;&#x5B9E;&#x73B0;&#xFF0C;&#x652F;&#x6301;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x3002;</li>
+<li>Vector&#xFF1A;&#x548C;ArrayList&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x5B83;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x3002;</li>
+<li>LinkedList&#xFF1A;&#x57FA;&#x4E8E;&#x53CC;&#x5411;&#x94FE;&#x8868;&#x5B9E;&#x73B0;&#xFF0C;&#x53EA;&#x80FD;&#x987A;&#x5E8F;&#x8BBF;&#x95EE;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x5FEB;&#x901F;&#x5730;&#x5728;&#x94FE;&#x8868;&#x4E2D;&#x95F4;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x5143;&#x7D20;&#x3002;&#x4E0D;&#x4EC5;&#x5982;&#x6B64;&#xFF0C;LinkedList&#x8FD8;&#x53EF;&#x4EE5;&#x7528;&#x505A;&#x6808;&#x3001;&#x961F;&#x5217;&#x548C;&#x53CC;&#x5411;&#x961F;&#x5217;&#x3002;</li>
+</ul>
+<h4 id="2set">2.Set</h4>
+<ul>
+<li>TreeSet: &#x57FA;&#x4E8E;&#x7EA2;&#x9ED1;&#x6811;&#x5B9E;&#x73B0;&#xFF0C;&#x652F;&#x6301;&#x6709;&#x5E8F;&#x6027;&#x64CD;&#x4F5C;&#xFF0C;&#x4F8B;&#x5982;&#x6839;&#x636E;&#x4E00;&#x4E2A;&#x8303;&#x56F4;&#x67E5;&#x627E;&#x5143;&#x7D20;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x4F46;&#x662F;&#x67E5;&#x627E;&#x6548;&#x7387;&#x4E0D;&#x5982;HashSet&#xFF0C;HashSet&#x67E5;&#x627E;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A;O(1)&#xFF0C;TreeSet&#x5219;&#x4E3A;O(logN)&#x3002;</li>
+<li>HashSet&#xFF1A;&#x57FA;&#x4E8E;&#x54C8;&#x5E0C;&#x8868;&#x5B9E;&#x73B0;&#xFF0C;&#x652F;&#x6301;&#x5FEB;&#x901F;&#x67E5;&#x627E;&#xFF0C;&#x4F46;&#x4E0D;&#x652F;&#x6301;&#x6709;&#x5E8F;&#x6027;&#x64CD;&#x4F5C;&#x3002;&#x5E76;&#x4E14;&#x5931;&#x53BB;&#x4E86;&#x5143;&#x7D20;&#x7684;&#x63D2;&#x5165;&#x987A;&#x5E8F;&#x4FE1;&#x606F;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x4F7F;&#x7528;Iterator&#x904D;&#x5386;HashSet&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x4E0D;&#x786E;&#x5B9A;&#x7684;&#x3002;</li>
+<li>LinkedHashSet&#xFF1A;&#x5177;&#x6709;HashSet&#x7684;&#x67E5;&#x627E;&#x6548;&#x679C;&#xFF0C;&#x4E14;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x53CC;&#x5411;&#x94FE;&#x8868;&#x7EF4;&#x62A4;&#x5143;&#x7D20;&#x7684;&#x63D2;&#x5165;&#x987A;&#x5E8F;&#x3002;</li>
+</ul>
+<h4 id="3queue">3.Queue</h4>
+<ul>
+<li>LinkedList&#xFF1A;&#x53EF;&#x4EE5;&#x7528;&#x5B83;&#x6765;&#x5B9E;&#x73B0;&#x53CC;&#x5411;&#x961F;&#x5217;&#x3002;</li>
+<li>PriorityQueue&#xFF1A;&#x57FA;&#x4E8E;&#x5806;&#x7ED3;&#x6784;&#x5B9E;&#x73B0;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x5B83;&#x6765;&#x5B9E;&#x73B0;&#x4F18;&#x5148;&#x961F;&#x5217;&#x3002;</li>
+</ul>
+<h3 id="map">Map</h3>
+<p><div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/774d756b-902a-41a3-a3fd-81ca3ef688dc.png" width="500px"> </div><br></p>
+<ul>
+<li>TreeMap&#xFF1A;&#x57FA;&#x4E8E;&#x7EA2;&#x9ED1;&#x6811;&#x5B9E;&#x73B0;&#x3002;</li>
+<li>HashMap&#xFF1A;&#x57FA;&#x4E8E;&#x54C8;&#x5E0C;&#x8868;&#x5B9E;&#x73B0;&#x3002;</li>
+<li>HashTable&#xFF1A; &#x548C;HashMap&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x5B83;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x540C;&#x4E00;&#x65F6;&#x523B;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x5199;&#x5165;HashTable&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x4E0D;&#x4E00;&#x81F4;&#x3002;&#x5B83;&#x662F;&#x9057;&#x7559;&#x7C7B;&#xFF0C;&#x4E0D;&#x5E94;&#x8BE5;&#x53BB;&#x4F7F;&#x7528;&#x5B83;&#x3002;&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;ConcurrentHashMap&#x6765;&#x652F;&#x6301;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF0C;&#x5E76;&#x4E14;ConcurrentHashMap&#x7684;&#x6548;&#x7387;&#x4F1A;&#x66F4;&#x9AD8;&#xFF0C;&#x56E0;&#x4E3A;ConcurrentHashMap&#x5F15;&#x5165;&#x4E86;&#x5206;&#x6BB5;&#x9501;&#x3002;</li>
+<li>LinkedHashMap&#xFF1A;&#x4F7F;&#x7528;&#x53CC;&#x5411;&#x94FE;&#x8868;&#x6765;&#x7EF4;&#x62A4;&#x5143;&#x7D20;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x987A;&#x5E8F;&#x4E3A;&#x63D2;&#x5165;&#x987A;&#x5E8F;&#x6216;&#x8005;&#x6700;&#x8FD1;&#x6700;&#x5C11;&#x4F7F;&#x7528;&#xFF08;LRU&#xFF09;&#x987A;&#x5E8F;&#x3002;</li>
+</ul>
+<h2 id="&#x4E8C;&#x3001;&#x5BB9;&#x5668;&#x6846;&#x67B6;">&#x4E8C;&#x3001;&#x5BB9;&#x5668;&#x6846;&#x67B6;</h2>
+<p><img src="https://gitee.com/turnon/images/raw/master/images/java/container/java-container-structure.png" alt="img"></p>
+<h2 id="&#x4E09;&#x3001;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;">&#x4E09;&#x3001;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;</h2>
+<h3 id="&#x8FED;&#x4EE3;&#x5668;&#x6A21;&#x5F0F;">&#x8FED;&#x4EE3;&#x5668;&#x6A21;&#x5F0F;</h3>
+<p> <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/93fb1d38-83f9-464a-a733-67b2e6bfddda.png" width="600px"> </div><br></p>
+<p>Collection &#x7EE7;&#x627F;&#x4E86; Iterable&#x63A5;&#x53E3;&#xFF0C;&#x5176;&#x4E2D;&#x7684;iterator()&#x65B9;&#x6CD5;&#x80FD;&#x591F;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;Iterator&#x5BF9;&#x8C61;&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x5C31;&#x53EF;&#x4EE5;&#x8FED;&#x4EE3;&#x904D;&#x5386;Collection&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
+<p>&#x4ECE; JDK 1.5 &#x4E4B;&#x540E;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; foreach &#x65B9;&#x6CD5;&#x6765;&#x904D;&#x5386;&#x5B9E;&#x73B0; Iterable &#x63A5;&#x53E3;&#x7684;&#x805A;&#x5408;&#x5BF9;&#x8C61;&#x3002;</p>
+<pre><code class="lang-java">List&lt;String&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+list.add(<span class="hljs-string">&quot;a&quot;</span>);
+list.add(<span class="hljs-string">&quot;b&quot;</span>);
+<span class="hljs-keyword">for</span>(String item : list){
+  System.out.println(item);  
+}
+</code></pre>
+<h3 id="&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;">&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;</h3>
+<p>java.util.Arrays#aslist() &#x53EF;&#x4EE5;&#x628A;&#x6570;&#x7EC4;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x4E3A;List&#x7C7B;&#x578B;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-meta">@SafeVarargs</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">List&lt;T&gt; <span class="hljs-title">asList</span><span class="hljs-params">(T... a)</span>
+</span></code></pre>
+<p>&#x5E94;&#x8BE5;&#x6CE8;&#x610F;&#x7684;&#x662F;asList() &#x7684;&#x53C2;&#x6570;&#x4E3A;&#x6CDB;&#x578B;&#x7684;&#x53D8;&#x957F;&#x53C2;&#x6570;&#xFF0C;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x6570;&#x7EC4;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x76F8;&#x5E94;&#x7684;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#x6570;&#x7EC4;&#x3002;</p>
+<pre><code class="lang-java">Intege[] arr = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>};
+List list = Array.asList(arr);
+</code></pre>
+<p>&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EE5;&#x4E0B;&#x65B9;&#x5F0F;&#x8C03;&#x7528; asList() :</p>
+<pre><code class="lang-java">List list = Arrays.asList(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>);
+</code></pre>
+<h3 id=""> </h3>
 
                                 
                                 </section>
@@ -1418,7 +1491,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"容器概述","level":"1.2.3.1","depth":3,"next":{"title":"Collection之List","level":"1.2.3.2","depth":3,"path":"javacore/container/container-list.md","ref":"javacore/container/container-list.md","articles":[]},"previous":{"title":"容器","level":"1.2.3","depth":2,"ref":"","articles":[{"title":"容器概述","level":"1.2.3.1","depth":3,"path":"javacore/container/container.md","ref":"javacore/container/container.md","articles":[]},{"title":"Collection之List","level":"1.2.3.2","depth":3,"path":"javacore/container/container-list.md","ref":"javacore/container/container-list.md","articles":[]},{"title":"Collection之Set","level":"1.2.3.3","depth":3,"path":"javacore/container/container-set.md","ref":"javacore/container/container-set.md","articles":[]},{"title":"Collection之Queue","level":"1.2.3.4","depth":3,"path":"javacore/container/container-queue.md","ref":"javacore/container/container-queue.md","articles":[]},{"title":"Map","level":"1.2.3.5","depth":3,"path":"javacore/container/container-map.md","ref":"javacore/container/container-map.md","articles":[]},{"title":"Map之面试问题集","level":"1.2.3.6","depth":3,"path":"javacore/container/container-map2.md","ref":"javacore/container/container-map2.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/container/container.md","mtime":"2019-08-20T14:17:10.379Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-20T14:17:12.349Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"容器概述","level":"1.2.3.1","depth":3,"next":{"title":"Collection之List","level":"1.2.3.2","depth":3,"path":"javacore/container/container-list.md","ref":"javacore/container/container-list.md","articles":[]},"previous":{"title":"容器","level":"1.2.3","depth":2,"ref":"","articles":[{"title":"容器概述","level":"1.2.3.1","depth":3,"path":"javacore/container/container.md","ref":"javacore/container/container.md","articles":[]},{"title":"Collection之List","level":"1.2.3.2","depth":3,"path":"javacore/container/container-list.md","ref":"javacore/container/container-list.md","articles":[]},{"title":"Collection之Set","level":"1.2.3.3","depth":3,"path":"javacore/container/container-set.md","ref":"javacore/container/container-set.md","articles":[]},{"title":"Collection之Queue","level":"1.2.3.4","depth":3,"path":"javacore/container/container-queue.md","ref":"javacore/container/container-queue.md","articles":[]},{"title":"Map","level":"1.2.3.5","depth":3,"path":"javacore/container/container-map.md","ref":"javacore/container/container-map.md","articles":[]},{"title":"Map之面试问题集","level":"1.2.3.6","depth":3,"path":"javacore/container/container-map2.md","ref":"javacore/container/container-map2.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/container/container.md","mtime":"2019-08-22T01:17:38.105Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-22T03:00:53.488Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1380,7 +1380,250 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x7B2C;&#x4E03;&#x7AE0;-&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7C7B;">&#x7B2C;&#x4E03;&#x7AE0; &#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7C7B;</h1>
+                                <h1 id="&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7C7B;">&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7C7B;</h1>
+<blockquote>
+<p>&#x672C;&#x6587;&#x5185;&#x5BB9;&#x57FA;&#x4E8E; JDK1.8&#x3002;</p>
+</blockquote>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x57FA;&#x672C;&#x7C7B;&#x578B;">&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x57FA;&#x672C;&#x7C7B;&#x578B;</a></li>
+<li><a href="#&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x6570;&#x7EC4;">&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x6570;&#x7EC4;</a></li>
+<li><a href="#&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5F15;&#x7528;&#x7C7B;&#x578B;">&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5F15;&#x7528;&#x7C7B;&#x578B;</a></li>
+<li><a href="#&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5B57;&#x6BB5;&#x7C7B;">&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5B57;&#x6BB5;&#x7C7B;</a></li>
+<li><a href="#&#x8D44;&#x6599;">&#x8D44;&#x6599;</a></li>
+</ul>
+<!-- /TOC -->
+<p>&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x6BD4;&#x9501;&#x7684;&#x7C92;&#x5EA6;&#x66F4;&#x7EC6;&#xFF0C;&#x91CF;&#x7EA7;&#x66F4;&#x8F7B;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x4E8E;&#x5728;&#x591A;&#x5904;&#x7406;&#x5668;&#x7CFB;&#x7EDF;&#x4E0A;&#x5B9E;&#x73B0;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x5E76;&#x53D1;&#x4EE3;&#x7801;&#x6765;&#x8BF4;&#x662F;&#x975E;&#x5E38;&#x5173;&#x952E;&#x7684;&#x3002;</p>
+<p>&#x539F;&#x5B50;&#x53D8;&#x91CF;&#x7C7B;&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x79CD;&#x6CDB;&#x5316;&#x7684; volatile &#x53D8;&#x91CF;&#xFF0C;&#x80FD;&#x591F;&#x652F;&#x6301;&#x539F;&#x5B50;&#x7684;&#x548C;&#x6709;&#x6761;&#x4EF6;&#x7684;&#x8BFB;-&#x6539;-&#x5199;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x539F;&#x5B50;&#x7C7B;&#x5728;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x73B0;&#x4EE3; CPU &#x652F;&#x6301;&#x7684; CAS &#x6307;&#x4EE4;&#x6765;&#x5B9E;&#x73B0;&#x540C;&#x6B65;&#x3002;&#x8FD9;&#x4E9B;&#x6307;&#x4EE4;&#x901A;&#x5E38;&#x6BD4;&#x9501;&#x66F4;&#x5FEB;&#x3002;</p>
+<h2 id="&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x57FA;&#x672C;&#x7C7B;&#x578B;">&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x57FA;&#x672C;&#x7C7B;&#x578B;</h2>
+<ul>
+<li>AtomicBoolean - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5E03;&#x5C14;&#x7C7B;&#x578B;&#x3002;</li>
+<li>AtomicInteger - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x6574;&#x578B;&#x3002;</li>
+<li>AtomicLong - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x957F;&#x6574;&#x578B;&#x3002;</li>
+</ul>
+<p>&#x793A;&#x4F8B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AtomicIntegerDemo</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        ExecutorService executorService = Executors.newFixedThreadPool(<span class="hljs-number">5</span>);
+        AtomicInteger count = <span class="hljs-keyword">new</span> AtomicInteger(<span class="hljs-number">0</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++) {
+            executorService.submit((Runnable) () -&gt; {
+                System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; count=&quot;</span> + count.get());
+                count.incrementAndGet();
+            });
+        }
+
+        executorService.shutdown();
+        executorService.awaitTermination(<span class="hljs-number">30</span>, TimeUnit.SECONDS);
+        System.out.println(<span class="hljs-string">&quot;Final Count is : &quot;</span> + count.get());
+    }
+}
+</code></pre>
+<h2 id="&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x6570;&#x7EC4;">&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x6570;&#x7EC4;</h2>
+<ul>
+<li>AtomicIntegerArray - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x6574;&#x578B;&#x6570;&#x7EC4;&#x91CC;&#x7684;&#x5143;&#x7D20;&#x3002;</li>
+<li>AtomicLongArray - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x957F;&#x6574;&#x578B;&#x6570;&#x7EC4;&#x91CC;&#x7684;&#x5143;&#x7D20;&#x3002;</li>
+<li>AtomicReferenceArray - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x6570;&#x7EC4;&#x7684;&#x5143;&#x7D20;&#x3002;</li>
+<li>AtomicBooleanArray - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5E03;&#x5C14;&#x7C7B;&#x578B;&#x6570;&#x7EC4;&#x7684;&#x5143;&#x7D20;&#x3002;</li>
+</ul>
+<p>&#x793A;&#x4F8B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AtomicIntegerArrayDemo</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> AtomicIntegerArray atomicIntegerArray = <span class="hljs-keyword">new</span> AtomicIntegerArray(<span class="hljs-number">10</span>);
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String[] arguments)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; atomicIntegerArray.length(); i++) {
+            atomicIntegerArray.set(i, i);
+        }
+
+        Thread t1 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Increment());
+        Thread t2 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Compare());
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        System.out.println(<span class="hljs-string">&quot;Final Values: &quot;</span>);
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; atomicIntegerArray.length(); i++) {
+            System.out.print(atomicIntegerArray.get(i) + <span class="hljs-string">&quot; &quot;</span>);
+        }
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Increment</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; atomicIntegerArray.length(); i++) {
+                <span class="hljs-keyword">int</span> add = atomicIntegerArray.incrementAndGet(i);
+                System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot;, index &quot;</span> + i + <span class="hljs-string">&quot;, value: &quot;</span> + add);
+
+            }
+        }
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Compare</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; atomicIntegerArray.length(); i++) {
+                <span class="hljs-keyword">boolean</span> swapped = atomicIntegerArray.compareAndSet(i, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
+
+                <span class="hljs-keyword">if</span> (swapped) {
+                    System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot;, index &quot;</span> + i + <span class="hljs-string">&quot;, value: 3&quot;</span>);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5F15;&#x7528;&#x7C7B;&#x578B;">&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5F15;&#x7528;&#x7C7B;&#x578B;</h2>
+<ul>
+<li>AtomicReference - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x3002;</li>
+<li>AtomicReferenceFieldUpdater - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x91CC;&#x7684;&#x5B57;&#x6BB5;&#x3002;</li>
+<li>AtomicMarkableReference - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5E26;&#x6709;&#x6807;&#x8BB0;&#x4F4D;&#x7684;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x3002;&#x53EF;&#x4EE5;&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x4E00;&#x4E2A;&#x5E03;&#x5C14;&#x7C7B;&#x578B;&#x7684;&#x6807;&#x8BB0;&#x4F4D;&#x548C;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x3002;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AtomicReferenceDemo</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> String message;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Person person;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> AtomicReference&lt;String&gt; aRmessage;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> AtomicReference&lt;Person&gt; aRperson;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        Thread t1 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> MyRun1());
+        Thread t2 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> MyRun2());
+        message = <span class="hljs-string">&quot;hello&quot;</span>;
+        person = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Phillip&quot;</span>, <span class="hljs-number">23</span>);
+        aRmessage = <span class="hljs-keyword">new</span> AtomicReference&lt;String&gt;(message);
+        aRperson = <span class="hljs-keyword">new</span> AtomicReference&lt;Person&gt;(person);
+        System.out.println(<span class="hljs-string">&quot;Message is: &quot;</span> + message
+            + <span class="hljs-string">&quot;\nPerson is &quot;</span> + person.toString());
+        System.out.println(<span class="hljs-string">&quot;Atomic Reference of Message is: &quot;</span> + aRmessage.get()
+            + <span class="hljs-string">&quot;\nAtomic Reference of Person is &quot;</span> + aRperson.get().toString());
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println(<span class="hljs-string">&quot;\nNow Message is: &quot;</span> + message
+            + <span class="hljs-string">&quot;\nPerson is &quot;</span> + person.toString());
+        System.out.println(<span class="hljs-string">&quot;Atomic Reference of Message is: &quot;</span> + aRmessage.get()
+            + <span class="hljs-string">&quot;\nAtomic Reference of Person is &quot;</span> + aRperson.get().toString());
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyRun1</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+            aRmessage.compareAndSet(message, <span class="hljs-string">&quot;Thread 1&quot;</span>);
+            message = message.concat(<span class="hljs-string">&quot;-Thread 1!&quot;</span>);
+            person.setAge(person.getAge() + <span class="hljs-number">1</span>);
+            person.setName(<span class="hljs-string">&quot;Thread 1&quot;</span>);
+            aRperson.getAndSet(<span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Thread 1&quot;</span>, <span class="hljs-number">1</span>));
+            System.out.println(<span class="hljs-string">&quot;\n&quot;</span> + Thread.currentThread().getName() + <span class="hljs-string">&quot; Values &quot;</span>
+                + message + <span class="hljs-string">&quot; - &quot;</span> + person.toString());
+            System.out.println(<span class="hljs-string">&quot;\n&quot;</span> + Thread.currentThread().getName() + <span class="hljs-string">&quot; Atomic References &quot;</span>
+                + message + <span class="hljs-string">&quot; - &quot;</span> + person.toString());
+        }
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyRun2</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+            message = message.concat(<span class="hljs-string">&quot;-Thread 2&quot;</span>);
+            person.setAge(person.getAge() + <span class="hljs-number">2</span>);
+            person.setName(<span class="hljs-string">&quot;Thread 2&quot;</span>);
+            aRmessage.lazySet(<span class="hljs-string">&quot;Thread 2&quot;</span>);
+            aRperson.set(<span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Thread 2&quot;</span>, <span class="hljs-number">2</span>));
+            System.out.println(<span class="hljs-string">&quot;\n&quot;</span> + Thread.currentThread().getName() + <span class="hljs-string">&quot; Values: &quot;</span>
+                + message + <span class="hljs-string">&quot; - &quot;</span> + person.toString());
+            System.out.println(<span class="hljs-string">&quot;\n&quot;</span> + Thread.currentThread().getName() + <span class="hljs-string">&quot; Atomic References: &quot;</span>
+                + aRmessage.get() + <span class="hljs-string">&quot; - &quot;</span> + aRperson.get().toString());
+        }
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>{
+
+        <span class="hljs-keyword">private</span> String name;
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;
+
+        Person(String name, <span class="hljs-keyword">int</span> age) {
+            <span class="hljs-keyword">this</span>.name = name;
+            <span class="hljs-keyword">this</span>.age = age;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span> name;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>{
+            <span class="hljs-keyword">this</span>.name = name;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getAge</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span> age;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>{
+            <span class="hljs-keyword">this</span>.age = age;
+        }
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;[name &quot;</span> + <span class="hljs-keyword">this</span>.name + <span class="hljs-string">&quot;, age &quot;</span> + <span class="hljs-keyword">this</span>.age + <span class="hljs-string">&quot;]&quot;</span>;
+        }
+    }
+}
+</code></pre>
+<h2 id="&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5B57;&#x6BB5;&#x7C7B;">&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5B57;&#x6BB5;&#x7C7B;</h2>
+<ul>
+<li>AtomicIntegerFieldUpdater - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x6574;&#x578B;&#x7684;&#x5B57;&#x6BB5;&#x7684;&#x66F4;&#x65B0;&#x5668;&#x3002;</li>
+<li>AtomicLongFieldUpdater - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x957F;&#x6574;&#x578B;&#x5B57;&#x6BB5;&#x7684;&#x66F4;&#x65B0;&#x5668;&#x3002;</li>
+<li>AtomicStampedReference - &#x539F;&#x5B50;&#x66F4;&#x65B0;&#x5E26;&#x6709;&#x7248;&#x672C;&#x53F7;&#x7684;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x3002;&#x8BE5;&#x7C7B;&#x5C06;&#x6574;&#x578B;&#x6570;&#x503C;&#x4E0E;&#x5F15;&#x7528;&#x5173;&#x8054;&#x8D77;&#x6765;&#xFF0C;&#x53EF;&#x7528;&#x4E8E;&#x539F;&#x5B50;&#x7684;&#x66F4;&#x65B0;&#x6570;&#x636E;&#x548C;&#x6570;&#x636E;&#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x4F7F;&#x7528; CAS &#x8FDB;&#x884C;&#x539F;&#x5B50;&#x66F4;&#x65B0;&#x65F6;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684; ABA &#x95EE;&#x9898;&#x3002;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AtomicStampedReferenceDemo</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> String INIT_REF = <span class="hljs-string">&quot;abc&quot;</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+
+        AtomicStampedReference&lt;String&gt; asr = <span class="hljs-keyword">new</span> AtomicStampedReference&lt;&gt;(INIT_REF, <span class="hljs-number">0</span>);
+        System.out.println(<span class="hljs-string">&quot;&#x521D;&#x59CB;&#x5BF9;&#x8C61;&#x4E3A;&#xFF1A;&quot;</span> + asr.getReference());
+        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> stamp = asr.getStamp();
+
+        ExecutorService executorService = Executors.newFixedThreadPool(<span class="hljs-number">100</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++) {
+            executorService.submit(() -&gt; {
+                <span class="hljs-keyword">try</span> {
+                    Thread.sleep(Math.abs((<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">100</span>)));
+                } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                <span class="hljs-keyword">if</span> (asr.compareAndSet(INIT_REF, Thread.currentThread().getName(), stamp, stamp + <span class="hljs-number">1</span>)) {
+                    System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; &#x4FEE;&#x6539;&#x4E86;&#x5BF9;&#x8C61;&#xFF01;&quot;</span>);
+                    System.out.println(<span class="hljs-string">&quot;&#x65B0;&#x7684;&#x5BF9;&#x8C61;&#x4E3A;&#xFF1A;&quot;</span> + asr.getReference());
+                }
+            });
+        }
+
+        executorService.shutdown();
+        executorService.awaitTermination(<span class="hljs-number">60</span>, TimeUnit.SECONDS);
+    }
+}
+</code></pre>
+<h2 id="&#x8D44;&#x6599;">&#x8D44;&#x6599;</h2>
+<ul>
+<li><a href="https://item.jd.com/10922250.html" target="_blank">Java &#x5E76;&#x53D1;&#x7F16;&#x7A0B;&#x5B9E;&#x6218;</a></li>
+<li><a href="https://item.jd.com/11740734.html" target="_blank">Java &#x5E76;&#x53D1;&#x7F16;&#x7A0B;&#x7684;&#x827A;&#x672F;</a></li>
+<li><a href="http://tutorials.jenkov.com/java-util-concurrent/atomicinteger.html" target="_blank">http://tutorials.jenkov.com/java-util-concurrent/atomicinteger.html</a></li>
+<li><a href="http://tutorials.jenkov.com/java-util-concurrent/atomicintegerarray.html" target="_blank">http://tutorials.jenkov.com/java-util-concurrent/atomicintegerarray.html</a></li>
+<li><a href="http://tutorials.jenkov.com/java-util-concurrent/atomicreference.html" target="_blank">http://tutorials.jenkov.com/java-util-concurrent/atomicreference.html</a></li>
+<li><a href="http://tutorials.jenkov.com/java-util-concurrent/atomicstampedreference.html" target="_blank">http://tutorials.jenkov.com/java-util-concurrent/atomicstampedreference.html</a></li>
+</ul>
 
                                 
                                 </section>
@@ -1424,7 +1667,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第七章 原子变量类","level":"1.2.4.8","depth":3,"next":{"title":"第八章 并发工具类","level":"1.2.4.9","depth":3,"path":"javacore/concurrent/并发工具类.md","ref":"javacore/concurrent/并发工具类.md","articles":[]},"previous":{"title":"第六章 锁","level":"1.2.4.7","depth":3,"path":"javacore/concurrent/锁.md","ref":"javacore/concurrent/锁.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/concurrent/原子变量类.md","mtime":"2019-08-20T14:17:10.396Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-20T14:17:12.349Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第七章 原子变量类","level":"1.2.4.8","depth":3,"next":{"title":"第八章 并发工具类","level":"1.2.4.9","depth":3,"path":"javacore/concurrent/并发工具类.md","ref":"javacore/concurrent/并发工具类.md","articles":[]},"previous":{"title":"第六章 锁","level":"1.2.4.7","depth":3,"path":"javacore/concurrent/锁.md","ref":"javacore/concurrent/锁.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javacore/concurrent/原子变量类.md","mtime":"2019-08-22T01:17:38.084Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-22T03:00:53.488Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

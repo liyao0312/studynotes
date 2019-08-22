@@ -1449,19 +1449,35 @@ $ gitbook serve
 <p>&#x53EF;&#x4EE5;&#x7528;&#x535A;&#x5BA2;&#x56ED;&#x7684;&#x6B64;&#x7F16;&#x8F91;&#x5668;&#xFF0C;&#x6DFB;&#x52A0;&#x56FE;&#x7247;&#x540E;&#x53D1;&#x5E03;&#x51FA;&#x6765;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x7F16;&#x8F91;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x56FE;&#x7247;&#x7684;&#x94FE;&#x63A5;&#xFF0C;&#x76F4;&#x63A5;&#x590D;&#x5236;&#x5230;&#x672C;&#x5730;&#x7F16;&#x8F91;&#x5668;&#x5C31;&#x53EF;&#x4EE5;</p>
 <h3 id="gitbook&#x6E90;&#x6587;&#x4EF6;&#x53D1;&#x5E03;&#x5230;gh-pages">GitBook&#x6E90;&#x6587;&#x4EF6;&#x53D1;&#x5E03;&#x5230;gh-pages</h3>
 <p>&#x590D;&#x5236;_book&#x6587;&#x4EF6;&#x4E0B;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;&#xFF0C;&#x5207;&#x6362;&#x5230; gh-pages&#x5206;&#x652F;&#xFF0C;&#x7136;&#x540E;&#x590D;&#x5236;&#x5230;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x7136;&#x540E;&#x63A8;&#x9001;&#x3001;</p>
-<pre><code>git checkout --orphan gh-pages
-//&#x6E05;&#x7A7A;&#x4E00;&#x4E0B;&#x5206;&#x652F;
-rm -rf *
-//&#x7136;&#x540E;&#x5C06;master&#x5206;&#x652F;&#x4E0B;&#x7684;_book&#x9759;&#x6001;&#x9875;&#x9762;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5168;&#x90E8;&#x590D;&#x5236;&#x5230;gh-pages&#x5206;&#x652F;&#x4E0B;
-git checkout master -- _book
-//&#x5C06;_book&#x4E2D;&#x7684;&#x5B50;&#x6587;&#x4EF6;&#x5168;&#x90E8;&#x79FB;&#x5230;&#x5916;&#x5C42;&#xFF0C;&#x5E76;&#x5220;&#x9664;_book
-mv _book/* ./
-rm -rf _book
-//&#x8FD9;&#x65F6;&#x5019;gh-pages&#x5206;&#x652F;&#x4E0B;&#x5C31;&#x662F;&#x5168;&#x90E8;&#x7684;&#x9759;&#x6001;&#x9875;&#x9762;&#x6587;&#x4EF6;&#x4E86;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;&#x63D0;&#x4EA4;&#x5230;&#x8FDC;&#x7A0B;gh-pages&#x5206;&#x652F;
-git add .
-git commit -m &apos;publish gh-pages&apos;
-git push origin gh-pages
+<p>&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E2A;<code>publish.sh</code> &#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;&#xFF0C;&#x653E;&#x5230;git&#x4ED3;&#x5E93;&#x5916;&#x6267;&#x884C;&#xFF0C;&#x81EA;&#x52A8;&#x540C;&#x6B65;&#x5230;gh-pages&#x5206;&#x652F;&#xFF08;&#x8BB0;&#x4F4F;&#x6BCF;&#x6B21;&#x6267;&#x884C;&#x811A;&#x672C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8981;&#x628A;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;&#x5168;&#x90E8;&#x5173;&#x95ED;&#x6389;&#xFF0C;&#x4E0D;&#x7136;&#x88AB;&#x5360;&#x7528;&#x4E86;&#xFF0C;git&#x4F1A;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;&#x8FD8;&#x5F97;&#x7528;&#x7248;&#x672C;&#x56DE;&#x9000;&#xFF09;</p>
+<pre><code class="lang-shell">cd /f/Leo/StudyNotes  &amp;&amp;\
+git checkout master &amp;&amp;\
+gitbook init &amp;&amp;\
+gitbook build &amp;&amp;\
+git add . &amp;&amp;\
+git commit -m &apos;update gitbook&apos; &amp;&amp;\
+git push origin master &amp;&amp;\
+git checkout gh-pages &amp;&amp;\
+rm -rf * &amp;&amp;\
+git checkout master -- _book &amp;&amp;\
+mv _book/* ./ &amp;&amp;\
+rm -rf _book &amp;&amp;\
+rm -rf publish.sh &amp;&amp;\
+git add . &amp;&amp;\
+git commit -m &apos;publish gh-pages&apos; &amp;&amp;\
+git push origin gh-pages &amp;&amp;\
+git checkout master
 </code></pre>
+<h3 id="&#x7248;&#x672C;&#x56DE;&#x9000;&#x5E76;&#x5F3A;&#x5236;&#x63A8;&#x9001;&#x5230;">&#x7248;&#x672C;&#x56DE;&#x9000;&#x5E76;&#x5F3A;&#x5236;&#x63A8;&#x9001;&#x5230;</h3>
+<ol>
+<li>&#x4F7F;&#x7528; git log &#x547D;&#x4EE4;&#x5386;&#x53F2;&#x7248;&#x672C;&#x8BB0;&#x5F55;&#x56DE;&#x9000;&#x7248;&#x672C;</li>
+</ol>
+<p>git reset --hard f6a7c803a6931a9eca011d4e097389e0845cbe49</p>
+<ol>
+<li>&#x63A8;&#x9001;&#x5230;&#x8FDC;&#x7A0B;</li>
+</ol>
+<p>git push -f -u origin master</p>
+
                                 
                                 </section>
                             
@@ -1500,7 +1516,7 @@ git push origin gh-pages
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"怎么用Git写书","level":"3.7","depth":1,"previous":{"title":"Linux","level":"3.6","depth":1,"path":"linux/linux.md","ref":"linux/linux.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"怎么用Git写书.md","mtime":"2019-08-20T14:17:06.879Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-20T14:17:12.349Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"怎么用Git写书","level":"3.7","depth":1,"previous":{"title":"Linux","level":"3.6","depth":1,"path":"linux/linux.md","ref":"linux/linux.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters"],"pluginsConfig":{"expandable-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"怎么用Git写书.md","mtime":"2019-08-22T01:25:42.737Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-22T03:00:53.488Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
