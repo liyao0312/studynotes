@@ -104,17 +104,34 @@ $ gitbook serve
 
 ### GitBook源文件发布到gh-pages
 复制_book文件下的所有文件，切换到 gh-pages分支，然后复制到这个目录下，然后推送、
+
+以下代码可以创建个`publish.sh` 的脚本文件，放到git仓库外执行，自动同步到gh-pages分支（记住每次执行脚本的时候，要把打开的文件全部关闭掉，不然被占用了，git会出现错误，还得用版本回退）
+
+```shell
+cd /f/Leo/StudyNotes  &&\
+git checkout master &&\
+gitbook init &&\
+gitbook build &&\
+git add . &&\
+git commit -m 'update gitbook' &&\
+git push origin master &&\
+git checkout gh-pages &&\
+rm -rf * &&\
+git checkout master -- _book &&\
+mv _book/* ./ &&\
+rm -rf _book &&\
+rm -rf publish.sh &&\
+git add . &&\
+git commit -m 'publish gh-pages' &&\
+git push origin gh-pages &&\
+git checkout master
 ```
-git checkout --orphan gh-pages
-//清空一下分支
-rm -rf *
-//然后将master分支下的_book静态页面文件内容全部复制到gh-pages分支下
-git checkout master -- _book
-//将_book中的子文件全部移到外层，并删除_book
-mv _book/* ./
-rm -rf _book
-//这时候gh-pages分支下就是全部的静态页面文件了，接下来就是提交到远程gh-pages分支
-git add .
-git commit -m 'publish gh-pages'
-git push origin gh-pages
-```
+### 版本回退并强制推送到
+
+1. 使用 git log 命令历史版本记录回退版本
+
+git reset --hard f6a7c803a6931a9eca011d4e097389e0845cbe49
+
+2. 推送到远程
+
+git push -f -u origin master
