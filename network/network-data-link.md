@@ -2,6 +2,10 @@
 
 > **数据链路层（Data Link Layer）** - 网络层针对的还是主机之间的数据传输服务，而主机之间可以有很多链路，链路层协议就是为同一链路的主机提供数据传输服务。数据链路层把网络层传下来的分组封装成帧。
 >
+> 两台主机之间的数据传输，总是在一段一段的链路上传送的，这就需要使用专门的链路层的协议
+>
+> 为网络层提供服务，解决两相邻节点之间的通信问题，传送的协议数据单元是数据帧
+>
 > - 主要协议：`PPP`、`CSMA/CD` 等。
 > - 数据单元：帧（frame）。
 > - 典型设备：二层交换机、网桥、网卡。
@@ -44,7 +48,7 @@
 
 为了提高传输效率，应该让数据部分长度尽可能大于首部和尾部。但是，每种链路层协议都限制了帧的数据部分长度上线——最大传送单元 MTU（Maximum Transfer Unit）
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/数据链路帧.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822170430684-463906347.png"/></div>
 
 ### 透明传输
 
@@ -52,7 +56,7 @@
 
 帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧的开始和结束位置就会被错误的判定。需要在数据部分出现首部尾部相同的内容前面插入转义字符。如果数据部分出现转义字符，那么就在转义字符前面再加个转义字符。在接收端进行处理之后可以还原出原始数据。这个过程透明传输的内容是转义字符，用户察觉不到转义字符的存在。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/经过字节填充后发送的数据.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822170432538-1050516253.png"/></div>
 
 ### 差错检测
 
@@ -68,11 +72,11 @@
 
 互联网用户通常都要连接到某个 ISP 之后才能接入到互联网，PPP 协议是用户计算机和 ISP 进行通信时所使用的数据链路层协议。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/PPP协议.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822170436673-2065069897.png"/></div>
 
 PPP（点到点协议）是为在同等单元之间传输数据包这样的简单链路设计的链路层协议。这种链路提供全双工操作，并按照顺序传递数据包。设计目的主要是用来通过拨号或专线方式建立点对点连接发送数据，使其成为各种主机、网桥和路由器之间简单连接的一种共通的解决方案。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/PPP帧.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822170444535-1874319603.png"/></div>
 
 PPP 的帧格式：
 
@@ -121,7 +125,7 @@ MAC 地址长度为 6 字节（48 位），用于唯一标识网络适配器（�
 
 一台主机拥有多少个网络适配器就有多少个 MAC 地址。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/MAC帧.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822170457466-1221265533.png"/></div>
 
 ## 设备
 

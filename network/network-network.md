@@ -15,6 +15,7 @@
     - [IP 地址与物理地址](#ip-地址与物理地址)
     - [IP 数据报格式](#ip-数据报格式)
 - [地址解析协议 ARP](#地址解析协议-arp)
+- [逆地址解析协议RARP](#逆地址解析协议rarp)
 - [网际控制报文协议 ICMP](#网际控制报文协议-icmp)
     - [1. Ping](#1-ping)
     - [2. Traceroute](#2-traceroute)
@@ -29,6 +30,7 @@
 
 <!-- /TOC -->
 
+
 ## 概述
 
 网络层向上只提供简单灵活的、无连接的、尽最大努力交付的数据报服务。网络层不提供服务质量的承诺，不保证分组交付的时限，所传送的分组可能出错、丢失、重复和失序。进程间通信的可靠性由运输层负责。
@@ -41,6 +43,17 @@
 2. IP 软件完成路由选择功能，选择数据传送的路径。
 3. IP 包含了一组不可靠分组传送的规则，指明了分组处理、差错信息发生以及分组的规则。
 
+### IP地址
+
+- A类地址：以0开头，第一字节范围：0~127（1.0.0.0 - 126.255.255.255）；
+- B类地址：以10开头，第一个字节范围：128~191（128.0.0.0 - 191.255.255.255）；
+- C类地址：以110开头，第一个字节范围：192~223（192.0.0.0 - 223.255.255.255）；
+- 连接在Internet中的每一台主机(或 路由器) 的全球唯一的标识符
+- 私有保留地址  
+  - A类 10.0.0.0       - 10.255.255.255
+  - B类 172.16.0.0   - 172.31.255.255
+  - C类 192.168.0.0 - 192.168.255.255  
+
 ### 相关协议
 
 与 IP 协议配套使用的还有三个协议：
@@ -49,7 +62,7 @@
 - 网际控制报文协议 ICMP（Internet Control Message Protocol）
 - 网际组管理协议 IGMP（Internet Group Management Protocol）
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1550912617336.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822172852903-1814497687.png"/></div>
 
 ### 分类的 IP 地址
 
@@ -66,8 +79,9 @@ IP 地址的编址方式经历了三个历史阶段：
 ```
 IP 地址 ::= {< 网络号 >, < 主机号 >}
 ```
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822172904903-1221173939.png"/></div>
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086738403.png!zp"/></div>
+- ​
 
 #### 2. 子网划分
 
@@ -99,16 +113,16 @@ CIDR 的地址掩码可以继续称为子网掩码，子网掩码首 1 长度为
 
 ### IP 地址与物理地址
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551088476626.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822172919528-2031197326.png"/></div>
 
 - 物理地址是数据链路层和物理层使用的地址。
 - IP 地址是网络层和以上各层使用的地址，是一种逻辑地址。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551088631948.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822172931195-1743551971.png"/></div>
 
 ### IP 数据报格式
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1550913213250.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822172946775-2062798520.png"/></div>
 
 - **版本** - 有 4（IPv4）和 6（IPv6）两个值。
 - **首部长度** - 占 4 位，因此最大十进制数值为 15。值为 1 表示的是 1 个 32 位字的长度，也就是 4 字节。因为首部固定长度为 20 字节，因此该值最小为 5。如果可选字段的长度不是 4 字节的整数倍，就用尾部的填充部分来填充。
@@ -120,33 +134,54 @@ CIDR 的地址掩码可以继续称为子网掩码，子网掩码首 1 长度为
 - **标识** - 在数据报长度过长从而发生分片的情况下，相同数据报的不同分片具有相同的标识符。
 - **片偏移** - 和标识符一起，用于发生分片的情况。片偏移的单位为 8 字节。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1550913364479.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822172953630-651270886.png"/></div>
 
 ## 地址解析协议 ARP
 
 网络层实现主机之间的通信，而链路层实现具体每段链路之间的通信。因此在通信过程中，IP 数据报的源地址和目的地址始终不变，而 MAC 地址随着链路的改变而改变。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086787261.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822174004471-2093530900.png"/></div>
 
 ARP 实现由 IP 地址得到 MAC 地址。
+![]()
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086769846.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822173005613-236301698.png"/></div>
 
 每个主机都有一个 ARP 高速缓存，里面有本局域网上的各主机和路由器的 IP 地址到 MAC 地址的映射表。
 
 如果主机 A 知道主机 B 的 IP 地址，但是 ARP 高速缓存中没有该 IP 地址到 MAC 地址的映射，此时主机 A 通过广播的方式发送 ARP 请求分组，主机 B 收到该请求后会发送 ARP 响应分组给主机 A 告知其 MAC 地址，随后主机 A 向其高速缓存中写入主机 B 的 IP 地址到 MAC 地址的映射。
+![]()
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086833117.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822173015067-1548327592.png"/></div>
+
+
+
+## 逆地址解析协议RARP
+
+Reverse Address Resolution Protocol
+
+RARP是逆地址解析协议，作用是完成硬件地址到IP地址的映射，主要用于无盘工作站，因为给无盘工作站配置的IP地址不能保存。
+
+无盘工作站其实就是把硬盘和主机分离，无盘工作站只执行操作不执行存储。
+
+工作流程：
+
+- 在网络中配置一台RARP服务器，里面保存着IP地址和MAC地址的映射关系；
+- 当无盘工作站启动后，就封装一个RARP数据包，里面有其MAC地址，然后广播到网络上去；
+- 当服务器收到请求包后，就查找对应的MAC地址的IP地址装入响应报文中发回给请求者；
+- 因为需要广播请求报文，因此RARP只能用于具有广播能力的网络。
 
 ## 网际控制报文协议 ICMP
 
-ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。它封装在 IP 数据报中，但是不属于高层协议。
+因特网控制报文协议。它是TCP/IP协议族的一个自协议，用于在IP主机/路由器之间传递控制消息。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086857345.png!zp"/></div>
+ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。它封装在 IP 数据报中，但是不属于高层协议。
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822173024347-1454116709.png"/></div>
 
 ICMP 报文分为差错报告报文和询问报文。
+![]()
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086870897.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822173033868-728381271.png"/></div>
 
 ### 1. Ping
 
@@ -178,8 +213,9 @@ Traceroute 发送的 IP 数据报封装的是无法交付的 UDP 用户数据报
 VPN 使用公用的互联网作为本机构各专用网之间的通信载体。专用指机构内的主机只与本机构内的其它主机通信；虚拟指好像是，而实际上并不是，它有经过公用的互联网。
 
 下图中，场所 A 和 B 的通信经过互联网，如果场所 A 的主机 X 要和另一个场所 B 的主机 Y 通信，IP 数据报的源地址是 10.1.0.1，目的地址是 10.2.0.3。数据报先发送到与互联网相连的路由器 R1，R1 对内部数据进行加密，然后重新加上数据报的首部，源地址是路由器 R1 的全球地址 125.1.2.3，目的地址是路由器 R2 的全球地址 194.4.5.6。路由器 R2 收到数据报后将数据部分进行解密，恢复原来的数据报，此时目的地址为 10.2.0.3，就交付给 Y。
+![]()
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086901339.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822173048154-1426369478.png"/></div>
 
 ## 网络地址转换 NAT
 
@@ -193,7 +229,7 @@ VPN 使用公用的互联网作为本机构各专用网之间的通信载体。�
 
 分组转发结构由三个部分组成：交换结构、一组输入端口和一组输出端口。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086930371.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822173058777-1262265402.png"/></div>
 
 ## 路由器分组转发流程
 
@@ -204,7 +240,7 @@ VPN 使用公用的互联网作为本机构各专用网之间的通信载体。�
 - 若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器；
 - 报告转发分组出错。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086952828.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822183657230-33360988.png"/></div>
 
 ## 路由选择协议
 
@@ -261,4 +297,4 @@ BGP 只能寻找一条比较好的路由，而不是最佳路由。
 
 每个 AS 都必须配置 BGP 发言人，通过在两个相邻 BGP 发言人之间建立 TCP 连接来交换路由信息。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086977310.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822183723736-1046139880.png"/></div>

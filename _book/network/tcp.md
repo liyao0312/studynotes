@@ -7,7 +7,12 @@
 **TCP（Transmission Control Protocol），即传输控制协议，它是一种`面向连接的`、`可靠的`、`基于字节流的`传输层通信协议**。TCP 由 RFC 793 定义。
 
 <div align="center"><img src="http://dunwu.test.upcdn.net/snap/1559263786555.png!zp"/></div>
+
+
+
 ### TCP 的特性
+
+
 
 - `面向连接的` - 面向连接是指 TCP 需要通过三次握手、四次挥手原则建立和断开双向连接。
 - `可靠的` - 可靠是指 TCP 传输的数据包保证以原始顺序到达目的地，且数据包不被损坏。为了实现这点，TCP 通过以下技术来保证：

@@ -83,6 +83,14 @@ HTTP 响应也由四个部分组成，分别是：状态行、消息报头、空
 
 <div align="center"><img src="https://images2015.cnblogs.com/blog/318837/201601/318837-20160108221142606-879279999.jpg"/></div>
 
+## 常见HTTP首部字段
+
+- 通用首部：Date：创建报文时间 Connection：连接的管理Cache-Control：缓存的控制 Transfer-Encoding：报文主体的传输编码方式
+- 请求首部字段：Host：请求资源所在服务器Accept：可处理的媒体类型Accept-Charset：可接收的字符集Accept-Encoding：可接受的内容编码Accept-Language：可接受的自然语言
+- 响应首部字段：Accept-Ranges：可接受的字节范围 Location：令客户端重新定向到的URI；Server：HTTP服务器的安装信息
+- 实体首部字段：Allow：资源可支持的HTTP方法；Content-Type：实体主类的类型；Content-Encoding：实体主体适用的编码方式；
+- Content-Language：实体主体的自然语言；Content-Length：实体主体的的字节数；Content-Range：实体主体的位置范围，一般用于发出部分请求时使用
+
 # HTTP 请求
 
 根据 HTTP 标准，HTTP 请求可以使用多种请求方法。
@@ -91,48 +99,48 @@ HTTP 响应也由四个部分组成，分别是：状态行、消息报头、空
 
 **HTTP1.1**新增了五种请求方法：**OPTIONS**, **PUT**, **DELETE**, **TRACE** 和 **CONNECT**方法。
 
-| 方法    | 描述                                                                                                                                     |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| GET     | 请求指定的页面信息，并返回实体主体。                                                                                                     |
-| HEAD    | 类似于 get 请求，只不过返回的响应中没有具体的内容，用于获取报头                                                                          |
+| 方法      | 描述                                       |
+| ------- | ---------------------------------------- |
+| GET     | 请求指定的页面信息，并返回实体主体。                       |
+| HEAD    | 类似于 get 请求，只不过返回的响应中没有具体的内容，用于获取报头       |
 | POST    | 向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和/或已有资源的修改。 |
-| PUT     | 从客户端向服务器传送的数据取代指定的文档的内容。                                                                                         |
-| DELETE  | 请求服务器删除指定的页面。                                                                                                               |
-| CONNECT | HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。                                                                                |
-| OPTIONS | 允许客户端查看服务器的性能。                                                                                                             |
-| TRACE   | 回显服务器收到的请求，主要用于测试或诊断。                                                                                               |
+| PUT     | 从客户端向服务器传送的数据取代指定的文档的内容。                 |
+| DELETE  | 请求服务器删除指定的页面。                            |
+| CONNECT | HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。        |
+| OPTIONS | 允许客户端查看服务器的性能。                           |
+| TRACE   | 回显服务器收到的请求，主要用于测试或诊断。                    |
 
 **HTTP** **请求消息头**
 
-| **请求消息头**  | **说明**                                     |
-| --------------- | -------------------------------------------- |
-| Accept          | 浏览器支持的格式                             |
-| Accept-Encoding | 支持的编码格式，如（UTF-8，GBK）             |
-| Accept-Language | 支持的语言类型                               |
-| User-Agent      | 浏览器信息                                   |
-| Cookie          | 记录的是用户当前的状态                       |
-| Referer         | 指从哪个页面单击链接进入的页面               |
-| HOST            | 目的地址对应的主机名                         |
+| **请求消息头**       | **说明**                       |
+| --------------- | ---------------------------- |
+| Accept          | 浏览器支持的格式                     |
+| Accept-Encoding | 支持的编码格式，如（UTF-8，GBK）         |
+| Accept-Language | 支持的语言类型                      |
+| User-Agent      | 浏览器信息                        |
+| Cookie          | 记录的是用户当前的状态                  |
+| Referer         | 指从哪个页面单击链接进入的页面              |
+| HOST            | 目的地址对应的主机名                   |
 | Connection      | 连接类型。如 Keep-Alive 表示长连接，不会断开 |
-| Content-Length  | 内容长度                                     |
-| Content-Type    | 内容类型                                     |
+| Content-Length  | 内容长度                         |
+| Content-Type    | 内容类型                         |
 
 # HTTP 响应
 
-| **响应消息头**   | **说明**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Allow            | 服务器支持哪些请求方法（如 GET、POST 等）。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Content-Encoding | 文档的编码（Encode）方法。只有在解码之后才可以得到 Content-Type 头指定的内容类型。利用 gzip 压缩文档能够显著地减少 HTML 文档的下载时间。Java 的 GZIPOutputStream 可以很方便地进行 gzip 压缩，但只有 Unix 上的 Netscape 和 Windows 上的 IE 4、IE 5 才支持它。因此，Servlet 应该通过查看 Accept-Encoding 头（即 request.getHeader("Accept-Encoding")）检查浏览器是否支持 gzip，为支持 gzip 的浏览器返回经 gzip 压缩的 HTML 页面，为其他浏览器返回普通页面。                                                                                                                                                                                                                                                                                                                              |
-| Content-Length   | 表示内容长度。只有当浏览器使用持久 HTTP 连接时才需要这个数据。如果你想要利用持久连接的优势，可以把输出文档写入 ByteArrayOutputStram，完成后查看其大小，然后把该值放入 Content-Length 头，最后通过`byteArrayStream.writeTo(response.getOutputStream()` 发送内容。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Content-Type     | 表示后面的文档属于什么 MIME 类型。Servlet 默认为 `text/plain`，但通常需要显式地指定为 text/html。由于经常要设置 Content-Type，因此 HttpServletResponse 提供了一个专用的方法 setContentType。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Date             | 当前的 GMT 时间。你可以用 setDateHeader 来设置这个头以避免转换时间格式的麻烦。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Expires          | 应该在什么时候认为文档已经过期，从而不再缓存它？                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Last-Modified    | 文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，该请求将被视为一个条件 GET，只有改动时间迟于指定时间的文档才会返回，否则返回一个 304（Not Modified）状态。Last-Modified 也可用 setDateHeader 方法来设置。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Location         | 表示客户应当到哪里去提取文档。Location 通常不是直接设置的，而是通过 HttpServletResponse 的 sendRedirect 方法，该方法同时设置状态代码为 302。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **响应消息头**        | **说明**                                   |
+| ---------------- | ---------------------------------------- |
+| Allow            | 服务器支持哪些请求方法（如 GET、POST 等）。               |
+| Content-Encoding | 文档的编码（Encode）方法。只有在解码之后才可以得到 Content-Type 头指定的内容类型。利用 gzip 压缩文档能够显著地减少 HTML 文档的下载时间。Java 的 GZIPOutputStream 可以很方便地进行 gzip 压缩，但只有 Unix 上的 Netscape 和 Windows 上的 IE 4、IE 5 才支持它。因此，Servlet 应该通过查看 Accept-Encoding 头（即 request.getHeader("Accept-Encoding")）检查浏览器是否支持 gzip，为支持 gzip 的浏览器返回经 gzip 压缩的 HTML 页面，为其他浏览器返回普通页面。 |
+| Content-Length   | 表示内容长度。只有当浏览器使用持久 HTTP 连接时才需要这个数据。如果你想要利用持久连接的优势，可以把输出文档写入 ByteArrayOutputStram，完成后查看其大小，然后把该值放入 Content-Length 头，最后通过`byteArrayStream.writeTo(response.getOutputStream()` 发送内容。 |
+| Content-Type     | 表示后面的文档属于什么 MIME 类型。Servlet 默认为 `text/plain`，但通常需要显式地指定为 text/html。由于经常要设置 Content-Type，因此 HttpServletResponse 提供了一个专用的方法 setContentType。 |
+| Date             | 当前的 GMT 时间。你可以用 setDateHeader 来设置这个头以避免转换时间格式的麻烦。 |
+| Expires          | 应该在什么时候认为文档已经过期，从而不再缓存它？                 |
+| Last-Modified    | 文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，该请求将被视为一个条件 GET，只有改动时间迟于指定时间的文档才会返回，否则返回一个 304（Not Modified）状态。Last-Modified 也可用 setDateHeader 方法来设置。 |
+| Location         | 表示客户应当到哪里去提取文档。Location 通常不是直接设置的，而是通过 HttpServletResponse 的 sendRedirect 方法，该方法同时设置状态代码为 302。 |
 | Refresh          | 表示浏览器应该在多少时间之后刷新文档，以秒计。除了刷新当前文档之外，你还可以通过 `response.setHeader("Refresh", "5;URL=http://host/path")`让浏览器读取指定的页面。 注意这种功能通常是通过设置 HTML 页面 HEAD 区的 `<META HTTP-EQUIV="Refresh" CONTENT="5;URL=http://host/path">`实现，这是因为，自动刷新或重定向对于那些不能使用 CGI 或 Servlet 的 HTML 编写者十分重要。但是，对于 Servlet 来说，直接设置 Refresh 头更加方便。 注意 Refresh 的意义是"N 秒之后刷新本页面或访问指定页面"，而不是"每隔 N 秒刷新本页面或访问指定页面"。因此，连续刷新要求每次都发送一个 Refresh 头，而发送 204 状态代码则可以阻止浏览器继续刷新，不管是使用 Refresh 头还是 `<META HTTP-EQUIV="Refresh" ...>`。 注意 Refresh 头不属于 HTTP 1.1 正式规范的一部分，而是一个扩展，但 Netscape 和 IE 都支持它。 |
-| Server           | 服务器名字。Servlet 一般不设置这个值，而是由 Web 服务器自己设置。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Set-Cookie       | 设置和页面关联的 Cookie。Servlet 不应使用`response.setHeader("Set-Cookie", ...)`，而是应使用 HttpServletResponse 提供的专用方法 addCookie。参见下文有关 Cookie 设置的讨论。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| WWW-Authenticate | 客户应该在 Authorization 头中提供什么类型的授权信息？在包含 401（Unauthorized）状态行的应答中这个头是必需的。例如，`response.setHeader("WWW-Authenticate", "BASIC realm=＼"executives＼"")`。 注意 Servlet 一般不进行这方面的处理，而是让 Web 服务器的专门机制来控制受密码保护页面的访问（例如.htaccess）。                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Server           | 服务器名字。Servlet 一般不设置这个值，而是由 Web 服务器自己设置。  |
+| Set-Cookie       | 设置和页面关联的 Cookie。Servlet 不应使用`response.setHeader("Set-Cookie", ...)`，而是应使用 HttpServletResponse 提供的专用方法 addCookie。参见下文有关 Cookie 设置的讨论。 |
+| WWW-Authenticate | 客户应该在 Authorization 头中提供什么类型的授权信息？在包含 401（Unauthorized）状态行的应答中这个头是必需的。例如，`response.setHeader("WWW-Authenticate", "BASIC realm=＼"executives＼"")`。 注意 Servlet 一般不进行这方面的处理，而是让 Web 服务器的专门机制来控制受密码保护页面的访问（例如.htaccess）。 |
 
 ## HTTP 状态码
 
@@ -151,59 +159,59 @@ HTTP 状态码分类
 
 HTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP 状态码共分为 5 种类型：
 
-| **分类** | **分类描述**                                   |
-| -------- | ---------------------------------------------- |
-| 1        | 信息，服务器收到请求，需要请求者继续执行操作   |
-| 2        | 成功，操作被成功接收并处理                     |
-| 3        | 重定向，需要进一步的操作以完成请求             |
-| 4        | 客户端错误，请求包含语法错误或无法完成请求     |
-| 5        | 服务器错误，服务器在处理请求的过程中发生了错误 |
+| **分类** | **分类描述**                |
+| ------ | ----------------------- |
+| 1      | 信息，服务器收到请求，需要请求者继续执行操作  |
+| 2      | 成功，操作被成功接收并处理           |
+| 3      | 重定向，需要进一步的操作以完成请求       |
+| 4      | 客户端错误，请求包含语法错误或无法完成请求   |
+| 5      | 服务器错误，服务器在处理请求的过程中发生了错误 |
 
 **HTTP 状态列表：**
 
-| 状态码 | 状态码英文名称                  |
-| ------ | ------------------------------- |
-| 100    | Continue                        |
-| 101    | Switching Protocols             |
-| 200    | OK                              |
-| 201    | Created                         |
-| 202    | Accepted                        |
-| 203    | Non-Authoritative Information   |
-| 204    | No Content                      |
-| 205    | Reset Content                   |
-| 206    | Partial Content                 |
-| 300    | Multiple Choices                |
-| 301    | Moved Permanently               |
-| 302    | Found                           |
-| 303    | See Other                       |
-| 304    | Not Modified                    |
-| 305    | Use Proxy                       |
-| 306    | Unused                          |
-| 307    | Temporary Redirect              |
-| 400    | Bad Request                     |
-| 401    | Unauthorized                    |
-| 402    | Payment Required                |
-| 403    | Forbidden                       |
-| 404    | Not Found                       |
-| 405    | Method Not Allowed              |
-| 406    | Not Acceptable                  |
-| 407    | Proxy Authentication Required   |
-| 408    | Request Time-out                |
-| 409    | Conflict                        |
-| 410    | Gone                            |
-| 411    | Length Required                 |
-| 412    | Precondition Failed             |
-| 413    | Request Entity Too Large        |
-| 414    | Request-URI Too Large           |
-| 415    | Unsupported Media Type          |
-| 416    | Requested range not satisfiable |
-| 417    | Expectation Failed              |
-| 500    | Internal Server Error           |
-| 501    | Not Implemented                 |
-| 502    | Bad Gateway                     |
-| 503    | Service Unavailable             |
-| 504    | Gateway Time-out                |
-| 505    | HTTP Version not supported      |
+| 状态码  | 状态码英文名称                         |
+| ---- | ------------------------------- |
+| 100  | Continue                        |
+| 101  | Switching Protocols             |
+| 200  | OK                              |
+| 201  | Created                         |
+| 202  | Accepted                        |
+| 203  | Non-Authoritative Information   |
+| 204  | No Content                      |
+| 205  | Reset Content                   |
+| 206  | Partial Content                 |
+| 300  | Multiple Choices                |
+| 301  | Moved Permanently               |
+| 302  | Found                           |
+| 303  | See Other                       |
+| 304  | Not Modified                    |
+| 305  | Use Proxy                       |
+| 306  | Unused                          |
+| 307  | Temporary Redirect              |
+| 400  | Bad Request                     |
+| 401  | Unauthorized                    |
+| 402  | Payment Required                |
+| 403  | Forbidden                       |
+| 404  | Not Found                       |
+| 405  | Method Not Allowed              |
+| 406  | Not Acceptable                  |
+| 407  | Proxy Authentication Required   |
+| 408  | Request Time-out                |
+| 409  | Conflict                        |
+| 410  | Gone                            |
+| 411  | Length Required                 |
+| 412  | Precondition Failed             |
+| 413  | Request Entity Too Large        |
+| 414  | Request-URI Too Large           |
+| 415  | Unsupported Media Type          |
+| 416  | Requested range not satisfiable |
+| 417  | Expectation Failed              |
+| 500  | Internal Server Error           |
+| 501  | Not Implemented                 |
+| 502  | Bad Gateway                     |
+| 503  | Service Unavailable             |
+| 504  | Gateway Time-out                |
+| 505  | HTTP Version not supported      |
 
 ## 更多内容
 
