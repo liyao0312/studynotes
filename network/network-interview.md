@@ -24,14 +24,14 @@
 >
 > 这是学习计算机网络知识宏观层面必须要了解的核心点。知道了这些，对于网络的体系结构就基本上了解了。
 
-<div align="center"><img src="https://gitee.com/turnon/images/raw/master/images/network/overview/network-layers.png"/></div>
+<div align="center">![](https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822161020532-934966452.png)</div>
 
 计算机网络分层一般有三种划分体系：OSI 分层；五层协议分层；TCP/IP 协议分层。
 
 - OSI 的七层体系结构概念清楚，理论完整，但是比较复杂且不实用，所以并不流行。
 - 五层协议分层是一种折中方案，在现实中更为流行。
 
-<div align="center"><img src="https://gitee.com/turnon/images/raw/master/images/network/overview/网络分层架构图.png"/></div>
+<div align="center">![](https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822161115451-483296681.png)</div>
 
 **物理层**
 
