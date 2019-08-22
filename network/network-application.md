@@ -1,28 +1,36 @@
 # 计算机网络之应用层
 
+> 应用层定义了应用进程间通信和交互的规则
+>
+> 任务：通过应用进程间的交互来完成特定网络应用
+>
+> - 基于TCP的协议：FTP、HTTP、Telnet、SMTP、HTTPS、POP3；
+> - 基于UDP的协议：DNS、SNMP、NFS
+
 <!-- TOC depthFrom:2 depthTo:3 -->
 
 - [HTTP](#http)
+  - [http和https的区别](#http和https的区别)
 - [DNS](#dns)
 - [FTP](#ftp)
 - [DHCP](#dhcp)
 - [TELNET](#telnet)
 - [电子邮件协议](#电子邮件协议)
-    - [1. SMTP](#1-smtp)
-    - [2. POP3](#2-pop3)
-    - [3. IMAP](#3-imap)
+  - [1. SMTP](#1-smtp)
+  - [2. POP3](#2-pop3)
+  - [3. IMAP](#3-imap)
 - [常用端口](#常用端口)
 - [Web 页面请求过程](#web-页面请求过程)
-    - [1. DHCP 配置主机信息](#1-dhcp-配置主机信息)
-    - [2. ARP 解析 MAC 地址](#2-arp-解析-mac-地址)
-    - [3. DNS 解析域名](#3-dns-解析域名)
-    - [4. HTTP 请求页面](#4-http-请求页面)
+  - [1. DHCP 配置主机信息](#1-dhcp-配置主机信息)
+  - [2. ARP 解析 MAC 地址](#2-arp-解析-mac-地址)
+  - [3. DNS 解析域名](#3-dns-解析域名)
+  - [4. HTTP 请求页面](#4-http-请求页面)
 
 <!-- /TOC -->
 
 ## HTTP
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551096916007.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822203340552-1864494154.png"/></div>
 
 超文本传输协议（英语：HyperText Transfer Protocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议。HTTP 是万维网的数据通信的基础。
 
@@ -32,15 +40,25 @@
 
 > :point_right: 扩展阅读：[HTTP](HTTP.md)
 
+### https请求的流程
+
+
+
+### http和https的区别
+
+- http端口为80，https端口是443
+- 资源消耗：和HTTP通信相比，Https通信会由于加减密处理消耗更多的CPU和内存资源；
+- 开销：Https通信需要证书，而证书一般需要向认证机构购买； 
+
 ## DNS
 
 域名服务器 DNS 是一个分布式数据库，提供了主机名和 IP 地址之间相互转换的服务。这里的分布式数据库是指，每个站点只保留它自己的那部分数据。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551094759786.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822203359641-1345912054.png"/></div>
 
 域名具有层次结构，从上到下依次为：根域名、顶级域名、二级域名。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551094954067.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822203417465-1406920352.png"/></div>
 
 DNS 可以使用 UDP 或者 TCP 进行传输，使用的端口号都为 53。大多数情况下 DNS 使用 UDP 进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传来保证可靠性。在两种情况下会使用 TCP 进行传输：
 
@@ -58,7 +76,7 @@ DNS 可以使用 UDP 或者 TCP 进行传输，使用的端口号都为 53。大
 
 根据数据连接是否是服务器端主动建立，FTP 有主动和被动两种模式：
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551095440002.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822203437851-1130276158.png"/></div>
 
 - 主动模式：服务器端主动建立数据连接，其中服务器端的端口号为 20，客户端的端口号随机，但是必须大于 1024，因为 0\~1023 是熟知端口号。
 - 被动模式：客户端主动建立数据连接，其中客户端的端口号由客户端自己指定，服务器端的端口号随机。
@@ -80,7 +98,7 @@ DHCP 工作过程如下：
 3. 如果客户端选择了某个 DHCP 服务器提供的信息，那么就发送 Request 报文给该 DHCP 服务器。
 4. DHCP 服务器发送 Ack 报文，表示客户端此时可以使用提供给它的信息。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551095610521.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822203457144-350994498.png"/></div>
 
 ## TELNET
 
@@ -108,17 +126,17 @@ IMAP 协议中客户端和服务器上的邮件保持同步，如果不手动删
 
 ## 常用端口
 
-|       应用       | 应用层协议 | 端口号  | 传输层协议 |            备注             |
-| :--------------: | :--------: | :-----: | :--------: | :-------------------------: |
-|     域名解析     |    DNS     |   53    |  UDP/TCP   | 长度超过 512 字节时使用 TCP |
-| 动态主机配置协议 |    DHCP    |  67/68  |    UDP     |                             |
-| 简单网络管理协议 |    SNMP    | 161/162 |    UDP     |                             |
-|   文件传送协议   |    FTP     |  20/21  |    TCP     |  控制连接 21，数据连接 20   |
-|   远程终端协议   |   TELNET   |   23    |    TCP     |                             |
-|  超文本传送协议  |    HTTP    |   80    |    TCP     |                             |
-| 简单邮件传送协议 |    SMTP    |   25    |    TCP     |                             |
-|   邮件读取协议   |    POP3    |   110   |    TCP     |                             |
-| 网际报文存取协议 |    IMAP    |   143   |    TCP     |                             |
+|    应用    | 应用层协议  |   端口号   |  传输层协议  |         备注         |
+| :------: | :----: | :-----: | :-----: | :----------------: |
+|   域名解析   |  DNS   |   53    | UDP/TCP | 长度超过 512 字节时使用 TCP |
+| 动态主机配置协议 |  DHCP  |  67/68  |   UDP   |                    |
+| 简单网络管理协议 |  SNMP  | 161/162 |   UDP   |                    |
+|  文件传送协议  |  FTP   |  20/21  |   TCP   |  控制连接 21，数据连接 20   |
+|  远程终端协议  | TELNET |   23    |   TCP   |                    |
+| 超文本传送协议  |  HTTP  |   80    |   TCP   |                    |
+| 简单邮件传送协议 |  SMTP  |   25    |   TCP   |                    |
+|  邮件读取协议  |  POP3  |   110   |   TCP   |                    |
+| 网际报文存取协议 |  IMAP  |   143   |   TCP   |                    |
 
 ## Web 页面请求过程
 

@@ -1,15 +1,9 @@
----
-title: 计算机网络概述
-categories: ['communication']
-tags: ['communication', 'network']
-date: 2019-02-20 22:26
----
-
 # 计算机网络概述
 
 > 计算机网络是指将地理位置不同的具有独立功能的多台计算机及其外部设备，通过通信线路连接起来，在网络操作系统，网络管理软件及网络通信协议的管理和协调下，实现资源共享和信息传递的计算机系统。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network.jpg!zp"/></div>
+<div align="center">![](https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822160655061-1548852226.png)
+</div>
 
 ## :bulb: 指南
 
@@ -53,7 +47,8 @@ date: 2019-02-20 22:26
 
 计算机网络的拓扑结构可分为：
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/overview/network-topological-structure.gif!zp"/></div>
+<div align="center">![](https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822160846633-250483917.png)
+</div>
 
 - 网型拓扑网型网（Mesh network）
 - 环型拓扑环型网（Ring network）
@@ -84,19 +79,21 @@ date: 2019-02-20 22:26
 >
 > 这是学习计算机网络知识宏观层面必须要了解的核心点。知道了这些，对于网络的体系结构就基本上了解了。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/overview/network-layers.png!zp"/></div>
+<div align="center">![](https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822161020532-934966452.png)
+</div>
 
 计算机网络分层一般有三种划分体系：OSI 分层；五层协议分层；TCP/IP 协议分层。
 
 - OSI 的七层体系结构概念清楚，理论完整，但是比较复杂且不实用，所以并不流行。
 - 五层协议分层是一种折中方案，在现实中更为流行。
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/overview/网络分层架构图.png!zp"/></div>
+<div align="center">![](https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822161115451-483296681.png)
+ </div>
 
 ### 物理层
 
 > 物理层（Physical Layer）只接收和发送一串比特(bit)流，不考虑信息的意义和信息结构。
-> 
+>
 > 扩展阅读：[计算机网络之物理层](network-physical.md)
 
 - 关键词：调制、解调、数字信号、模拟信号、通信媒介、信道复用
@@ -106,7 +103,7 @@ date: 2019-02-20 22:26
 ### 数据链路层
 
 > 网络层针对的还是主机之间的数据传输服务，而主机之间可以有很多链路，数据链路层（Data Link Layer）就是为同一链路的主机提供数据传输服务。数据链路层把网络层传下来的分组封装成帧。
-> 
+>
 > 扩展阅读：[计算机网络之数据链路层](network-data-link.md)
 
 - 关键词：点对点信道、广播信道、`PPP`、`CSMA/CD`、局域网、以太网、`MAC`、适配器、集线器、网桥、交换机
@@ -117,7 +114,7 @@ date: 2019-02-20 22:26
 ### 网络层
 
 > 网络层（network layer）为分组交换网上的不同主机提供通信服务。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组或包进行传送。
-> 
+>
 > 扩展阅读：[计算机网络之网络层](network-network.md)
 
 - 关键词：`IP`、`ICMP`、`ARP`、路由
@@ -128,7 +125,7 @@ date: 2019-02-20 22:26
 ### 传输层
 
 > 传输层（transport layer）为两台主机中进程间的通信提供通用的数据传输服务。
-> 
+>
 > 扩展阅读：[计算机网络之网络层](network-network.md)
 
 - 关键词：`UDP`、`TCP`、滑动窗口、拥塞控制、三次握手
@@ -146,13 +143,9 @@ date: 2019-02-20 22:26
 ### 应用层
 
 > 应用层（application layer）通过应用进程间的交互来完成特定网络应用。应用层协议定义的是应用进程间通信和交互的规则。
-> 
+>
 > 扩展阅读：[计算机网络之应用层](network-application.md)
 
 - 关键词：`HTTP`、`DNS`、`FTP`、`TELNET`、`DHCP`
 - 主要协议：`HTTP`、`DNS`、`SMTP`、`Telnet`、`FTP`、`SNMP` 等。
 - 数据单元：报文（message）。
-
-## :door: 传送门
-
-| [回首頁](https://github.com/dunwu/blog) |

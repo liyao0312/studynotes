@@ -16,12 +16,13 @@
     - [基本带通调制方法](#基本带通调制方法)
 - [通信媒介](#通信媒介)
 - [信道复用](#信道复用)
+- [设备](#设备)
+    - [集线器](#集线器)
 
 <!-- /TOC -->
 
 ## 通信系统模型
-
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/physical/数据通信系统的模型.png!zp"/></div>
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822165902331-653725903.png"></div>
 
 通信系统模型分为三大部分：源系统（包括信源和发送器）、传输系统、目的系统（包括信宿接收器）。
 
@@ -33,8 +34,8 @@
 - **码元** - 在数字通信中常常用时间间隔相同的符号来表示一个二进制数字，这样的时间间隔内的信号称为(二进制）码元。
 
 ## 通信方式
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822164149592-50995365.png"></div>
 
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/physical/通信方式.jpg!zp"/></div>
 
 有三种通信方式：
 
@@ -66,9 +67,7 @@
 调制分为：基带调制和带通调制
 
 ### 基本带通调制方法
-
-<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/physical/基本调制方法.png!zp"/></div>
-
+<div align="center"><img src="https://img2018.cnblogs.com/blog/1237308/201908/1237308-20190822164207717-110505820.png"></div>
 如果你收听过广播，一定经常听到 AM、FM 这两个关键词，这是什么意思呢？答案如下：
 
 - **调幅（AM）** - 即载波的**振幅**随基带数字信号而变化。
@@ -92,3 +91,11 @@
 - 时分复用
 - 波分复用
 - 码分复用
+
+## 设备
+
+### 集线器
+
+集线器（Hub）的主要功能是对接收到的信号进行再生整形放大，以扩大网络的传输距离，同时把所有节点集中在以它为中心的节点上。
+
+使用集线器可以在物理层扩展以太网。
