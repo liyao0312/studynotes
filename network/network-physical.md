@@ -21,7 +21,7 @@
 
 ## 通信系统模型
 
-<div align="center">![network-physical01](network/network-physical01.png)</div>
+<div align="center">![network-physical01](https://github.com/liyao0312/studynotes/blob/master/network/network-physical01.png)</div>
 
 通信系统模型分为三大部分：源系统（包括信源和发送器）、传输系统、目的系统（包括信宿接收器）。
 
