@@ -92,6 +92,6 @@
     * 单例设计模式
 * [Linux](linux/linux.md)
 * 面经
-    - [腾讯运营开发](mianjing/tengxunyunyingkaifa.md)
+    * [腾讯运营开发](mianjing/tengxunyunyingkaifa.md)
 * [怎么用Git写书](怎么用Git写书.md)
 
