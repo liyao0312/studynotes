@@ -65,6 +65,9 @@
     * RPC
     * 安全
     * ORM
+* [数据库](database/database.md)
+* 操作系统
+    - [Linux](linux/linux.md)
 * 网络通信
     * [网络通信面经](network/network-interview.md)
     * 网络分层
@@ -83,14 +86,12 @@
         * [网络协议之 WebSocket](network/websocket.md)
         * [CDN 详解](network/cdn.md)
 
------
-* [数据库](database/database.md)
+
 * Go核心技术教程
 * Beego框架
 * MongoDB数据库
 * 设计模式
-    * 单例设计模式
-* [Linux](linux/linux.md)
+    * 单例设计模式​
 * 面经
     * [腾讯运营开发](mianjing/tengxunyunyingkaifa.md)
 * [怎么用Git写书](怎么用Git写书.md)
