@@ -131,5 +131,6 @@ Java基础特性
 # 面经
 
 - [腾讯运营开发](mianjing/tengxunyunyingkaifa.md)
+- [小米 Java服务端开发](mianjing/xiaomi.md)
 
 # [怎么用Git写书](怎么用Git写书.md)
