@@ -180,7 +180,25 @@
 - 实现 `Runnable` 接口优于继承 `Thread` 类，因为根据开放封闭原则——实现接口更便于扩展；
 - 实现 `Runnable` 接口的线程没有返回值；而使用 `Callable` / `Future` 方式可以让线程有返回值。
 
-> :point_right: 参考阅读：[java 创建线程的三种方式及其对比](https://blog.csdn.net/longshengguoji/article/details/41126119)
+> ​:point_right: 参考阅读：[java 创建线程的三种方式及其对比](https://blog.csdn.net/longshengguoji/article/details/41126119)
+
+**实现 Runnable 接口比继承 Thread 类所具有的优势：**
+
+1）：适合多个相同的程序代 
+
+码的线程去处理同一个资源
+
+ 2）：可以避免 java 中的单继承的限制
+
+ 3）：增加程序的健 
+
+壮性，代码可以被多个线程共享，代码和数据独立
+
+ 4）：线程池只能放入实现 Runable 或 callable 类线程，不能直接放入继承 Thread 的类 
+
+ 5）：runnable 实现线程可以对线程进行复用，因为 runnable 是轻量级的对象，重复 new 不会耗费太大资源，而 Threa 
+
+d 则不然，它是重量级对象，而且线程执行完就完了，无法再次利用 
 
 ### 2.3. 什么是 `Callable` 和 `Future`？什么是 `FutureTask`？
 
