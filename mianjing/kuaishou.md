@@ -1,4 +1,4 @@
-# 快手
+# 快手一面
 
 自我介绍，项目介绍
 
@@ -290,3 +290,71 @@ public class Main {
 问：类实例化两个对象A和B。静态变量在A中修改对B有影响吗
 
 答：有影响，
+
+
+
+# 快手二面
+
+## 问题1：SQL语句
+
+问：一个表内有两个属性，名字，对应负责项目。 怎么找负责两个以上项目的人。
+
+答：呃....最近没怎么看mysql数据库，用的都是mongodb
+
+```sql
+select username from table1 group by username having count >=2
+```
+
+问；mongoDB的主从模式，是单机模式还是集群模式
+
+答：集群模式
+
+问：那MongoDB是主从模式吗
+
+答：是
+
+问：分布式存储知道吗
+
+答：不知道
+
+## 问题2：代码题
+
+问： 实现整数反转（提示注意整数的临界值）
+
+答：
+
+```java
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int i = sc.nextInt();
+        int max = sc.nextInt();
+        int result = reverse(i,max);
+        System.out.println(result);
+    }
+    
+    public static int reverse(int i,int max){
+        if(i/10==0) return i;
+        int result=0;
+        
+        while(i/10!=0){
+            int temp=i%10;
+            i=i/10;
+            result=result*10+temp;
+        }
+        result=result*10+i;
+        if(result<0) return -1;
+        return result;
+    }
+    
+}
+```
+
+问：整数是怎么存的，超过存储容量后会有什么结果
+
+答：（怎么存不知道），超过存储容量后，会把符号位也覆盖，编程负数。
+
+问：那result判断一下就可以了，小于0就是大于临界值了
+
+答：好的
