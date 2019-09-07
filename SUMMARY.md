@@ -106,5 +106,6 @@
 * 面经
     * [腾讯运营开发](mianjing/tengxunyunyingkaifa.md)
     * [小米java服务端开发](mianjing/xiaomi.md)
+    * [快手后端开发](mianjing/kuaishou.md)
 * [怎么用Git写书](怎么用Git写书.md)
 
