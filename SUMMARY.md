@@ -110,4 +110,5 @@
     * [小米java服务端开发](mianjing/xiaomi.md)
     * [快手后端开发](mianjing/kuaishou.md)
     * [跟谁学-Java&Android开发](mianjing/gensheixue.md)
+    * [浪潮](mianjing/langchao.md)
 
