@@ -77,6 +77,7 @@
 * Beego框架
 * 数据库
     * [MySql](database/database.md)
+        * [MySq学习笔记](database/mysql.md)
     * Redis
     * MongoDB
     * SQL
