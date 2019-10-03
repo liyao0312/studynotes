@@ -104,6 +104,21 @@
 -----
 * 设计模式
     * 单例设计模式
+
 * [怎么用Git写书](怎么用Git写书.md)
-* [欢迎指正](mianjing/00mulu.md)
+
+* 欢迎指正
+
+    - [小米java服务端开发](mianjing/02xiaomi.md)
+    - [快手后端开发](mianjing/03kuaishou.md)
+    - [跟谁学-Java&Android开发](mianjing/04gensheixue.md)
+    - [广联达](mianjing/07guanglianda.md)
+    - [中科曙光](mianjing/05zhongkeshuguang.md)
+    - [浪潮](mianjing/08langchao.md)
+    - [腾讯运营开发](mianjing/01tengxunyunyingkaifa.md)
+    - [映客直播](mianjing/07yingkezhibo.md)
+    - [歌尔](mianjing/06geer.md)
+    - [海信](mianjing/06haixin.md)
+    - [吉利科技](mianjing/09jilikeji.md)
+
 

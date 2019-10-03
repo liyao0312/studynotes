@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/20190801" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190803" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190804" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190806" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190807" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190808" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190809" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190810" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190814" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190815" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190818" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190819" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/20190821" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/beike0810_leo" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/offer" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sort" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Tree" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

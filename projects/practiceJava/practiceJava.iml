@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190801" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190803" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190804" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190806" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190807" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190808" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190809" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190810" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190814" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190815" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190818" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190819" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/20190821" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/beike0810_leo" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/offer" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/shangguigu" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/sort" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/aiqiyi" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/duxiaoman" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/gensheixue" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/guangdakeji" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/huawei" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/huawei20190828" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/jd" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/kuaishou" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/laohu" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/shangtanag" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/VIPKID" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/vivo" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/wangyi" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/wanmeishijie" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/weibo" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/xiaohongshu" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/xiehcneg" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/yuanfudao" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/yuncongkeji" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/zhongxing" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/zhuanzhuan" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/瓜子" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/老虎" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/bishi/老虎/laohu" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
