@@ -1,9 +1,9 @@
-package shangguigu;
+
 
 /**
  * Created by artsing on 2019/10/2.
  */
-public class a_jicheng {
+public class ajicheng {
     public static void main(String[] args) {
         Animal a = new Animal();
         System.out.println(a);

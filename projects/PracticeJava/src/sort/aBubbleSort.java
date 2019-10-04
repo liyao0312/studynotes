@@ -1,11 +1,10 @@
-package shangguigu;
 
 import java.util.Scanner;
 
 /**
  * Created by artsing on 2019/10/2.
  */
-public class a_BubbleSort {
+public class aBubbleSort {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String[] s = sc.nextLine().split(" ");

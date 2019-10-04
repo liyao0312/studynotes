@@ -47,6 +47,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/bishi/瓜子" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/bishi/老虎" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/bishi/老虎/laohu" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/aaDuoXianCheng" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/aaMianXiangDuiXiang" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
