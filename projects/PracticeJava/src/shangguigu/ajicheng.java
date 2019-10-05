@@ -5,13 +5,13 @@
  */
 public class ajicheng {
     public static void main(String[] args) {
-        Animal a = new Animal();
+        Animal2 a = new Animal2();
         System.out.println(a);
 
     }
 }
 
-class Animal{
+class Animal2{
     private int legs;
     private  String eysColor;
 
