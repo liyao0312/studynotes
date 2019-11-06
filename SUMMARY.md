@@ -108,6 +108,7 @@
 * [怎么用Git写书](怎么用Git写书.md)
 * 欢迎指正
     * [小米java服务端开发](mianjing/02xiaomi.md)
+    * [字节跳动](mianjing/10zijietiaodong.md)
     * [快手后端开发](mianjing/03kuaishou.md)
     * [跟谁学-Java&Android开发](mianjing/04gensheixue.md)
     * [广联达](mianjing/07guanglianda.md)
@@ -118,4 +119,5 @@
     * [歌尔](mianjing/06geer.md)
     * [海信](mianjing/06haixin.md)
     * [吉利科技](mianjing/09jilikeji.md)
+* [毕业论文](毕业论文沟通记录.md)
 
